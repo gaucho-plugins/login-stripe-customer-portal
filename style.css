@@ -1,0 +1,44 @@
+.stripe-portal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.stripe-portal-container form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.stripe-portal-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.stripe-portal-container .stripe-portal-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.stripe-portal-container .stripe-portal-submit {
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.stripe-portal-container .stripe-portal-submit:hover {
+    background-color: #005177;
+}

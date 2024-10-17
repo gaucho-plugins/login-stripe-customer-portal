@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Login for Stripe Customer Portal
  * Description: Allow merchants to connect Stripe and provide a customer login endpoint for the Stripe Customer Portal.
- * Version: 1.0
+ * Version: 1.0.1
  * Author: Gaucho Plugins
  * License: GPLv3
  * Text Domain: login-stripe-customer-portal
@@ -58,7 +58,7 @@ class Plugin {
     }
 
     /**
-     * Add the settings page for API key, redirect URL, and endpoint slug.
+     * Add the settings page for API key, redirect URL, endpoint slug, and allow validation setting.
      */
     public function add_settings_page() {
         add_menu_page(
@@ -73,7 +73,7 @@ class Plugin {
     }
 
     /**
-     * Register the API key, redirect URL, and endpoint slug settings.
+     * Register the API key, redirect URL, endpoint slug, and validation settings.
      */
     public function register_settings() {
         register_setting('stripe_portal_settings_group', 'stripe_api_key', [
@@ -85,14 +85,27 @@ class Plugin {
         register_setting('stripe_portal_settings_group', 'stripe_endpoint_slug', [
             'sanitize_callback' => 'sanitize_title',
         ]);
+        register_setting('stripe_portal_settings_group', 'stripe_validate_existing_customers', [
+            'sanitize_callback' => [$this, 'sanitize_checkbox'],
+        ]);
     }
 
     /**
      * Sanitize the secret key before saving.
      */
     public function sanitize_secret_key($input) {
+        // Get the current saved API key
+        $current_api_key = get_option('stripe_api_key');
+    
+        // If the input is masked (i.e., dots or empty), return the currently saved key
+        if (empty($input) || strpos($input, '●') !== false) {
+            return $current_api_key;
+        }
+    
+        // If there's a new API key entered, save it
         return sanitize_text_field($input);
     }
+    
 
     /**
      * Sanitize the redirect URL before saving.
@@ -105,15 +118,22 @@ class Plugin {
     }
 
     /**
+     * Sanitize checkbox values.
+     */
+    public function sanitize_checkbox($input) {
+        return $input === '1' ? '1' : '0';
+    }
+
+    /**
      * Render the settings page for entering the Stripe API key, redirect URL, and endpoint slug.
      */
     public function render_settings_page() {
         $slug = get_option('stripe_endpoint_slug', 'customer-portal');
         $customer_portal_url = home_url('/' . $slug . '/');
-
+        $validate_existing_customers = get_option('stripe_validate_existing_customers', '0');
         ?>
         <div class="wrap">
-            <h1><?php esc_html_e('Embed Stripe Customer Portal Settings', 'login-stripe-customer-portal'); ?></h1>
+            <h1><?php esc_html_e('Login for Stripe Customer Portal Settings', 'login-stripe-customer-portal'); ?></h1>
             <p><?php esc_html_e('Provide your Stripe Secret Key, Redirect URL, and Customer Portal Endpoint Slug below. After saving, the Secret Key will be hidden for security.', 'login-stripe-customer-portal'); ?></p>
             <form method="post" action="options.php">
                 <?php 
@@ -146,10 +166,18 @@ class Plugin {
                             <p class="description"><?php esc_html_e('Customize the slug for the customer portal page. Leave empty to disable the page.', 'login-stripe-customer-portal'); ?></p>
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row"><?php esc_html_e('Only allow existing Stripe customers to login', 'login-stripe-customer-portal'); ?></th>
+                        <td>
+                            <input type="checkbox" name="stripe_validate_existing_customers" value="1" <?php checked('1', $validate_existing_customers); ?> />
+                            <p class="description"><?php esc_html_e('If checked, only existing Stripe customers can log in to the portal.', 'login-stripe-customer-portal'); ?></p>
+                        </td>
+                    </tr>
                 </table>
                 <?php submit_button(); ?>
             </form>
 
+            <!-- Add the instructional strings here -->
             <?php if (!empty($slug)) : ?>
                 <h2><?php esc_html_e('Customer Portal URL', 'login-stripe-customer-portal'); ?></h2>
                 <p><?php esc_html_e('Your customer portal is available at:', 'login-stripe-customer-portal'); ?></p>
@@ -164,6 +192,7 @@ class Plugin {
             <p><?php esc_html_e('Make sure to resave your permalinks after making changes to the customer portal slug by going to:', 'login-stripe-customer-portal'); ?>
             <a href="<?php echo esc_url(admin_url('options-permalink.php')); ?>" target="_blank"><?php esc_html_e('Permalinks Settings', 'login-stripe-customer-portal'); ?></a>.
             </p>
+
         </div>
         <?php
     }
@@ -206,6 +235,13 @@ class Plugin {
                 if (isset($_POST['email'])) {
                     $email = sanitize_email(wp_unslash($_POST['email']));
     
+                    // Check if validation for existing customers is enabled
+                    if (get_option('stripe_validate_existing_customers', '0') === '1') {
+                        if (!$this->check_if_customer_exists($email)) {
+                            wp_die(esc_html__('Only existing customers can log in.', 'login-stripe-customer-portal'));
+                        }
+                    }
+
                     if (is_email($email)) {
                         $this->process_customer_portal_login($email);
                     } else {
@@ -218,7 +254,27 @@ class Plugin {
     
             exit;
         }
-    }    
+    }
+
+    /**
+     * Check if the customer exists in Stripe.
+     *
+     * @param string $email The email address to check.
+     * @return bool True if the customer exists, false otherwise.
+     */
+    public function check_if_customer_exists($email) {
+        \Stripe\Stripe::setApiKey(get_option('stripe_api_key'));
+
+        try {
+            $customers = \Stripe\Customer::all([
+                'email' => $email,
+                'limit' => 1,
+            ]);
+            return count($customers->data) > 0;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 
     /**
      * Display the email form for customers to enter their email.

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Login for Stripe Customer Portal
  * Description: Allow merchants to connect Stripe and provide a customer login endpoint for the Stripe Customer Portal.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Gaucho Plugins
  * License: GPLv3
  * Text Domain: login-stripe-customer-portal
@@ -105,7 +105,6 @@ class Plugin {
         // If there's a new API key entered, save it
         return sanitize_text_field($input);
     }
-    
 
     /**
      * Sanitize the redirect URL before saving.
@@ -209,7 +208,7 @@ class Plugin {
     }
 
     /**
-     * Handle the customer portal by processing the email form and redirecting to the Stripe Customer Portal.
+     * Handle the customer portal by processing the email form and sending the email with the login link.
      */
     public function handle_customer_portal() {
         $slug = get_option('stripe_endpoint_slug', 'customer-portal');
@@ -234,19 +233,35 @@ class Plugin {
                 // Process form data after nonce verification
                 if (isset($_POST['email'])) {
                     $email = sanitize_email(wp_unslash($_POST['email']));
+                    $message = 'If your email address is registered, you should receive an email with a login link.';
     
                     // Check if validation for existing customers is enabled
                     if (get_option('stripe_validate_existing_customers', '0') === '1') {
                         if (!$this->check_if_customer_exists($email)) {
-                            wp_die(esc_html__('Only existing customers can log in.', 'login-stripe-customer-portal'));
+                            $message = 'If your email address is registered, you should receive an email with a login link.';
+                            // Display message regardless, but no email sent
+                            return wp_die(esc_html($message), esc_html__('Login Message', 'login-stripe-customer-portal'));
                         }
                     }
-
+    
+                    // If the email is valid, send the login email
                     if (is_email($email)) {
-                        $this->process_customer_portal_login($email);
-                    } else {
-                        wp_die(esc_html__('Invalid email address.', 'login-stripe-customer-portal'));
+                        $this->send_login_email($email);
                     }
+    
+                    // Always display this message after form submission
+                    wp_die(esc_html($message), esc_html__('Login Message', 'login-stripe-customer-portal'));
+                }
+            } elseif (isset($_GET['token'])) {
+                // If a token is present in the URL, process login
+                $token = sanitize_text_field(wp_unslash($_GET['token']));
+                $email = get_transient('stripe_login_token_' . md5($token));
+    
+                if ($email) {
+                    delete_transient('stripe_login_token_' . md5($token));
+                    $this->process_customer_portal_login($email);
+                } else {
+                    wp_die(esc_html__('Invalid or expired token.', 'login-stripe-customer-portal'));
                 }
             } else {
                 $this->render_email_form();
@@ -254,6 +269,52 @@ class Plugin {
     
             exit;
         }
+    }    
+
+    /**
+     * Send the email containing the login link with a token.
+     *
+     * @param string $email The email address to send the login link to.
+     * @return bool True if the email was sent, false otherwise.
+     */
+    public function send_login_email($email) {
+        $validate_existing_customers = get_option('stripe_validate_existing_customers', '0');
+        
+        // Check if the validation is enabled and if the customer exists
+        if ($validate_existing_customers === '1' && !$this->check_if_customer_exists($email)) {
+            return false;
+        }
+    
+        // Generate a unique token and store it in the database (e.g., as a transient with expiration)
+        $token = wp_generate_password(20, false);
+        set_transient('stripe_login_token_' . md5($token), $email, 3600); // Token expires after 1 hour
+    
+        // Generate login link with token
+        $login_url = add_query_arg([
+            'token' => $token,
+        ], home_url('/customer-portal'));
+    
+        // Send email
+        $subject = __('Login to Stripe Customer Portal', 'login-stripe-customer-portal');
+        $message = sprintf(
+            __('Click the following link to log in to the Stripe Customer Portal: <a href="%s">%s</a>', 'login-stripe-customer-portal'),
+            esc_url($login_url),
+            esc_url($login_url)
+        );
+        $headers = ['Content-Type: text/html; charset=UTF-8'];
+    
+        return wp_mail($email, $subject, $message, $headers);
+    }    
+
+    /**
+     * Show the message after the email is sent or the form is submitted.
+     */
+    public function show_login_message() {
+        ?>
+        <div style="text-align: center; padding: 50px;">
+            <p><?php esc_html_e('If your email address is registered, you should receive an email with a login link shortly.', 'login-stripe-customer-portal'); ?></p>
+        </div>
+        <?php
     }
 
     /**
@@ -299,14 +360,14 @@ class Plugin {
      */
     public function process_customer_portal_login($email) {
         \Stripe\Stripe::setApiKey(get_option('stripe_api_key'));
-
+    
         try {
             // Search for the customer by email
             $customers = \Stripe\Customer::all([
                 'email' => $email,
                 'limit' => 1,
             ]);
-
+    
             if (count($customers->data) > 0) {
                 $customer_id = $customers->data[0]->id;
             } else {
@@ -315,14 +376,15 @@ class Plugin {
                 ]);
                 $customer_id = $customer->id;
             }
-
+    
             // Redirect to Stripe Customer Portal
             $this->redirect_to_stripe_customer_portal($customer_id);
-
+    
         } catch (Exception $e) {
+            error_log('Stripe Error: ' . $e->getMessage());
             wp_die(esc_html__('Error: ', 'login-stripe-customer-portal') . esc_html($e->getMessage()));
         }
-    }
+    }    
 
     /**
      * Redirect to Stripe Customer Portal with the customer ID.

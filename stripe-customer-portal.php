@@ -161,8 +161,11 @@ class Plugin {
     
             // Check if request method is POST and verify nonce
             if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Unsanitize and sanitize the nonce
+                $nonce = isset($_POST['stripe_portal_nonce']) ? sanitize_text_field(wp_unslash($_POST['stripe_portal_nonce'])) : '';
+    
                 // Verify nonce
-                if (!isset($_POST['stripe_portal_nonce']) || !wp_verify_nonce($_POST['stripe_portal_nonce'], 'stripe_portal_login_action')) {
+                if (!wp_verify_nonce($nonce, 'stripe_portal_login_action')) {
                     wp_die(esc_html__('Security check failed', 'login-stripe-customer-portal'));
                 }
     

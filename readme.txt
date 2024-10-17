@@ -1,7 +1,7 @@
 === Login for Stripe Customer Portal ===
 Contributors: gauchoplugins
 Tags: stripe, customer portal, login, api
-Stable tag: 1.0
+Stable tag: 1.0.1
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0

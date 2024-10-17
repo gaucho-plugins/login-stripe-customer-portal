@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Login Page for Stripe Customer Portal
+ * Plugin Name: Login for Stripe Customer Portal
  * Description: Allow merchants to connect Stripe and provide a customer login endpoint for the Stripe Customer Portal.
  * Version: 1.0
  * Author: Gaucho Plugins
@@ -154,25 +154,35 @@ class Plugin {
         if (empty($slug)) {
             return; // Disable the customer portal page if the slug is empty
         }
-
+    
         global $wp_query;
-
+    
         if (isset($wp_query->query_vars['stripe_customer_portal'])) {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
-                $email = sanitize_email(wp_unslash($_POST['email']));
-
-                if (is_email($email)) {
-                    $this->process_customer_portal_login($email);
-                } else {
-                    wp_die(esc_html__('Invalid email address.', 'login-stripe-customer-portal'));
+    
+            // Check if request method is POST and verify nonce
+            if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Verify nonce
+                if (!isset($_POST['stripe_portal_nonce']) || !wp_verify_nonce($_POST['stripe_portal_nonce'], 'stripe_portal_login_action')) {
+                    wp_die(esc_html__('Security check failed', 'login-stripe-customer-portal'));
+                }
+    
+                // Process form data after nonce verification
+                if (isset($_POST['email'])) {
+                    $email = sanitize_email(wp_unslash($_POST['email']));
+    
+                    if (is_email($email)) {
+                        $this->process_customer_portal_login($email);
+                    } else {
+                        wp_die(esc_html__('Invalid email address.', 'login-stripe-customer-portal'));
+                    }
                 }
             } else {
                 $this->render_email_form();
             }
-
+    
             exit;
         }
-    }
+    }    
 
     /**
      * Display the email form for customers to enter their email.
@@ -181,13 +191,14 @@ class Plugin {
         ?>
         <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4;">
             <form method="post" action="" style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 400px; width: 100%; text-align: center;">
+                <?php wp_nonce_field('stripe_portal_login_action', 'stripe_portal_nonce'); ?>
                 <label for="email" style="display: block; margin-bottom: 10px; font-weight: bold;"><?php esc_html_e('Enter your email address:', 'login-stripe-customer-portal'); ?></label>
                 <input type="email" name="email" id="email" required style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #ccc;" />
                 <input type="submit" value="<?php esc_html_e('Continue to Stripe Portal', 'login-stripe-customer-portal'); ?>" style="background-color: #0073aa; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px;" />
             </form>
         </div>
         <?php
-    }
+    }    
 
     /**
      * Process the form submission and redirect to the Stripe Customer Portal.

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Login for Stripe Customer Portal
  * Description: Allow merchants to connect Stripe and provide a customer login endpoint for the Stripe Customer Portal.
- * Version: 1.0.1
+ * Version: 1.0
  * Author: Gaucho Plugins
  * License: GPLv3
  * Text Domain: login-stripe-customer-portal
@@ -147,7 +147,7 @@ class Plugin {
         }
     }
 
-    /**
+        /**
      * Handle the customer portal by processing the email form and redirecting to the Stripe Customer Portal.
      */
     public function handle_customer_portal() {
@@ -155,20 +155,20 @@ class Plugin {
         if (empty($slug)) {
             return; // Disable the customer portal page if the slug is empty
         }
-    
+
         global $wp_query;
-    
+
         if (isset($wp_query->query_vars['lscp_stripe_customer_portal'])) {
-    
+
             // Check if request method is POST and verify nonce
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
                 $nonce = isset($_POST['lscp_stripe_portal_nonce']) ? sanitize_text_field(wp_unslash($_POST['lscp_stripe_portal_nonce'])) : '';
-    
+
                 // Verify nonce
                 if (!wp_verify_nonce($nonce, 'lscp_stripe_portal_login_action')) {
                     wp_die(esc_html__('Security check failed', 'login-stripe-customer-portal'));
                 }
-    
+
                 if (isset($_POST['email'])) {
                     $email = sanitize_email(wp_unslash($_POST['email']));
                     if (is_email($email)) {
@@ -183,6 +183,7 @@ class Plugin {
             exit;
         }
     }
+
 
     /**
      * Display the email form for customers to enter their email.

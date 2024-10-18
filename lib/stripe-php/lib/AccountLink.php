@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Account Links are the means by which a Connect platform grants a connected account permission to access
@@ -18,7 +17,6 @@ namespace Stripe;
 class AccountLink extends ApiResource
 {
     const OBJECT_NAME = 'account_link';
-
     /**
      * Creates an AccountLink object that includes a single-use Stripe URL that the
      * platform can redirect their user to in order to take them through the Connect
@@ -35,11 +33,9 @@ class AccountLink extends ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

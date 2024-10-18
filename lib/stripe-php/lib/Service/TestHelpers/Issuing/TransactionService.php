@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\TestHelpers\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\TestHelpers\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class TransactionService extends \Stripe\Service\AbstractService
+class TransactionService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Allows the user to capture an arbitrary amount, also known as a forced capture.
@@ -24,7 +23,6 @@ class TransactionService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/test_helpers/issuing/transactions/create_force_capture', $params, $opts);
     }
-
     /**
      * Allows the user to refund an arbitrary amount, also known as a unlinked refund.
      *
@@ -39,7 +37,6 @@ class TransactionService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/test_helpers/issuing/transactions/create_unlinked_refund', $params, $opts);
     }
-
     /**
      * Refund a test-mode Transaction.
      *

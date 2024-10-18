@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Util;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Util;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class ApiVersion
 {

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Tax;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Tax;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * You can use Tax <code>Settings</code> to manage configurations used by Stripe Tax calculations.
@@ -16,13 +15,11 @@ namespace Stripe\Tax;
  * @property string $status The status of the Tax <code>Settings</code>.
  * @property \Stripe\StripeObject $status_details
  */
-class Settings extends \Stripe\SingletonApiResource
+class Settings extends \LSCP\Stripe\SingletonApiResource
 {
     const OBJECT_NAME = 'tax.settings';
-
     const STATUS_ACTIVE = 'active';
     const STATUS_PENDING = 'pending';
-
     /**
      * Retrieves Tax <code>Settings</code> for a merchant.
      *
@@ -34,13 +31,11 @@ class Settings extends \Stripe\SingletonApiResource
      */
     public static function retrieve($opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static(null, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -53,14 +48,11 @@ class Settings extends \Stripe\SingletonApiResource
     {
         self::_validateParams($params);
         $url = '/v1/tax/settings';
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array|string $opts
      *
@@ -80,7 +72,6 @@ class Settings extends \Stripe\SingletonApiResource
             list($response, $opts) = $this->_request('post', $url, $params, $opts, ['save']);
             $this->refreshFrom($response, $opts);
         }
-
         return $this;
     }
 }

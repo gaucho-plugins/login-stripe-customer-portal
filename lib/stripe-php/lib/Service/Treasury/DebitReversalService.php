@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class DebitReversalService extends \Stripe\Service\AbstractService
+class DebitReversalService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of DebitReversals.
@@ -24,7 +23,6 @@ class DebitReversalService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/treasury/debit_reversals', $params, $opts);
     }
-
     /**
      * Reverses a ReceivedDebit and creates a DebitReversal object.
      *
@@ -39,7 +37,6 @@ class DebitReversalService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/treasury/debit_reversals', $params, $opts);
     }
-
     /**
      * Retrieves a DebitReversal object.
      *

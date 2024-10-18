@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A Personalization Design is a logical grouping of a Physical Bundle, card logo, and carrier text that represents a product line.
@@ -21,17 +20,14 @@ namespace Stripe\Issuing;
  * @property \Stripe\StripeObject $rejection_reasons
  * @property string $status Whether this personalization design can be used to create cards.
  */
-class PersonalizationDesign extends \Stripe\ApiResource
+class PersonalizationDesign extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'issuing.personalization_design';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     const STATUS_ACTIVE = 'active';
     const STATUS_INACTIVE = 'inactive';
     const STATUS_REJECTED = 'rejected';
     const STATUS_REVIEW = 'review';
-
     /**
      * Creates a personalization design object.
      *
@@ -46,14 +42,11 @@ class PersonalizationDesign extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of personalization design objects. The objects are sorted in
      * descending order by creation date, with the most recently created object
@@ -69,10 +62,8 @@ class PersonalizationDesign extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a personalization design object.
      *
@@ -85,13 +76,11 @@ class PersonalizationDesign extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates a card personalization object.
      *
@@ -107,11 +96,9 @@ class PersonalizationDesign extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

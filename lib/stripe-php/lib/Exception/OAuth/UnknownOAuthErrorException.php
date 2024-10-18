@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception\OAuth;
 
-namespace Stripe\Exception\OAuth;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * UnknownApiErrorException is thrown when the client library receives an

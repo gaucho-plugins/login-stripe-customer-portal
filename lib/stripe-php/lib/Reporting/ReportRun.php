@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Reporting;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Reporting;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * The Report Run object represents an instance of a report type generated with
@@ -25,10 +24,9 @@ namespace Stripe\Reporting;
  * @property string $status Status of this report run. This will be <code>pending</code> when the run is initially created. When the run finishes, this will be set to <code>succeeded</code> and the <code>result</code> field will be populated. Rarely, we may encounter an error, at which point this will be set to <code>failed</code> and the <code>error</code> field will be populated.
  * @property null|int $succeeded_at Timestamp at which this run successfully finished (populated when <code>status=succeeded</code>). Measured in seconds since the Unix epoch.
  */
-class ReportRun extends \Stripe\ApiResource
+class ReportRun extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'reporting.report_run';
-
     /**
      * Creates a new object and begin running the report. (Certain report types require
      * a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.).
@@ -44,14 +42,11 @@ class ReportRun extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of Report Runs, with the most recent appearing first.
      *
@@ -65,10 +60,8 @@ class ReportRun extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing Report Run.
      *
@@ -81,10 +74,9 @@ class ReportRun extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

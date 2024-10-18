@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Use <a href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments">OutboundPayments</a> to send funds to another party's external bank account or <a href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. To send money to an account belonging to the same user, use an <a href="https://stripe.com/docs/api#outbound_transfers">OutboundTransfer</a>.
@@ -34,16 +33,14 @@ namespace Stripe\Treasury;
  * @property null|\Stripe\StripeObject $tracking_details Details about network-specific tracking information if available.
  * @property string|\Stripe\Treasury\Transaction $transaction The Transaction associated with this object.
  */
-class OutboundPayment extends \Stripe\ApiResource
+class OutboundPayment extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'treasury.outbound_payment';
-
     const STATUS_CANCELED = 'canceled';
     const STATUS_FAILED = 'failed';
     const STATUS_POSTED = 'posted';
     const STATUS_PROCESSING = 'processing';
     const STATUS_RETURNED = 'returned';
-
     /**
      * Creates an OutboundPayment.
      *
@@ -58,14 +55,11 @@ class OutboundPayment extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of OutboundPayments sent from the specified FinancialAccount.
      *
@@ -79,10 +73,8 @@ class OutboundPayment extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing OutboundPayment by passing the unique
      * OutboundPayment ID from either the OutboundPayment creation request or
@@ -97,13 +89,11 @@ class OutboundPayment extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -117,7 +107,6 @@ class OutboundPayment extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/cancel';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

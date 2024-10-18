@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A credit balance transaction is a resource representing a transaction (either a credit or a debit) against an existing credit grant.
@@ -18,13 +17,11 @@ namespace Stripe\Billing;
  * @property null|string|\Stripe\TestHelpers\TestClock $test_clock ID of the test clock this credit balance transaction belongs to.
  * @property null|string $type The type of balance transaction (credit or debit).
  */
-class CreditBalanceTransaction extends \Stripe\ApiResource
+class CreditBalanceTransaction extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'billing.credit_balance_transaction';
-
     const TYPE_CREDIT = 'credit';
     const TYPE_DEBIT = 'debit';
-
     /**
      * Retrieve a list of credit balance transactions.
      *
@@ -38,10 +35,8 @@ class CreditBalanceTransaction extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a credit balance transaction.
      *
@@ -54,10 +49,9 @@ class CreditBalanceTransaction extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

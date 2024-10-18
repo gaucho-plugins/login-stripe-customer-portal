@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Any use of an <a href="https://stripe.com/docs/issuing">issued card</a> that results in funds entering or leaving
@@ -34,19 +33,15 @@ namespace Stripe\Issuing;
  * @property string $type The nature of the transaction.
  * @property null|string $wallet The digital wallet used for this transaction. One of <code>apple_pay</code>, <code>google_pay</code>, or <code>samsung_pay</code>.
  */
-class Transaction extends \Stripe\ApiResource
+class Transaction extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'issuing.transaction';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     const TYPE_CAPTURE = 'capture';
     const TYPE_REFUND = 'refund';
-
     const WALLET_APPLE_PAY = 'apple_pay';
     const WALLET_GOOGLE_PAY = 'google_pay';
     const WALLET_SAMSUNG_PAY = 'samsung_pay';
-
     /**
      * Returns a list of Issuing <code>Transaction</code> objects. The objects are
      * sorted in descending order by creation date, with the most recently created
@@ -62,10 +57,8 @@ class Transaction extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves an Issuing <code>Transaction</code> object.
      *
@@ -78,13 +71,11 @@ class Transaction extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates the specified Issuing <code>Transaction</code> object by setting the
      * values of the parameters passed. Any parameters not provided will be left
@@ -102,11 +93,9 @@ class Transaction extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

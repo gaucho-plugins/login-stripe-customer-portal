@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Climate;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Climate;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class SupplierService extends \Stripe\Service\AbstractService
+class SupplierService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Lists all available Climate supplier objects.
@@ -24,7 +23,6 @@ class SupplierService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/climate/suppliers', $params, $opts);
     }
-
     /**
      * Retrieves a Climate supplier object.
      *

@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class SetupIntentService extends \Stripe\Service\AbstractService
+class SetupIntentService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of SetupIntents.
@@ -24,7 +23,6 @@ class SetupIntentService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/setup_intents', $params, $opts);
     }
-
     /**
      * You can cancel a SetupIntent object when it’s in one of these statuses:
      * <code>requires_payment_method</code>, <code>requires_confirmation</code>, or
@@ -47,7 +45,6 @@ class SetupIntentService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/setup_intents/%s/cancel', $id), $params, $opts);
     }
-
     /**
      * Confirm that your customer intends to set up the current or provided payment
      * method. For example, you would confirm a SetupIntent when a customer hits the
@@ -73,7 +70,6 @@ class SetupIntentService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/setup_intents/%s/confirm', $id), $params, $opts);
     }
-
     /**
      * Creates a SetupIntent object.
      *
@@ -92,7 +88,6 @@ class SetupIntentService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/setup_intents', $params, $opts);
     }
-
     /**
      * Retrieves the details of a SetupIntent that has previously been created.
      *
@@ -115,7 +110,6 @@ class SetupIntentService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/setup_intents/%s', $id), $params, $opts);
     }
-
     /**
      * Updates a SetupIntent object.
      *
@@ -131,7 +125,6 @@ class SetupIntentService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/setup_intents/%s', $id), $params, $opts);
     }
-
     /**
      * Verifies microdeposits on a SetupIntent object.
      *

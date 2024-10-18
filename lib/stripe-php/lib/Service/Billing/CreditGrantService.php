@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class CreditGrantService extends \Stripe\Service\AbstractService
+class CreditGrantService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Retrieve a list of credit grants.
@@ -24,7 +23,6 @@ class CreditGrantService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/billing/credit_grants', $params, $opts);
     }
-
     /**
      * Creates a credit grant.
      *
@@ -39,7 +37,6 @@ class CreditGrantService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/billing/credit_grants', $params, $opts);
     }
-
     /**
      * Expires a credit grant.
      *
@@ -55,7 +52,6 @@ class CreditGrantService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/billing/credit_grants/%s/expire', $id), $params, $opts);
     }
-
     /**
      * Retrieves a credit grant.
      *
@@ -71,7 +67,6 @@ class CreditGrantService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/billing/credit_grants/%s', $id), $params, $opts);
     }
-
     /**
      * Updates a credit grant.
      *
@@ -87,7 +82,6 @@ class CreditGrantService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/billing/credit_grants/%s', $id), $params, $opts);
     }
-
     /**
      * Voids a credit grant.
      *

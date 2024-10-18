@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\FinancialConnections;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\FinancialConnections;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A Transaction represents a real transaction that affects a Financial Connections Account balance.
@@ -20,14 +19,12 @@ namespace Stripe\FinancialConnections;
  * @property string $transaction_refresh The token of the transaction refresh that last updated or created this transaction.
  * @property int $updated Time at which the object was last updated. Measured in seconds since the Unix epoch.
  */
-class Transaction extends \Stripe\ApiResource
+class Transaction extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'financial_connections.transaction';
-
     const STATUS_PENDING = 'pending';
     const STATUS_POSTED = 'posted';
     const STATUS_VOID = 'void';
-
     /**
      * Returns a list of Financial Connections <code>Transaction</code> objects.
      *
@@ -41,10 +38,8 @@ class Transaction extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of a Financial Connections <code>Transaction</code>.
      *
@@ -57,10 +52,9 @@ class Transaction extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

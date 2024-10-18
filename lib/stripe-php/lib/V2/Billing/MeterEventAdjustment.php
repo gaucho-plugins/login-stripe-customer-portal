@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\V2\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\V2\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @property string $id The unique id of this meter event adjustment.
@@ -14,10 +13,9 @@ namespace Stripe\V2\Billing;
  * @property string $status Open Enum. The meter event adjustment’s status.
  * @property string $type Open Enum. Specifies whether to cancel a single event or a range of events for a time period. Time period cancellation is not supported yet.
  */
-class MeterEventAdjustment extends \Stripe\ApiResource
+class MeterEventAdjustment extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'billing.meter_event_adjustment';
-
     const STATUS_COMPLETE = 'complete';
     const STATUS_PENDING = 'pending';
 }

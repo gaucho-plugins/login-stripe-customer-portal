@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class EphemeralKeyService extends \Stripe\Service\AbstractService
+class EphemeralKeyService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Invalidates a short-lived API key for a given resource.
@@ -25,7 +24,6 @@ class EphemeralKeyService extends \Stripe\Service\AbstractService
     {
         return $this->request('delete', $this->buildPath('/v1/ephemeral_keys/%s', $id), $params, $opts);
     }
-
     /**
      * Creates a short-lived API key for a given resource.
      *
@@ -39,9 +37,8 @@ class EphemeralKeyService extends \Stripe\Service\AbstractService
     public function create($params = null, $opts = null)
     {
         if (!$opts || !isset($opts['stripe_version'])) {
-            throw new \Stripe\Exception\InvalidArgumentException('stripe_version must be specified to create an ephemeral key');
+            throw new \LSCP\Stripe\Exception\InvalidArgumentException('stripe_version must be specified to create an ephemeral key');
         }
-
         return $this->request('post', '/v1/ephemeral_keys', $params, $opts);
     }
 }

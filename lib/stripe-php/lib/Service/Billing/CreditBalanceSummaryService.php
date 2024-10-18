@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class CreditBalanceSummaryService extends \Stripe\Service\AbstractService
+class CreditBalanceSummaryService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Retrieves the credit balance summary for a customer.

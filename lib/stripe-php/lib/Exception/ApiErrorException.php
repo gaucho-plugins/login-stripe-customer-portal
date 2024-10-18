@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception;
 
-namespace Stripe\Exception;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Implements properties and methods common to all (non-SPL) Stripe exceptions.
@@ -14,7 +15,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     protected $jsonBody;
     protected $requestId;
     protected $stripeCode;
-
     /**
      * Creates a new API error exception.
      *
@@ -27,31 +27,21 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
      *
      * @return static
      */
-    public static function factory(
-        $message,
-        $httpStatus = null,
-        $httpBody = null,
-        $jsonBody = null,
-        $httpHeaders = null,
-        $stripeCode = null
-    ) {
+    public static function factory($message, $httpStatus = null, $httpBody = null, $jsonBody = null, $httpHeaders = null, $stripeCode = null)
+    {
         $instance = new static($message);
         $instance->setHttpStatus($httpStatus);
         $instance->setHttpBody($httpBody);
         $instance->setJsonBody($jsonBody);
         $instance->setHttpHeaders($httpHeaders);
         $instance->setStripeCode($stripeCode);
-
         $instance->setRequestId(null);
         if ($httpHeaders && isset($httpHeaders['Request-Id'])) {
             $instance->setRequestId($httpHeaders['Request-Id']);
         }
-
         $instance->setError($instance->constructErrorObject());
-
         return $instance;
     }
-
     /**
      * Gets the Stripe error object.
      *
@@ -61,7 +51,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         return $this->error;
     }
-
     /**
      * Sets the Stripe error object.
      *
@@ -71,7 +60,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         $this->error = $error;
     }
-
     /**
      * Gets the HTTP body as a string.
      *
@@ -81,7 +69,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         return $this->httpBody;
     }
-
     /**
      * Sets the HTTP body as a string.
      *
@@ -91,7 +78,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         $this->httpBody = $httpBody;
     }
-
     /**
      * Gets the HTTP headers array.
      *
@@ -101,7 +87,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         return $this->httpHeaders;
     }
-
     /**
      * Sets the HTTP headers array.
      *
@@ -111,7 +96,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         $this->httpHeaders = $httpHeaders;
     }
-
     /**
      * Gets the HTTP status code.
      *
@@ -121,7 +105,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         return $this->httpStatus;
     }
-
     /**
      * Sets the HTTP status code.
      *
@@ -131,7 +114,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         $this->httpStatus = $httpStatus;
     }
-
     /**
      * Gets the JSON deserialized body.
      *
@@ -141,7 +123,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         return $this->jsonBody;
     }
-
     /**
      * Sets the JSON deserialized body.
      *
@@ -151,7 +132,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         $this->jsonBody = $jsonBody;
     }
-
     /**
      * Gets the Stripe request ID.
      *
@@ -161,7 +141,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         return $this->requestId;
     }
-
     /**
      * Sets the Stripe request ID.
      *
@@ -171,7 +150,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         $this->requestId = $requestId;
     }
-
     /**
      * Gets the Stripe error code.
      *
@@ -184,7 +162,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         return $this->stripeCode;
     }
-
     /**
      * Sets the Stripe error code.
      *
@@ -194,7 +171,6 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     {
         $this->stripeCode = $stripeCode;
     }
-
     /**
      * Returns the string representation of the exception.
      *
@@ -203,18 +179,15 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
     public function __toString()
     {
         $parentStr = parent::__toString();
-        $statusStr = (null === $this->getHttpStatus()) ? '' : "(Status {$this->getHttpStatus()}) ";
-        $idStr = (null === $this->getRequestId()) ? '' : "(Request {$this->getRequestId()}) ";
-
+        $statusStr = null === $this->getHttpStatus() ? '' : "(Status {$this->getHttpStatus()}) ";
+        $idStr = null === $this->getRequestId() ? '' : "(Request {$this->getRequestId()}) ";
         return "Error sending request to Stripe: {$statusStr}{$idStr}{$this->getMessage()}\n{$parentStr}";
     }
-
     protected function constructErrorObject()
     {
         if (null === $this->jsonBody || !\array_key_exists('error', $this->jsonBody)) {
             return null;
         }
-
-        return \Stripe\ErrorObject::constructFrom($this->jsonBody['error']);
+        return \LSCP\Stripe\ErrorObject::constructFrom($this->jsonBody['error']);
     }
 }

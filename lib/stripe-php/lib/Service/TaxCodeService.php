@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class TaxCodeService extends \Stripe\Service\AbstractService
+class TaxCodeService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * A list of <a href="https://stripe.com/docs/tax/tax-categories">all tax codes
@@ -25,7 +24,6 @@ class TaxCodeService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/tax_codes', $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing tax code. Supply the unique tax code ID and
      * Stripe will return the corresponding tax code information.

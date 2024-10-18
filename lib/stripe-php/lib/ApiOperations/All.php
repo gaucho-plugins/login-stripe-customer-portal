@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\ApiOperations;
 
-namespace Stripe\ApiOperations;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Trait for listable resources. Adds a `all()` static method to the class.
@@ -20,7 +21,6 @@ trait All
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
 }

@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\TestHelpers;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\TestHelpers;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class RefundService extends \Stripe\Service\AbstractService
+class RefundService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Expire a refund with a status of <code>requires_action</code>.

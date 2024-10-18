@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Tax;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Tax;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class TransactionService extends \Stripe\Service\AbstractService
+class TransactionService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Retrieves the line items of a committed standalone transaction as a collection.
@@ -25,7 +24,6 @@ class TransactionService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', $this->buildPath('/v1/tax/transactions/%s/line_items', $id), $params, $opts);
     }
-
     /**
      * Creates a Tax Transaction from a calculation, if that calculation hasn’t
      * expired. Calculations expire after 90 days.
@@ -41,7 +39,6 @@ class TransactionService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/tax/transactions/create_from_calculation', $params, $opts);
     }
-
     /**
      * Partially or fully reverses a previously created <code>Transaction</code>.
      *
@@ -56,7 +53,6 @@ class TransactionService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/tax/transactions/create_reversal', $params, $opts);
     }
-
     /**
      * Retrieves a Tax <code>Transaction</code> object.
      *

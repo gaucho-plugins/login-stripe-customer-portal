@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class RefundService extends \Stripe\Service\AbstractService
+class RefundService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of all refunds you created. We return the refunds in sorted
@@ -26,7 +25,6 @@ class RefundService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/refunds', $params, $opts);
     }
-
     /**
      * Cancels a refund with a status of <code>requires_action</code>.
      *
@@ -45,7 +43,6 @@ class RefundService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/refunds/%s/cancel', $id), $params, $opts);
     }
-
     /**
      * When you create a new refund, you must specify a Charge or a PaymentIntent
      * object on which to create it.
@@ -72,7 +69,6 @@ class RefundService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/refunds', $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing refund.
      *
@@ -88,7 +84,6 @@ class RefundService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/refunds/%s', $id), $params, $opts);
     }
-
     /**
      * Updates the refund that you specify by setting the values of the passed
      * parameters. Any parameters that you don’t provide remain unchanged.

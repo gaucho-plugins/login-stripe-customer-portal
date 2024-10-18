@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Forwarding;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Forwarding;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class RequestService extends \Stripe\Service\AbstractService
+class RequestService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Lists all ForwardingRequest objects.
@@ -24,7 +23,6 @@ class RequestService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/forwarding/requests', $params, $opts);
     }
-
     /**
      * Creates a ForwardingRequest object.
      *
@@ -39,7 +37,6 @@ class RequestService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/forwarding/requests', $params, $opts);
     }
-
     /**
      * Retrieves a ForwardingRequest object.
      *

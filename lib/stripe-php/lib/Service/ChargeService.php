@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ChargeService extends \Stripe\Service\AbstractService
+class ChargeService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of charges you’ve previously created. The charges are returned in
@@ -25,7 +24,6 @@ class ChargeService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/charges', $params, $opts);
     }
-
     /**
      * Capture the payment of an existing, uncaptured charge that was created with the
      * <code>capture</code> option set to false.
@@ -49,7 +47,6 @@ class ChargeService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/charges/%s/capture', $id), $params, $opts);
     }
-
     /**
      * This method is no longer recommended—use the <a
      * href="/docs/api/payment_intents">Payment Intents API</a> to initiate a new
@@ -67,7 +64,6 @@ class ChargeService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/charges', $params, $opts);
     }
-
     /**
      * Retrieves the details of a charge that has previously been created. Supply the
      * unique charge ID that was returned from your previous request, and Stripe will
@@ -86,7 +82,6 @@ class ChargeService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/charges/%s', $id), $params, $opts);
     }
-
     /**
      * Search for charges you’ve previously created using Stripe’s <a
      * href="/docs/search#search-query-language">Search Query Language</a>. Don’t use
@@ -106,7 +101,6 @@ class ChargeService extends \Stripe\Service\AbstractService
     {
         return $this->requestSearchResult('get', '/v1/charges/search', $params, $opts);
     }
-
     /**
      * Updates the specified charge by setting the values of the parameters passed. Any
      * parameters not provided will be left unchanged.

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Tax;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Tax;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @property string $id Unique identifier for the object.
@@ -17,10 +16,9 @@ namespace Stripe\Tax;
  * @property null|\Stripe\StripeObject[] $tax_breakdown Detailed account of taxes relevant to this line item.
  * @property string $tax_code The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID used for this resource.
  */
-class CalculationLineItem extends \Stripe\ApiResource
+class CalculationLineItem extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'tax.calculation_line_item';
-
     const TAX_BEHAVIOR_EXCLUSIVE = 'exclusive';
     const TAX_BEHAVIOR_INCLUSIVE = 'inclusive';
 }

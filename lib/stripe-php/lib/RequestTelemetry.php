@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Class RequestTelemetry.
@@ -15,7 +16,6 @@ class RequestTelemetry
     public $requestDuration;
     /** @var string[] */
     public $usage;
-
     /**
      * Initialize a new telemetry object.
      *

@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ReceivedCreditService extends \Stripe\Service\AbstractService
+class ReceivedCreditService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of ReceivedCredits.
@@ -24,7 +23,6 @@ class ReceivedCreditService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/treasury/received_credits', $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing ReceivedCredit by passing the unique
      * ReceivedCredit ID from the ReceivedCredit list.

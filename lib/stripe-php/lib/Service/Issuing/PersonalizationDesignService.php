@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class PersonalizationDesignService extends \Stripe\Service\AbstractService
+class PersonalizationDesignService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of personalization design objects. The objects are sorted in
@@ -26,7 +25,6 @@ class PersonalizationDesignService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/issuing/personalization_designs', $params, $opts);
     }
-
     /**
      * Creates a personalization design object.
      *
@@ -41,7 +39,6 @@ class PersonalizationDesignService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/issuing/personalization_designs', $params, $opts);
     }
-
     /**
      * Retrieves a personalization design object.
      *
@@ -57,7 +54,6 @@ class PersonalizationDesignService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/issuing/personalization_designs/%s', $id), $params, $opts);
     }
-
     /**
      * Updates a card personalization object.
      *

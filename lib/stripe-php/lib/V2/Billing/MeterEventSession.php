@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\V2\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\V2\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @property string $id The unique id of this auth session.
@@ -12,7 +11,7 @@ namespace Stripe\V2\Billing;
  * @property int $expires_at The time at which this session will expire.
  * @property bool $livemode Has the value <code>true</code> if the object exists in live mode or the value <code>false</code> if the object exists in test mode.
  */
-class MeterEventSession extends \Stripe\ApiResource
+class MeterEventSession extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'billing.meter_event_session';
 }

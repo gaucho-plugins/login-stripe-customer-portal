@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * An issuing token object is created when an issued card is added to a digital wallet. As a <a href="https://stripe.com/docs/issuing">card issuer</a>, you can <a href="https://stripe.com/docs/issuing/controls/token-management">view and manage these tokens</a> through Stripe.
@@ -20,24 +19,19 @@ namespace Stripe\Issuing;
  * @property string $status The usage state of the token.
  * @property null|string $wallet_provider The digital wallet for this token, if one was used.
  */
-class Token extends \Stripe\ApiResource
+class Token extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'issuing.token';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     const NETWORK_MASTERCARD = 'mastercard';
     const NETWORK_VISA = 'visa';
-
     const STATUS_ACTIVE = 'active';
     const STATUS_DELETED = 'deleted';
     const STATUS_REQUESTED = 'requested';
     const STATUS_SUSPENDED = 'suspended';
-
     const WALLET_PROVIDER_APPLE_PAY = 'apple_pay';
     const WALLET_PROVIDER_GOOGLE_PAY = 'google_pay';
     const WALLET_PROVIDER_SAMSUNG_PAY = 'samsung_pay';
-
     /**
      * Lists all Issuing <code>Token</code> objects for a given card.
      *
@@ -51,10 +45,8 @@ class Token extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves an Issuing <code>Token</code> object.
      *
@@ -67,13 +59,11 @@ class Token extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Attempts to update the specified Issuing <code>Token</code> object to the status
      * specified.
@@ -90,11 +80,9 @@ class Token extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

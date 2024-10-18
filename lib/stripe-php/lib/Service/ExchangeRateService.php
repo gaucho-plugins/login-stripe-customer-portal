@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ExchangeRateService extends \Stripe\Service\AbstractService
+class ExchangeRateService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of objects that contain the rates at which foreign currencies are
@@ -25,7 +24,6 @@ class ExchangeRateService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/exchange_rates', $params, $opts);
     }
-
     /**
      * Retrieves the exchange rates from the given currency to every supported
      * currency.

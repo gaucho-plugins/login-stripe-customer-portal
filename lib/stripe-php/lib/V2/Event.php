@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\V2;
 
-namespace Stripe\V2;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @property string $id Unique identifier for the event.
@@ -10,7 +11,7 @@ namespace Stripe\V2;
  * @property string $type The type of the event.
  * @property null|string $context The Stripe account of the event
  */
-abstract class Event extends \Stripe\ApiResource
+abstract class Event extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'v2.core.event';
 }

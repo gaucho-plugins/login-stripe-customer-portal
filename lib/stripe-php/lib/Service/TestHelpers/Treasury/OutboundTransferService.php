@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\TestHelpers\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\TestHelpers\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class OutboundTransferService extends \Stripe\Service\AbstractService
+class OutboundTransferService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Transitions a test mode created OutboundTransfer to the <code>failed</code>
@@ -27,7 +26,6 @@ class OutboundTransferService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/test_helpers/treasury/outbound_transfers/%s/fail', $id), $params, $opts);
     }
-
     /**
      * Transitions a test mode created OutboundTransfer to the <code>posted</code>
      * status. The OutboundTransfer must already be in the <code>processing</code>
@@ -45,7 +43,6 @@ class OutboundTransferService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/test_helpers/treasury/outbound_transfers/%s/post', $id), $params, $opts);
     }
-
     /**
      * Transitions a test mode created OutboundTransfer to the <code>returned</code>
      * status. The OutboundTransfer must already be in the <code>processing</code>
@@ -63,7 +60,6 @@ class OutboundTransferService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/test_helpers/treasury/outbound_transfers/%s/return', $id), $params, $opts);
     }
-
     /**
      * Updates a test mode created OutboundTransfer with tracking details. The
      * OutboundTransfer must not be cancelable, and cannot be in the

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Refund objects allow you to refund a previously created charge that isn't
@@ -35,24 +34,19 @@ namespace Stripe;
 class Refund extends ApiResource
 {
     const OBJECT_NAME = 'refund';
-
     use ApiOperations\Update;
-
     const FAILURE_REASON_EXPIRED_OR_CANCELED_CARD = 'expired_or_canceled_card';
     const FAILURE_REASON_LOST_OR_STOLEN_CARD = 'lost_or_stolen_card';
     const FAILURE_REASON_UNKNOWN = 'unknown';
-
     const REASON_DUPLICATE = 'duplicate';
     const REASON_EXPIRED_UNCAPTURED_CHARGE = 'expired_uncaptured_charge';
     const REASON_FRAUDULENT = 'fraudulent';
     const REASON_REQUESTED_BY_CUSTOMER = 'requested_by_customer';
-
     const STATUS_CANCELED = 'canceled';
     const STATUS_FAILED = 'failed';
     const STATUS_PENDING = 'pending';
     const STATUS_REQUIRES_ACTION = 'requires_action';
     const STATUS_SUCCEEDED = 'succeeded';
-
     /**
      * When you create a new refund, you must specify a Charge or a PaymentIntent
      * object on which to create it.
@@ -79,14 +73,11 @@ class Refund extends ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of all refunds you created. We return the refunds in sorted
      * order, with the most recent refunds appearing first. The 10 most recent refunds
@@ -102,10 +93,8 @@ class Refund extends ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing refund.
      *
@@ -118,13 +107,11 @@ class Refund extends ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates the refund that you specify by setting the values of the passed
      * parameters. Any parameters that you don’t provide remain unchanged.
@@ -143,14 +130,11 @@ class Refund extends ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -164,7 +148,6 @@ class Refund extends ApiResource
         $url = $this->instanceUrl() . '/cancel';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

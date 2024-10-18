@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class AuthorizationService extends \Stripe\Service\AbstractService
+class AuthorizationService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of Issuing <code>Authorization</code> objects. The objects are
@@ -26,7 +25,6 @@ class AuthorizationService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/issuing/authorizations', $params, $opts);
     }
-
     /**
      * [Deprecated] Approves a pending Issuing <code>Authorization</code> object. This
      * request should be made within the timeout window of the <a
@@ -49,7 +47,6 @@ class AuthorizationService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/issuing/authorizations/%s/approve', $id), $params, $opts);
     }
-
     /**
      * [Deprecated] Declines a pending Issuing <code>Authorization</code> object. This
      * request should be made within the timeout window of the <a
@@ -72,7 +69,6 @@ class AuthorizationService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/issuing/authorizations/%s/decline', $id), $params, $opts);
     }
-
     /**
      * Retrieves an Issuing <code>Authorization</code> object.
      *
@@ -88,7 +84,6 @@ class AuthorizationService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/issuing/authorizations/%s', $id), $params, $opts);
     }
-
     /**
      * Updates the specified Issuing <code>Authorization</code> object by setting the
      * values of the parameters passed. Any parameters not provided will be left

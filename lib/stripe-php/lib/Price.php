@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.
@@ -37,22 +36,16 @@ namespace Stripe;
 class Price extends ApiResource
 {
     const OBJECT_NAME = 'price';
-
     use ApiOperations\Update;
-
     const BILLING_SCHEME_PER_UNIT = 'per_unit';
     const BILLING_SCHEME_TIERED = 'tiered';
-
     const TAX_BEHAVIOR_EXCLUSIVE = 'exclusive';
     const TAX_BEHAVIOR_INCLUSIVE = 'inclusive';
     const TAX_BEHAVIOR_UNSPECIFIED = 'unspecified';
-
     const TIERS_MODE_GRADUATED = 'graduated';
     const TIERS_MODE_VOLUME = 'volume';
-
     const TYPE_ONE_TIME = 'one_time';
     const TYPE_RECURRING = 'recurring';
-
     /**
      * Creates a new price for an existing product. The price can be recurring or
      * one-time.
@@ -68,14 +61,11 @@ class Price extends ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of your active prices, excluding <a
      * href="/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
@@ -91,10 +81,8 @@ class Price extends ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the price with the given ID.
      *
@@ -107,13 +95,11 @@ class Price extends ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates the specified price by setting the values of the parameters passed. Any
      * parameters not provided are left unchanged.
@@ -130,14 +116,11 @@ class Price extends ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -149,7 +132,6 @@ class Price extends ApiResource
     public static function search($params = null, $opts = null)
     {
         $url = '/v1/prices/search';
-
-        return static::_requestPage($url, \Stripe\SearchResult::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\SearchResult::class, $params, $opts);
     }
 }

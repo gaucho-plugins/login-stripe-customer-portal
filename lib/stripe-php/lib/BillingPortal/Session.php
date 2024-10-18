@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\BillingPortal;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\BillingPortal;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * The Billing customer portal is a Stripe-hosted UI for subscription and
@@ -32,10 +31,9 @@ namespace Stripe\BillingPortal;
  * @property null|string $return_url The URL to redirect customers to when they click on the portal's link to return to your website.
  * @property string $url The short-lived URL of the session that gives customers access to the customer portal.
  */
-class Session extends \Stripe\ApiResource
+class Session extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'billing_portal.session';
-
     /**
      * Creates a session of the customer portal.
      *
@@ -50,11 +48,9 @@ class Session extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

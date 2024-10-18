@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class FinancialAccountService extends \Stripe\Service\AbstractService
+class FinancialAccountService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of FinancialAccounts.
@@ -24,7 +23,6 @@ class FinancialAccountService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/treasury/financial_accounts', $params, $opts);
     }
-
     /**
      * Creates a new FinancialAccount. For now, each connected account can only have
      * one FinancialAccount.
@@ -40,7 +38,6 @@ class FinancialAccountService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/treasury/financial_accounts', $params, $opts);
     }
-
     /**
      * Retrieves the details of a FinancialAccount.
      *
@@ -56,7 +53,6 @@ class FinancialAccountService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/treasury/financial_accounts/%s', $id), $params, $opts);
     }
-
     /**
      * Retrieves Features information associated with the FinancialAccount.
      *
@@ -72,7 +68,6 @@ class FinancialAccountService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/treasury/financial_accounts/%s/features', $id), $params, $opts);
     }
-
     /**
      * Updates the details of a FinancialAccount.
      *
@@ -88,7 +83,6 @@ class FinancialAccountService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/treasury/financial_accounts/%s', $id), $params, $opts);
     }
-
     /**
      * Updates the Features associated with a FinancialAccount.
      *

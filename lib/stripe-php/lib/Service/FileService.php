@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class FileService extends \Stripe\Service\AbstractService
+class FileService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of the files that your account has access to. Stripe sorts and
@@ -26,7 +25,6 @@ class FileService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/files', $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing file object. After you supply a unique file
      * ID, Stripe returns the corresponding file object. Learn how to <a
@@ -44,7 +42,6 @@ class FileService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/files/%s', $id), $params, $opts);
     }
-
     /**
      * Create a file.
      *
@@ -55,15 +52,13 @@ class FileService extends \Stripe\Service\AbstractService
      */
     public function create($params = null, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         if (!isset($opts->apiBase)) {
             $opts->apiBase = $this->getClient()->getFilesBase();
         }
-
         // Manually flatten params, otherwise curl's multipart encoder will
         // choke on nested null|arrays.
-        $flatParams = \array_column(\Stripe\Util\Util::flattenParams($params), 1, 0);
-
+        $flatParams = \array_column(\LSCP\Stripe\Util\Util::flattenParams($params), 1, 0);
         return $this->request('post', '/v1/files', $flatParams, $opts);
     }
 }

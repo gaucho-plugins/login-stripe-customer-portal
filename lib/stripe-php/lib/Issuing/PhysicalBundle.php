@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A Physical Bundle represents the bundle of physical items - card stock, carrier letter, and envelope - that is shipped to a cardholder when you create a physical card.
@@ -15,17 +14,14 @@ namespace Stripe\Issuing;
  * @property string $status Whether this physical bundle can be used to create cards.
  * @property string $type Whether this physical bundle is a standard Stripe offering or custom-made for you.
  */
-class PhysicalBundle extends \Stripe\ApiResource
+class PhysicalBundle extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'issuing.physical_bundle';
-
     const STATUS_ACTIVE = 'active';
     const STATUS_INACTIVE = 'inactive';
     const STATUS_REVIEW = 'review';
-
     const TYPE_CUSTOM = 'custom';
     const TYPE_STANDARD = 'standard';
-
     /**
      * Returns a list of physical bundle objects. The objects are sorted in descending
      * order by creation date, with the most recently created object appearing first.
@@ -40,10 +36,8 @@ class PhysicalBundle extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a physical bundle object.
      *
@@ -56,10 +50,9 @@ class PhysicalBundle extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * You can <a href="https://stripe.com/docs/issuing/cards">create physical or virtual cards</a> that are issued to cardholders.
@@ -32,28 +31,22 @@ namespace Stripe\Issuing;
  * @property string $type The type of the card.
  * @property null|\Stripe\StripeObject $wallets Information relating to digital wallets (like Apple Pay and Google Pay).
  */
-class Card extends \Stripe\ApiResource
+class Card extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'issuing.card';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     const CANCELLATION_REASON_DESIGN_REJECTED = 'design_rejected';
     const CANCELLATION_REASON_LOST = 'lost';
     const CANCELLATION_REASON_STOLEN = 'stolen';
-
     const REPLACEMENT_REASON_DAMAGED = 'damaged';
     const REPLACEMENT_REASON_EXPIRED = 'expired';
     const REPLACEMENT_REASON_LOST = 'lost';
     const REPLACEMENT_REASON_STOLEN = 'stolen';
-
     const STATUS_ACTIVE = 'active';
     const STATUS_CANCELED = 'canceled';
     const STATUS_INACTIVE = 'inactive';
-
     const TYPE_PHYSICAL = 'physical';
     const TYPE_VIRTUAL = 'virtual';
-
     /**
      * Creates an Issuing <code>Card</code> object.
      *
@@ -68,14 +61,11 @@ class Card extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of Issuing <code>Card</code> objects. The objects are sorted in
      * descending order by creation date, with the most recently created object
@@ -91,10 +81,8 @@ class Card extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves an Issuing <code>Card</code> object.
      *
@@ -107,13 +95,11 @@ class Card extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates the specified Issuing <code>Card</code> object by setting the values of
      * the parameters passed. Any parameters not provided will be left unchanged.
@@ -130,11 +116,9 @@ class Card extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

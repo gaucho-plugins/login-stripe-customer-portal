@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\ApiOperations;
 
-namespace Stripe\ApiOperations;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Trait for retrievable singleton resources. Adds a `retrieve()` static method to the
@@ -20,10 +21,9 @@ trait SingletonRetrieve
      */
     public static function retrieve($opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static(null, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

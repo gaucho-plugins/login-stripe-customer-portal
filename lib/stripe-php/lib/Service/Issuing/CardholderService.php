@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class CardholderService extends \Stripe\Service\AbstractService
+class CardholderService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of Issuing <code>Cardholder</code> objects. The objects are
@@ -26,7 +25,6 @@ class CardholderService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/issuing/cardholders', $params, $opts);
     }
-
     /**
      * Creates a new Issuing <code>Cardholder</code> object that can be issued cards.
      *
@@ -41,7 +39,6 @@ class CardholderService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/issuing/cardholders', $params, $opts);
     }
-
     /**
      * Retrieves an Issuing <code>Cardholder</code> object.
      *
@@ -57,7 +54,6 @@ class CardholderService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/issuing/cardholders/%s', $id), $params, $opts);
     }
-
     /**
      * Updates the specified Issuing <code>Cardholder</code> object by setting the
      * values of the parameters passed. Any parameters not provided will be left

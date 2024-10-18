@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Service\TestHelpers;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\TestHelpers;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Service factory class for API resources in the TestHelpers namespace.
@@ -15,21 +14,12 @@ namespace Stripe\Service\TestHelpers;
  * @property TestClockService $testClocks
  * @property Treasury\TreasuryServiceFactory $treasury
  */
-class TestHelpersServiceFactory extends \Stripe\Service\AbstractServiceFactory
+class TestHelpersServiceFactory extends \LSCP\Stripe\Service\AbstractServiceFactory
 {
     /**
      * @var array<string, string>
      */
-    private static $classMap = [
-        'confirmationTokens' => ConfirmationTokenService::class,
-        'customers' => CustomerService::class,
-        'issuing' => Issuing\IssuingServiceFactory::class,
-        'refunds' => RefundService::class,
-        'terminal' => Terminal\TerminalServiceFactory::class,
-        'testClocks' => TestClockService::class,
-        'treasury' => Treasury\TreasuryServiceFactory::class,
-    ];
-
+    private static $classMap = ['confirmationTokens' => ConfirmationTokenService::class, 'customers' => CustomerService::class, 'issuing' => Issuing\IssuingServiceFactory::class, 'refunds' => RefundService::class, 'terminal' => Terminal\TerminalServiceFactory::class, 'testClocks' => TestClockService::class, 'treasury' => Treasury\TreasuryServiceFactory::class];
     protected function getServiceClass($name)
     {
         return \array_key_exists($name, self::$classMap) ? self::$classMap[$name] : null;

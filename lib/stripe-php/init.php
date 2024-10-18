@@ -1,10 +1,11 @@
 <?php
+namespace LSCP;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 require __DIR__ . '/lib/Util/ApiVersion.php';
-
 // Stripe singleton
 require __DIR__ . '/lib/Stripe.php';
-
 // Utilities
 require __DIR__ . '/lib/Util/CaseInsensitiveArray.php';
 require __DIR__ . '/lib/Util/LoggerInterface.php';
@@ -15,12 +16,10 @@ require __DIR__ . '/lib/Util/Set.php';
 require __DIR__ . '/lib/Util/Util.php';
 require __DIR__ . '/lib/Util/EventTypes.php';
 require __DIR__ . '/lib/Util/ObjectTypes.php';
-
 // HttpClient
 require __DIR__ . '/lib/HttpClient/ClientInterface.php';
 require __DIR__ . '/lib/HttpClient/StreamingClientInterface.php';
 require __DIR__ . '/lib/HttpClient/CurlClient.php';
-
 // Exceptions
 require __DIR__ . '/lib/Exception/ExceptionInterface.php';
 require __DIR__ . '/lib/Exception/ApiErrorException.php';
@@ -36,7 +35,6 @@ require __DIR__ . '/lib/Exception/RateLimitException.php';
 require __DIR__ . '/lib/Exception/SignatureVerificationException.php';
 require __DIR__ . '/lib/Exception/UnexpectedValueException.php';
 require __DIR__ . '/lib/Exception/UnknownApiErrorException.php';
-
 // OAuth exceptions
 require __DIR__ . '/lib/Exception/OAuth/ExceptionInterface.php';
 require __DIR__ . '/lib/Exception/OAuth/OAuthErrorException.php';
@@ -47,7 +45,6 @@ require __DIR__ . '/lib/Exception/OAuth/InvalidScopeException.php';
 require __DIR__ . '/lib/Exception/OAuth/UnknownOAuthErrorException.php';
 require __DIR__ . '/lib/Exception/OAuth/UnsupportedGrantTypeException.php';
 require __DIR__ . '/lib/Exception/OAuth/UnsupportedResponseTypeException.php';
-
 // API operations
 require __DIR__ . '/lib/ApiOperations/All.php';
 require __DIR__ . '/lib/ApiOperations/Create.php';
@@ -58,7 +55,6 @@ require __DIR__ . '/lib/ApiOperations/Retrieve.php';
 require __DIR__ . '/lib/ApiOperations/Search.php';
 require __DIR__ . '/lib/ApiOperations/SingletonRetrieve.php';
 require __DIR__ . '/lib/ApiOperations/Update.php';
-
 // Plumbing
 require __DIR__ . '/lib/ApiResponse.php';
 require __DIR__ . '/lib/RequestTelemetry.php';
@@ -78,14 +74,12 @@ require __DIR__ . '/lib/V2/Collection.php';
 require __DIR__ . '/lib/SearchResult.php';
 require __DIR__ . '/lib/ErrorObject.php';
 require __DIR__ . '/lib/Issuing/CardDetails.php';
-
 // StripeClient
 require __DIR__ . '/lib/BaseStripeClientInterface.php';
 require __DIR__ . '/lib/StripeClientInterface.php';
 require __DIR__ . '/lib/StripeStreamingClientInterface.php';
 require __DIR__ . '/lib/BaseStripeClient.php';
 require __DIR__ . '/lib/StripeClient.php';
-
 // The beginning of the section generated from our OpenAPI spec
 require __DIR__ . '/lib/Account.php';
 require __DIR__ . '/lib/AccountLink.php';
@@ -381,14 +375,11 @@ require __DIR__ . '/lib/V2/Billing/MeterEvent.php';
 require __DIR__ . '/lib/V2/Billing/MeterEventAdjustment.php';
 require __DIR__ . '/lib/V2/Billing/MeterEventSession.php';
 require __DIR__ . '/lib/WebhookEndpoint.php';
-
 // The end of the section generated from our OpenAPI spec
-
 // OAuth
 require __DIR__ . '/lib/OAuth.php';
 require __DIR__ . '/lib/OAuthErrorObject.php';
 require __DIR__ . '/lib/Service/OAuthService.php';
-
 // Webhooks
 require __DIR__ . '/lib/Webhook.php';
 require __DIR__ . '/lib/WebhookSignature.php';

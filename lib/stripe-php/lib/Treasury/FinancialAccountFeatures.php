@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Encodes whether a FinancialAccount has access to a particular Feature, with a <code>status</code> enum and associated <code>status_details</code>.
@@ -17,7 +16,7 @@ namespace Stripe\Treasury;
  * @property null|\Stripe\StripeObject $outbound_payments Settings related to Outbound Payments features on a Financial Account
  * @property null|\Stripe\StripeObject $outbound_transfers OutboundTransfers contains outbound transfers features for a FinancialAccount.
  */
-class FinancialAccountFeatures extends \Stripe\ApiResource
+class FinancialAccountFeatures extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'treasury.financial_account_features';
 }

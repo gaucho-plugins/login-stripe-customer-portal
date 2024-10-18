@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Tax;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Tax;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A Tax Calculation allows you to calculate the tax to collect from your customer.
@@ -25,10 +24,9 @@ namespace Stripe\Tax;
  * @property \Stripe\StripeObject[] $tax_breakdown Breakdown of individual tax amounts that add up to the total.
  * @property int $tax_date Timestamp of date at which the tax rules and rates in effect applies for the calculation.
  */
-class Calculation extends \Stripe\ApiResource
+class Calculation extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'tax.calculation';
-
     /**
      * Calculates tax based on the input and returns a Tax <code>Calculation</code>
      * object.
@@ -44,14 +42,11 @@ class Calculation extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Retrieves a Tax <code>Calculation</code> object, if the calculation hasn’t
      * expired.
@@ -65,13 +60,11 @@ class Calculation extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * @param string $id
      * @param null|array $params
@@ -85,9 +78,8 @@ class Calculation extends \Stripe\ApiResource
     {
         $url = static::resourceUrl($id) . '/line_items';
         list($response, $opts) = static::_staticRequest('get', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

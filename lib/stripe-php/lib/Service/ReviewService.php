@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ReviewService extends \Stripe\Service\AbstractService
+class ReviewService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of <code>Review</code> objects that have <code>open</code> set to
@@ -26,7 +25,6 @@ class ReviewService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/reviews', $params, $opts);
     }
-
     /**
      * Approves a <code>Review</code> object, closing it and removing it from the list
      * of reviews.
@@ -43,7 +41,6 @@ class ReviewService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/reviews/%s/approve', $id), $params, $opts);
     }
-
     /**
      * Retrieves a <code>Review</code> object.
      *

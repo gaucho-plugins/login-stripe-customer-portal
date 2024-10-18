@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class TokenService extends \Stripe\Service\AbstractService
+class TokenService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Lists all Issuing <code>Token</code> objects for a given card.
@@ -24,7 +23,6 @@ class TokenService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/issuing/tokens', $params, $opts);
     }
-
     /**
      * Retrieves an Issuing <code>Token</code> object.
      *
@@ -40,7 +38,6 @@ class TokenService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/issuing/tokens/%s', $id), $params, $opts);
     }
-
     /**
      * Attempts to update the specified Issuing <code>Token</code> object to the status
      * specified.

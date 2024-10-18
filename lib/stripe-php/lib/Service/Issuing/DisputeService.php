@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class DisputeService extends \Stripe\Service\AbstractService
+class DisputeService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted
@@ -26,7 +25,6 @@ class DisputeService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/issuing/disputes', $params, $opts);
     }
-
     /**
      * Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence
      * within the <code>evidence</code> object are optional at this point. Stripe only
@@ -45,7 +43,6 @@ class DisputeService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/issuing/disputes', $params, $opts);
     }
-
     /**
      * Retrieves an Issuing <code>Dispute</code> object.
      *
@@ -61,7 +58,6 @@ class DisputeService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/issuing/disputes/%s', $id), $params, $opts);
     }
-
     /**
      * Submits an Issuing <code>Dispute</code> to the card network. Stripe validates
      * that all evidence fields required for the dispute’s reason are present. For more
@@ -81,7 +77,6 @@ class DisputeService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/issuing/disputes/%s/submit', $id), $params, $opts);
     }
-
     /**
      * Updates the specified Issuing <code>Dispute</code> object by setting the values
      * of the parameters passed. Any parameters not provided will be left unchanged.

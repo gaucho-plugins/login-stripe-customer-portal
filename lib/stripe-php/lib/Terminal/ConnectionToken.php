@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Terminal;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Terminal;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A Connection Token is used by the Stripe Terminal SDK to connect to a reader.
@@ -13,10 +12,9 @@ namespace Stripe\Terminal;
  * @property null|string $location The id of the location that this connection token is scoped to. Note that location scoping only applies to internet-connected readers. For more details, see <a href="https://docs.stripe.com/terminal/fleet/locations-and-zones?dashboard-or-api=api#connection-tokens">the docs on scoping connection tokens</a>.
  * @property string $secret Your application should pass this token to the Stripe Terminal SDK.
  */
-class ConnectionToken extends \Stripe\ApiResource
+class ConnectionToken extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'terminal.connection_token';
-
     /**
      * To connect to a reader the Stripe Terminal SDK needs to retrieve a short-lived
      * connection token from Stripe, proxied through your server. On your backend, add
@@ -33,11 +31,9 @@ class ConnectionToken extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

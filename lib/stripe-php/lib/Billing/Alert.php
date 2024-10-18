@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A billing alert is a resource that notifies you when a certain usage threshold on a meter is crossed. For example, you might create a billing alert to notify you when a certain user made 100 API requests.
@@ -15,14 +14,12 @@ namespace Stripe\Billing;
  * @property string $title Title of the alert.
  * @property null|\Stripe\StripeObject $usage_threshold Encapsulates configuration of the alert to monitor usage on a specific <a href="https://stripe.com/docs/api/billing/meter">Billing Meter</a>.
  */
-class Alert extends \Stripe\ApiResource
+class Alert extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'billing.alert';
-
     const STATUS_ACTIVE = 'active';
     const STATUS_ARCHIVED = 'archived';
     const STATUS_INACTIVE = 'inactive';
-
     /**
      * Creates a billing alert.
      *
@@ -37,14 +34,11 @@ class Alert extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Lists billing active and inactive alerts.
      *
@@ -58,10 +52,8 @@ class Alert extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a billing alert given an ID.
      *
@@ -74,13 +66,11 @@ class Alert extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -94,10 +84,8 @@ class Alert extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/activate';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -111,10 +99,8 @@ class Alert extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/archive';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -128,7 +114,6 @@ class Alert extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/deactivate';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

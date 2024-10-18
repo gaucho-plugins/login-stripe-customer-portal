@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Tax;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Tax;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A Tax Transaction records the tax collected from or refunded to your customer.
@@ -26,13 +25,11 @@ namespace Stripe\Tax;
  * @property int $tax_date Timestamp of date at which the tax rules and rates in effect applies for the calculation.
  * @property string $type If <code>reversal</code>, this transaction reverses an earlier transaction.
  */
-class Transaction extends \Stripe\ApiResource
+class Transaction extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'tax.transaction';
-
     const TYPE_REVERSAL = 'reversal';
     const TYPE_TRANSACTION = 'transaction';
-
     /**
      * Retrieves a Tax <code>Transaction</code> object.
      *
@@ -45,13 +42,11 @@ class Transaction extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -64,12 +59,10 @@ class Transaction extends \Stripe\ApiResource
     {
         $url = static::classUrl() . '/create_from_calculation';
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -82,12 +75,10 @@ class Transaction extends \Stripe\ApiResource
     {
         $url = static::classUrl() . '/create_reversal';
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param string $id
      * @param null|array $params
@@ -101,9 +92,8 @@ class Transaction extends \Stripe\ApiResource
     {
         $url = static::resourceUrl($id) . '/line_items';
         list($response, $opts) = static::_staticRequest('get', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

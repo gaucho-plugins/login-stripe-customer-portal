@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class AccountLinkService extends \Stripe\Service\AbstractService
+class AccountLinkService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Creates an AccountLink object that includes a single-use Stripe URL that the

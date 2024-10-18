@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Apps;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Apps;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Secret Store is an API that allows Stripe Apps developers to securely persist secrets for use by UI Extensions and app backends.
@@ -25,10 +24,9 @@ namespace Stripe\Apps;
  * @property null|string $payload The plaintext secret value to be stored.
  * @property \Stripe\StripeObject $scope
  */
-class Secret extends \Stripe\ApiResource
+class Secret extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'apps.secret';
-
     /**
      * Create or replace a secret in the secret store.
      *
@@ -43,14 +41,11 @@ class Secret extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * List all secrets stored on the given scope.
      *
@@ -64,10 +59,8 @@ class Secret extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -80,12 +73,10 @@ class Secret extends \Stripe\ApiResource
     {
         $url = static::classUrl() . '/delete';
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -98,9 +89,8 @@ class Secret extends \Stripe\ApiResource
     {
         $url = static::classUrl() . '/find';
         list($response, $opts) = static::_staticRequest('get', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

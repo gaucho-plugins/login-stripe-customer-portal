@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\V2\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\V2\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class MeterEventSessionService extends \Stripe\Service\AbstractService
+class MeterEventSessionService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Creates a meter event session to send usage on the high-throughput meter event

@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Entitlements;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Entitlements;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class FeatureService extends \Stripe\Service\AbstractService
+class FeatureService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Retrieve a list of features.
@@ -24,7 +23,6 @@ class FeatureService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/entitlements/features', $params, $opts);
     }
-
     /**
      * Creates a feature.
      *
@@ -39,7 +37,6 @@ class FeatureService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/entitlements/features', $params, $opts);
     }
-
     /**
      * Retrieves a feature.
      *
@@ -55,7 +52,6 @@ class FeatureService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/entitlements/features/%s', $id), $params, $opts);
     }
-
     /**
      * Update a feature’s metadata or permanently deactivate it.
      *

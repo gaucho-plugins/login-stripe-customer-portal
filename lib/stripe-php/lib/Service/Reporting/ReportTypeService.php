@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Reporting;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Reporting;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ReportTypeService extends \Stripe\Service\AbstractService
+class ReportTypeService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a full list of Report Types.
@@ -24,7 +23,6 @@ class ReportTypeService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/reporting/report_types', $params, $opts);
     }
-
     /**
      * Retrieves the details of a Report Type. (Certain report types require a <a
      * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.).

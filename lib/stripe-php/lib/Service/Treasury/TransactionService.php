@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class TransactionService extends \Stripe\Service\AbstractService
+class TransactionService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Retrieves a list of Transaction objects.
@@ -24,7 +23,6 @@ class TransactionService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/treasury/transactions', $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing Transaction.
      *

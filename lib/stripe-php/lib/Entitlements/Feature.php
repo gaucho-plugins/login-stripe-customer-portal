@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Entitlements;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Entitlements;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A feature represents a monetizable ability or functionality in your system.
@@ -16,12 +15,10 @@ namespace Stripe\Entitlements;
  * @property \Stripe\StripeObject $metadata Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
  * @property string $name The feature's name, for your own purpose, not meant to be displayable to the customer.
  */
-class Feature extends \Stripe\ApiResource
+class Feature extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'entitlements.feature';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     /**
      * Creates a feature.
      *
@@ -36,14 +33,11 @@ class Feature extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Retrieve a list of features.
      *
@@ -57,10 +51,8 @@ class Feature extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a feature.
      *
@@ -73,13 +65,11 @@ class Feature extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Update a feature’s metadata or permanently deactivate it.
      *
@@ -95,11 +85,9 @@ class Feature extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

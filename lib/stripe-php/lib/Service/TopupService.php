@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class TopupService extends \Stripe\Service\AbstractService
+class TopupService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of top-ups.
@@ -24,7 +23,6 @@ class TopupService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/topups', $params, $opts);
     }
-
     /**
      * Cancels a top-up. Only pending top-ups can be canceled.
      *
@@ -40,7 +38,6 @@ class TopupService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/topups/%s/cancel', $id), $params, $opts);
     }
-
     /**
      * Top up the balance of an account.
      *
@@ -55,7 +52,6 @@ class TopupService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/topups', $params, $opts);
     }
-
     /**
      * Retrieves the details of a top-up that has previously been created. Supply the
      * unique top-up ID that was returned from your previous request, and Stripe will
@@ -73,7 +69,6 @@ class TopupService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/topups/%s', $id), $params, $opts);
     }
-
     /**
      * Updates the metadata of a top-up. Other top-up details are not editable by
      * design.

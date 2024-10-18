@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A SetupAttempt describes one attempted confirmation of a SetupIntent,
@@ -29,7 +28,6 @@ namespace Stripe;
 class SetupAttempt extends ApiResource
 {
     const OBJECT_NAME = 'setup_attempt';
-
     /**
      * Returns a list of SetupAttempts that associate with a provided SetupIntent.
      *
@@ -43,7 +41,6 @@ class SetupAttempt extends ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
 }

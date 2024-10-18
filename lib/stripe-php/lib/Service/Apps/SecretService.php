@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Apps;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Apps;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class SecretService extends \Stripe\Service\AbstractService
+class SecretService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * List all secrets stored on the given scope.
@@ -24,7 +23,6 @@ class SecretService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/apps/secrets', $params, $opts);
     }
-
     /**
      * Create or replace a secret in the secret store.
      *
@@ -39,7 +37,6 @@ class SecretService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/apps/secrets', $params, $opts);
     }
-
     /**
      * Deletes a secret from the secret store by name and scope.
      *
@@ -54,7 +51,6 @@ class SecretService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/apps/secrets/delete', $params, $opts);
     }
-
     /**
      * Finds a secret in the secret store by name and scope.
      *

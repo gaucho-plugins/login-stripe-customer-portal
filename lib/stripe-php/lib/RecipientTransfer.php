@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Class RecipientTransfer.

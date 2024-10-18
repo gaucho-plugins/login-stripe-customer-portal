@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Class SingletonApiResource.
@@ -14,13 +15,10 @@ abstract class SingletonApiResource extends ApiResource
     {
         // Replace dots with slashes for namespaced resources, e.g. if the object's name is
         // "foo.bar", then its URL will be "/v1/foo/bar".
-
         /** @phpstan-ignore-next-line */
         $base = \str_replace('.', '/', static::OBJECT_NAME);
-
         return "/v1/{$base}";
     }
-
     /**
      * @return string the endpoint associated with this singleton API resource
      */

@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\TestHelpers\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\TestHelpers\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class PersonalizationDesignService extends \Stripe\Service\AbstractService
+class PersonalizationDesignService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Updates the <code>status</code> of the specified testmode personalization design
@@ -26,7 +25,6 @@ class PersonalizationDesignService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/test_helpers/issuing/personalization_designs/%s/activate', $id), $params, $opts);
     }
-
     /**
      * Updates the <code>status</code> of the specified testmode personalization design
      * object to <code>inactive</code>.
@@ -43,7 +41,6 @@ class PersonalizationDesignService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/test_helpers/issuing/personalization_designs/%s/deactivate', $id), $params, $opts);
     }
-
     /**
      * Updates the <code>status</code> of the specified testmode personalization design
      * object to <code>rejected</code>.

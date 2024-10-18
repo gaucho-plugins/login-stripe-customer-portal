@@ -1,11 +1,11 @@
 <?php
+namespace LSCP\Stripe;
 
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 abstract class Webhook
 {
     const DEFAULT_TOLERANCE = 300;
-
     /**
      * Returns an Events instance using the provided JSON payload. Throws an
      * Exception\UnexpectedValueException if the payload is not valid JSON, and
@@ -27,16 +27,12 @@ abstract class Webhook
     public static function constructEvent($payload, $sigHeader, $secret, $tolerance = self::DEFAULT_TOLERANCE)
     {
         WebhookSignature::verifyHeader($payload, $sigHeader, $secret, $tolerance);
-
-        $data = \json_decode($payload, true);
+        $data = \json_decode($payload, \true);
         $jsonError = \json_last_error();
         if (null === $data && \JSON_ERROR_NONE !== $jsonError) {
-            $msg = "Invalid payload: {$payload} "
-              . "(json_last_error() was {$jsonError})";
-
+            $msg = "Invalid payload: {$payload} " . "(json_last_error() was {$jsonError})";
             throw new Exception\UnexpectedValueException($msg);
         }
-
         return Event::constructFrom($data);
     }
 }

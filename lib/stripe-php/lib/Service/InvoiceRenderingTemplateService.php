@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class InvoiceRenderingTemplateService extends \Stripe\Service\AbstractService
+class InvoiceRenderingTemplateService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * List all templates, ordered by creation date, with the most recently created
@@ -25,7 +24,6 @@ class InvoiceRenderingTemplateService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/invoice_rendering_templates', $params, $opts);
     }
-
     /**
      * Updates the status of an invoice rendering template to ‘archived’ so no new
      * Stripe objects (customers, invoices, etc.) can reference it. The template can
@@ -44,7 +42,6 @@ class InvoiceRenderingTemplateService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/invoice_rendering_templates/%s/archive', $id), $params, $opts);
     }
-
     /**
      * Retrieves an invoice rendering template with the given ID. It by default returns
      * the latest version of the template. Optionally, specify a version to see
@@ -62,7 +59,6 @@ class InvoiceRenderingTemplateService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/invoice_rendering_templates/%s', $id), $params, $opts);
     }
-
     /**
      * Unarchive an invoice rendering template so it can be used on new Stripe objects
      * again.

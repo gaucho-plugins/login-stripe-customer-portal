@@ -20,6 +20,12 @@ The **Login for Stripe Customer Portal** plugin simplifies the process for Strip
 * **Secure Authentication**: Users log in with their email to access their Stripe Customer Portal securely.
 * **Redirect URL**: After logging out of the portal, customers are redirected back to a specified URL, which can be customized in the plugin settings.
 
+### Third-Party Service Disclaimer
+This plugin integrates with Stripe to provide the customer portal functionality. It uses Stripe's API to connect with and manage customer data securely. By using this plugin, you are consenting to the transmission of data to Stripe’s services.
+
+Service Terms: [Stripe Terms of Use](https://stripe.com/legal/ssa)
+Privacy Policy: [Stripe Privacy Policy](https://stripe.com/privacy)
+
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/` directory or install the plugin through the WordPress plugins screen.

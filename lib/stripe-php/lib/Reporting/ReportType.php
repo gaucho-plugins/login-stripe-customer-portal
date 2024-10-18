@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Reporting;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Reporting;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * The Report Type resource corresponds to a particular type of report, such as
@@ -24,10 +23,9 @@ namespace Stripe\Reporting;
  * @property int $updated When this Report Type was latest updated. Measured in seconds since the Unix epoch.
  * @property int $version Version of the Report Type. Different versions report with the same ID will have the same purpose, but may take different run parameters or have different result schemas.
  */
-class ReportType extends \Stripe\ApiResource
+class ReportType extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'reporting.report_type';
-
     /**
      * Returns a full list of Report Types.
      *
@@ -41,10 +39,8 @@ class ReportType extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of a Report Type. (Certain report types require a <a
      * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.).
@@ -58,10 +54,9 @@ class ReportType extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

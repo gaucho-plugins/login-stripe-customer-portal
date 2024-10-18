@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A billing meter event adjustment is a resource that allows you to cancel a meter event. For example, you might create a billing meter event adjustment to cancel a meter event that was created in error or attached to the wrong customer.
@@ -14,13 +13,11 @@ namespace Stripe\Billing;
  * @property string $status The meter event adjustment's status.
  * @property string $type Specifies whether to cancel a single event or a range of events for a time period. Time period cancellation is not supported yet.
  */
-class MeterEventAdjustment extends \Stripe\ApiResource
+class MeterEventAdjustment extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'billing.meter_event_adjustment';
-
     const STATUS_COMPLETE = 'complete';
     const STATUS_PENDING = 'pending';
-
     /**
      * Creates a billing meter event adjustment.
      *
@@ -35,11 +32,9 @@ class MeterEventAdjustment extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

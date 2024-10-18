@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Radar;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Radar;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class EarlyFraudWarningService extends \Stripe\Service\AbstractService
+class EarlyFraudWarningService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of early fraud warnings.
@@ -24,7 +23,6 @@ class EarlyFraudWarningService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/radar/early_fraud_warnings', $params, $opts);
     }
-
     /**
      * Retrieves the details of an early fraud warning that has previously been
      * created.

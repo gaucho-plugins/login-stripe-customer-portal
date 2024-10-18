@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Login Links are single-use URLs for a connected account to access the Express Dashboard. The connected account's <a href="/api/accounts/object#account_object-controller-stripe_dashboard-type">account.controller.stripe_dashboard.type</a> must be <code>express</code> to have access to the Express Dashboard.

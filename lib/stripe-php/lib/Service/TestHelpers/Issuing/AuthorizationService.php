@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\TestHelpers\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\TestHelpers\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class AuthorizationService extends \Stripe\Service\AbstractService
+class AuthorizationService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Capture a test-mode authorization.
@@ -25,7 +24,6 @@ class AuthorizationService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/test_helpers/issuing/authorizations/%s/capture', $id), $params, $opts);
     }
-
     /**
      * Create a test-mode authorization.
      *
@@ -40,7 +38,6 @@ class AuthorizationService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/test_helpers/issuing/authorizations', $params, $opts);
     }
-
     /**
      * Expire a test-mode Authorization.
      *
@@ -56,7 +53,6 @@ class AuthorizationService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/test_helpers/issuing/authorizations/%s/expire', $id), $params, $opts);
     }
-
     /**
      * Finalize the amount on an Authorization prior to capture, when the initial
      * authorization was for an estimated amount.
@@ -73,7 +69,6 @@ class AuthorizationService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/test_helpers/issuing/authorizations/%s/finalize_amount', $id), $params, $opts);
     }
-
     /**
      * Increment a test-mode Authorization.
      *
@@ -89,7 +84,6 @@ class AuthorizationService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/test_helpers/issuing/authorizations/%s/increment', $id), $params, $opts);
     }
-
     /**
      * Reverse a test-mode Authorization.
      *

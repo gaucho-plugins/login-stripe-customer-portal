@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ApplePayDomainService extends \Stripe\Service\AbstractService
+class ApplePayDomainService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * List apple pay domains.
@@ -24,7 +23,6 @@ class ApplePayDomainService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/apple_pay/domains', $params, $opts);
     }
-
     /**
      * Create an apple pay domain.
      *
@@ -39,7 +37,6 @@ class ApplePayDomainService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/apple_pay/domains', $params, $opts);
     }
-
     /**
      * Delete an apple pay domain.
      *
@@ -55,7 +52,6 @@ class ApplePayDomainService extends \Stripe\Service\AbstractService
     {
         return $this->request('delete', $this->buildPath('/v1/apple_pay/domains/%s', $id), $params, $opts);
     }
-
     /**
      * Retrieve an apple pay domain.
      *

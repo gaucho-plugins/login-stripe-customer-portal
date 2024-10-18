@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A credit grant is a resource that records a grant of some credit to a customer.
@@ -23,15 +22,12 @@ namespace Stripe\Billing;
  * @property int $updated Time at which the object was last updated. Measured in seconds since the Unix epoch.
  * @property null|int $voided_at The time when this credit grant was voided. If not present, the credit grant hasn't been voided.
  */
-class CreditGrant extends \Stripe\ApiResource
+class CreditGrant extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'billing.credit_grant';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     const CATEGORY_PAID = 'paid';
     const CATEGORY_PROMOTIONAL = 'promotional';
-
     /**
      * Creates a credit grant.
      *
@@ -46,14 +42,11 @@ class CreditGrant extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Retrieve a list of credit grants.
      *
@@ -67,10 +60,8 @@ class CreditGrant extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a credit grant.
      *
@@ -83,13 +74,11 @@ class CreditGrant extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates a credit grant.
      *
@@ -105,14 +94,11 @@ class CreditGrant extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -126,10 +112,8 @@ class CreditGrant extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/expire';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -143,7 +127,6 @@ class CreditGrant extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/void';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

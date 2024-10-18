@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\BillingPortal;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\BillingPortal;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ConfigurationService extends \Stripe\Service\AbstractService
+class ConfigurationService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of configurations that describe the functionality of the customer
@@ -25,7 +24,6 @@ class ConfigurationService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/billing_portal/configurations', $params, $opts);
     }
-
     /**
      * Creates a configuration that describes the functionality and behavior of a
      * PortalSession.
@@ -41,7 +39,6 @@ class ConfigurationService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/billing_portal/configurations', $params, $opts);
     }
-
     /**
      * Retrieves a configuration that describes the functionality of the customer
      * portal.
@@ -58,7 +55,6 @@ class ConfigurationService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/billing_portal/configurations/%s', $id), $params, $opts);
     }
-
     /**
      * Updates a configuration that describes the functionality of the customer portal.
      *

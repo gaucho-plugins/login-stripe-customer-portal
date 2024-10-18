@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Class ApiResource.
@@ -9,7 +10,6 @@ namespace Stripe;
 abstract class ApiResource extends StripeObject
 {
     use ApiOperations\Request;
-
     /**
      * @return \Stripe\Util\Set A list of fields that can be their own type of
      * API resource (say a nested card under an account for example), and if
@@ -23,10 +23,8 @@ abstract class ApiResource extends StripeObject
         if (null === $savedNestedResources) {
             $savedNestedResources = new Util\Set();
         }
-
         return $savedNestedResources;
     }
-
     /**
      * @var bool A flag that can be set a behavior that will cause this
      * resource to be encoded and sent up along with an update of its parent
@@ -34,18 +32,15 @@ abstract class ApiResource extends StripeObject
      * individually on their own endpoints, but there are certain cases,
      * replacing a customer's source for example, where this is allowed.
      */
-    public $saveWithParent = false;
-
+    public $saveWithParent = \false;
     public function __set($k, $v)
     {
         parent::__set($k, $v);
         $v = $this->{$k};
-        if ((static::getSavedNestedResources()->includes($k))
-            && ($v instanceof ApiResource)) {
-            $v->saveWithParent = true;
+        if (static::getSavedNestedResources()->includes($k) && $v instanceof ApiResource) {
+            $v->saveWithParent = \true;
         }
     }
-
     /**
      * @throws Exception\ApiErrorException
      *
@@ -55,19 +50,11 @@ abstract class ApiResource extends StripeObject
     {
         $requestor = new ApiRequestor($this->_opts->apiKey, static::baseUrl());
         $url = $this->instanceUrl();
-
-        list($response, $this->_opts->apiKey) = $requestor->request(
-            'get',
-            $url,
-            $this->_retrieveOptions,
-            $this->_opts->headers
-        );
+        list($response, $this->_opts->apiKey) = $requestor->request('get', $url, $this->_retrieveOptions, $this->_opts->headers);
         $this->setLastResponse($response);
         $this->refreshFrom($response->json, $this->_opts);
-
         return $this;
     }
-
     /**
      * @return string the base URL for the given class
      */
@@ -75,7 +62,6 @@ abstract class ApiResource extends StripeObject
     {
         return Stripe::$apiBase;
     }
-
     /**
      * @return string the endpoint URL for the given class
      */
@@ -83,13 +69,10 @@ abstract class ApiResource extends StripeObject
     {
         // Replace dots with slashes for namespaced resources, e.g. if the object's name is
         // "foo.bar", then its URL will be "/v1/foo/bars".
-
         /** @phpstan-ignore-next-line */
         $base = \str_replace('.', '/', static::OBJECT_NAME);
-
         return "/v1/{$base}s";
     }
-
     /**
      * @param null|string $id the ID of the resource
      *
@@ -101,18 +84,14 @@ abstract class ApiResource extends StripeObject
     {
         if (null === $id) {
             $class = static::class;
-            $message = 'Could not determine which URL to request: '
-               . "{$class} instance has invalid ID: {$id}";
-
+            $message = 'Could not determine which URL to request: ' . "{$class} instance has invalid ID: {$id}";
             throw new Exception\UnexpectedValueException($message);
         }
         $id = Util\Util::utf8($id);
         $base = static::classUrl();
         $extn = \urlencode($id);
-
         return "{$base}/{$extn}";
     }
-
     /**
      * @return string the full API URL for this API resource
      */

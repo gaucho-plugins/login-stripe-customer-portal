@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\ApiOperations;
 
-namespace Stripe\ApiOperations;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Trait for searchable resources.
@@ -20,6 +21,6 @@ trait Search
      */
     protected static function _searchResource($searchUrl, $params = null, $opts = null)
     {
-        return static::_requestPage($searchUrl, \Stripe\SearchResult::class, $params, $opts);
+        return static::_requestPage($searchUrl, \LSCP\Stripe\SearchResult::class, $params, $opts);
     }
 }

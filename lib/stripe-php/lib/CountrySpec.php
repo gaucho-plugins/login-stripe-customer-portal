@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Stripe needs to collect certain pieces of information about each account
@@ -24,7 +23,6 @@ namespace Stripe;
 class CountrySpec extends ApiResource
 {
     const OBJECT_NAME = 'country_spec';
-
     /**
      * Lists all Country Spec objects available in the API.
      *
@@ -38,10 +36,8 @@ class CountrySpec extends ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Returns a Country Spec for a given Country code.
      *
@@ -54,10 +50,9 @@ class CountrySpec extends ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Climate;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Climate;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Orders represent your intent to purchase a particular Climate product. When you create an order, the
@@ -31,22 +30,18 @@ namespace Stripe\Climate;
  * @property null|int $product_substituted_at Time at which the order's product was substituted for a different product. Measured in seconds since the Unix epoch.
  * @property string $status The current status of this order.
  */
-class Order extends \Stripe\ApiResource
+class Order extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'climate.order';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     const CANCELLATION_REASON_EXPIRED = 'expired';
     const CANCELLATION_REASON_PRODUCT_UNAVAILABLE = 'product_unavailable';
     const CANCELLATION_REASON_REQUESTED = 'requested';
-
     const STATUS_AWAITING_FUNDS = 'awaiting_funds';
     const STATUS_CANCELED = 'canceled';
     const STATUS_CONFIRMED = 'confirmed';
     const STATUS_DELIVERED = 'delivered';
     const STATUS_OPEN = 'open';
-
     /**
      * Creates a Climate order object for a given Climate product. The order will be
      * processed immediately after creation and payment will be deducted your Stripe
@@ -63,14 +58,11 @@ class Order extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Lists all Climate order objects. The orders are returned sorted by creation
      * date, with the most recently created orders appearing first.
@@ -85,10 +77,8 @@ class Order extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of a Climate order object with the given ID.
      *
@@ -101,13 +91,11 @@ class Order extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates the specified order by setting the values of the parameters passed.
      *
@@ -123,14 +111,11 @@ class Order extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -144,7 +129,6 @@ class Order extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/cancel';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

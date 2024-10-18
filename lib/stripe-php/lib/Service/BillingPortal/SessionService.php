@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\BillingPortal;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\BillingPortal;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class SessionService extends \Stripe\Service\AbstractService
+class SessionService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Creates a session of the customer portal.

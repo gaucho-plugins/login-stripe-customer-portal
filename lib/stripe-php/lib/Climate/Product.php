@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Climate;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Climate;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A Climate product represents a type of carbon removal unit available for reservation.
@@ -18,10 +17,9 @@ namespace Stripe\Climate;
  * @property string $name The Climate product's name.
  * @property \Stripe\Climate\Supplier[] $suppliers The carbon removal suppliers that fulfill orders for this Climate product.
  */
-class Product extends \Stripe\ApiResource
+class Product extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'climate.product';
-
     /**
      * Lists all available Climate product objects.
      *
@@ -35,10 +33,8 @@ class Product extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of a Climate product with the given ID.
      *
@@ -51,10 +47,9 @@ class Product extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

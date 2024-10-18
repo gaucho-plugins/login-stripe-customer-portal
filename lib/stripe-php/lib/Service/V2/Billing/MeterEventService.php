@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\V2\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\V2\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class MeterEventService extends \Stripe\Service\AbstractService
+class MeterEventService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Creates a meter event. Events are validated synchronously, but are processed

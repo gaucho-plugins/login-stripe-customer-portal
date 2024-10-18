@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * When an <a href="https://stripe.com/docs/issuing">issued card</a> is used to make a purchase, an Issuing <code>Authorization</code>
@@ -39,22 +38,18 @@ namespace Stripe\Issuing;
  * @property \Stripe\StripeObject $verification_data
  * @property null|string $wallet The digital wallet used for this transaction. One of <code>apple_pay</code>, <code>google_pay</code>, or <code>samsung_pay</code>. Will populate as <code>null</code> when no digital wallet was utilized.
  */
-class Authorization extends \Stripe\ApiResource
+class Authorization extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'issuing.authorization';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     const AUTHORIZATION_METHOD_CHIP = 'chip';
     const AUTHORIZATION_METHOD_CONTACTLESS = 'contactless';
     const AUTHORIZATION_METHOD_KEYED_IN = 'keyed_in';
     const AUTHORIZATION_METHOD_ONLINE = 'online';
     const AUTHORIZATION_METHOD_SWIPE = 'swipe';
-
     const STATUS_CLOSED = 'closed';
     const STATUS_PENDING = 'pending';
     const STATUS_REVERSED = 'reversed';
-
     /**
      * Returns a list of Issuing <code>Authorization</code> objects. The objects are
      * sorted in descending order by creation date, with the most recently created
@@ -70,10 +65,8 @@ class Authorization extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves an Issuing <code>Authorization</code> object.
      *
@@ -86,13 +79,11 @@ class Authorization extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates the specified Issuing <code>Authorization</code> object by setting the
      * values of the parameters passed. Any parameters not provided will be left
@@ -110,14 +101,11 @@ class Authorization extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -131,10 +119,8 @@ class Authorization extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/approve';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -148,7 +134,6 @@ class Authorization extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/decline';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

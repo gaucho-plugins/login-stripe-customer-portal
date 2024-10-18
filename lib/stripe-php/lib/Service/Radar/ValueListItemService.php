@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Radar;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Radar;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ValueListItemService extends \Stripe\Service\AbstractService
+class ValueListItemService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of <code>ValueListItem</code> objects. The objects are sorted in
@@ -26,7 +25,6 @@ class ValueListItemService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/radar/value_list_items', $params, $opts);
     }
-
     /**
      * Creates a new <code>ValueListItem</code> object, which is added to the specified
      * parent value list.
@@ -42,7 +40,6 @@ class ValueListItemService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/radar/value_list_items', $params, $opts);
     }
-
     /**
      * Deletes a <code>ValueListItem</code> object, removing it from its parent value
      * list.
@@ -59,7 +56,6 @@ class ValueListItemService extends \Stripe\Service\AbstractService
     {
         return $this->request('delete', $this->buildPath('/v1/radar/value_list_items/%s', $id), $params, $opts);
     }
-
     /**
      * Retrieves a <code>ValueListItem</code> object.
      *

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Radar;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Radar;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Value lists allow you to group values together which can then be referenced in rules.
@@ -20,12 +19,10 @@ namespace Stripe\Radar;
  * @property \Stripe\StripeObject $metadata Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
  * @property string $name The name of the value list.
  */
-class ValueList extends \Stripe\ApiResource
+class ValueList extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'radar.value_list';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     const ITEM_TYPE_CARD_BIN = 'card_bin';
     const ITEM_TYPE_CARD_FINGERPRINT = 'card_fingerprint';
     const ITEM_TYPE_CASE_SENSITIVE_STRING = 'case_sensitive_string';
@@ -36,7 +33,6 @@ class ValueList extends \Stripe\ApiResource
     const ITEM_TYPE_SEPA_DEBIT_FINGERPRINT = 'sepa_debit_fingerprint';
     const ITEM_TYPE_STRING = 'string';
     const ITEM_TYPE_US_BANK_ACCOUNT_FINGERPRINT = 'us_bank_account_fingerprint';
-
     /**
      * Creates a new <code>ValueList</code> object, which can then be referenced in
      * rules.
@@ -52,14 +48,11 @@ class ValueList extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Deletes a <code>ValueList</code> object, also deleting any items contained
      * within the value list. To be deleted, a value list must not be referenced in any
@@ -75,14 +68,11 @@ class ValueList extends \Stripe\ApiResource
     public function delete($params = null, $opts = null)
     {
         self::_validateParams($params);
-
         $url = $this->instanceUrl();
         list($response, $opts) = $this->_request('delete', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * Returns a list of <code>ValueList</code> objects. The objects are sorted in
      * descending order by creation date, with the most recently created object
@@ -98,10 +88,8 @@ class ValueList extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a <code>ValueList</code> object.
      *
@@ -114,13 +102,11 @@ class ValueList extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates a <code>ValueList</code> object by setting the values of the parameters
      * passed. Any parameters not provided will be left unchanged. Note that
@@ -138,11 +124,9 @@ class ValueList extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

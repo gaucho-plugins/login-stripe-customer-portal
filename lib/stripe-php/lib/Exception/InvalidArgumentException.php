@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception;
 
-namespace Stripe\Exception;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {

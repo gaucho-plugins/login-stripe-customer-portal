@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception\OAuth;
 
-namespace Stripe\Exception\OAuth;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * UnsupportedGrantTypeException is thrown when an unuspported grant type

@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class InvoiceItemService extends \Stripe\Service\AbstractService
+class InvoiceItemService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of your invoice items. Invoice items are returned sorted by
@@ -25,7 +24,6 @@ class InvoiceItemService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/invoiceitems', $params, $opts);
     }
-
     /**
      * Creates an item to be added to a draft invoice (up to 250 items per invoice). If
      * no invoice is specified, the item will be on the next invoice created for the
@@ -42,7 +40,6 @@ class InvoiceItemService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/invoiceitems', $params, $opts);
     }
-
     /**
      * Deletes an invoice item, removing it from an invoice. Deleting invoice items is
      * only possible when they’re not attached to invoices, or if it’s attached to a
@@ -60,7 +57,6 @@ class InvoiceItemService extends \Stripe\Service\AbstractService
     {
         return $this->request('delete', $this->buildPath('/v1/invoiceitems/%s', $id), $params, $opts);
     }
-
     /**
      * Retrieves the invoice item with the given ID.
      *
@@ -76,7 +72,6 @@ class InvoiceItemService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/invoiceitems/%s', $id), $params, $opts);
     }
-
     /**
      * Updates the amount or description of an invoice item on an upcoming invoice.
      * Updating an invoice item is only possible before the invoice it’s attached to is

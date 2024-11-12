@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\ApiOperations;
 
-namespace Stripe\ApiOperations;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Trait for retrievable resources. Adds a `retrieve()` static method to the
@@ -21,10 +22,9 @@ trait Retrieve
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

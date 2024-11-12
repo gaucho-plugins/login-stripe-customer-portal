@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class TransactionService extends \Stripe\Service\AbstractService
+class TransactionService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of Issuing <code>Transaction</code> objects. The objects are
@@ -26,7 +25,6 @@ class TransactionService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/issuing/transactions', $params, $opts);
     }
-
     /**
      * Retrieves an Issuing <code>Transaction</code> object.
      *
@@ -42,7 +40,6 @@ class TransactionService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/issuing/transactions/%s', $id), $params, $opts);
     }
-
     /**
      * Updates the specified Issuing <code>Transaction</code> object by setting the
      * values of the parameters passed. Any parameters not provided will be left

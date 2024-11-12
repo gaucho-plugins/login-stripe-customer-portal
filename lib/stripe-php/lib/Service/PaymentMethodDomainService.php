@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class PaymentMethodDomainService extends \Stripe\Service\AbstractService
+class PaymentMethodDomainService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Lists the details of existing payment method domains.
@@ -24,7 +23,6 @@ class PaymentMethodDomainService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/payment_method_domains', $params, $opts);
     }
-
     /**
      * Creates a payment method domain.
      *
@@ -39,7 +37,6 @@ class PaymentMethodDomainService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/payment_method_domains', $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing payment method domain.
      *
@@ -55,7 +52,6 @@ class PaymentMethodDomainService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/payment_method_domains/%s', $id), $params, $opts);
     }
-
     /**
      * Updates an existing payment method domain.
      *
@@ -71,7 +67,6 @@ class PaymentMethodDomainService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/payment_method_domains/%s', $id), $params, $opts);
     }
-
     /**
      * Some payment methods such as Apple Pay require additional steps to verify a
      * domain. If the requirements weren’t satisfied when the domain was created, the

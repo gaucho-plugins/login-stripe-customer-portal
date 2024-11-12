@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class CreditBalanceTransactionService extends \Stripe\Service\AbstractService
+class CreditBalanceTransactionService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Retrieve a list of credit balance transactions.
@@ -24,7 +23,6 @@ class CreditBalanceTransactionService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/billing/credit_balance_transactions', $params, $opts);
     }
-
     /**
      * Retrieves a credit balance transaction.
      *

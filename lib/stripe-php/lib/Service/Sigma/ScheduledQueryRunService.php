@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Sigma;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Sigma;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ScheduledQueryRunService extends \Stripe\Service\AbstractService
+class ScheduledQueryRunService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of scheduled query runs.
@@ -24,7 +23,6 @@ class ScheduledQueryRunService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/sigma/scheduled_query_runs', $params, $opts);
     }
-
     /**
      * Retrieves the details of an scheduled query run.
      *

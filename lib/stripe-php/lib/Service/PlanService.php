@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class PlanService extends \Stripe\Service\AbstractService
+class PlanService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of your plans.
@@ -24,7 +23,6 @@ class PlanService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/plans', $params, $opts);
     }
-
     /**
      * You can now model subscriptions more flexibly using the <a href="#prices">Prices
      * API</a>. It replaces the Plans API and is backwards compatible to simplify your
@@ -41,7 +39,6 @@ class PlanService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/plans', $params, $opts);
     }
-
     /**
      * Deleting plans means new subscribers can’t be added. Existing subscribers aren’t
      * affected.
@@ -58,7 +55,6 @@ class PlanService extends \Stripe\Service\AbstractService
     {
         return $this->request('delete', $this->buildPath('/v1/plans/%s', $id), $params, $opts);
     }
-
     /**
      * Retrieves the plan with the given ID.
      *
@@ -74,7 +70,6 @@ class PlanService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/plans/%s', $id), $params, $opts);
     }
-
     /**
      * Updates the specified plan by setting the values of the parameters passed. Any
      * parameters not provided are left unchanged. By design, you cannot change a

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\FinancialConnections;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\FinancialConnections;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A Financial Connections Session is the secure way to programmatically launch the client-side Stripe.js modal that lets your users link their accounts.
@@ -18,10 +17,9 @@ namespace Stripe\FinancialConnections;
  * @property null|string[] $prefetch Data features requested to be retrieved upon account creation.
  * @property null|string $return_url For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
  */
-class Session extends \Stripe\ApiResource
+class Session extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'financial_connections.session';
-
     /**
      * To launch the Financial Connections authorization flow, create a
      * <code>Session</code>. The session’s <code>client_secret</code> can be used to
@@ -38,14 +36,11 @@ class Session extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Retrieves the details of a Financial Connections <code>Session</code>.
      *
@@ -58,10 +53,9 @@ class Session extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

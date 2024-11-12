@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Util;
 
-namespace Stripe\Util;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * CaseInsensitiveArray is an array-like class that ignores case for keys.
@@ -15,12 +16,10 @@ namespace Stripe\Util;
 class CaseInsensitiveArray implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     private $container = [];
-
     public function __construct($initial_array = [])
     {
         $this->container = \array_change_key_case($initial_array, \CASE_LOWER);
     }
-
     /**
      * @return int
      */
@@ -29,7 +28,6 @@ class CaseInsensitiveArray implements \ArrayAccess, \Countable, \IteratorAggrega
     {
         return \count($this->container);
     }
-
     /**
      * @return \ArrayIterator
      */
@@ -38,7 +36,6 @@ class CaseInsensitiveArray implements \ArrayAccess, \Countable, \IteratorAggrega
     {
         return new \ArrayIterator($this->container);
     }
-
     /**
      * @return void
      */
@@ -52,7 +49,6 @@ class CaseInsensitiveArray implements \ArrayAccess, \Countable, \IteratorAggrega
             $this->container[$offset] = $value;
         }
     }
-
     /**
      * @return bool
      */
@@ -60,10 +56,8 @@ class CaseInsensitiveArray implements \ArrayAccess, \Countable, \IteratorAggrega
     public function offsetExists($offset)
     {
         $offset = self::maybeLowercase($offset);
-
         return isset($this->container[$offset]);
     }
-
     /**
      * @return void
      */
@@ -73,7 +67,6 @@ class CaseInsensitiveArray implements \ArrayAccess, \Countable, \IteratorAggrega
         $offset = self::maybeLowercase($offset);
         unset($this->container[$offset]);
     }
-
     /**
      * @return mixed
      */
@@ -81,16 +74,13 @@ class CaseInsensitiveArray implements \ArrayAccess, \Countable, \IteratorAggrega
     public function offsetGet($offset)
     {
         $offset = self::maybeLowercase($offset);
-
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
     }
-
     private static function maybeLowercase($v)
     {
         if (\is_string($v)) {
             return \strtolower($v);
         }
-
         return $v;
     }
 }

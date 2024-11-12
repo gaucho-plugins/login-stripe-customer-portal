@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Use <a href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a> to add funds to your <a href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> via a PaymentMethod that is owned by you. The funds will be transferred via an ACH debit.
@@ -30,15 +29,13 @@ namespace Stripe\Treasury;
  * @property \Stripe\StripeObject $status_transitions
  * @property null|string|\Stripe\Treasury\Transaction $transaction The Transaction associated with this object.
  */
-class InboundTransfer extends \Stripe\ApiResource
+class InboundTransfer extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'treasury.inbound_transfer';
-
     const STATUS_CANCELED = 'canceled';
     const STATUS_FAILED = 'failed';
     const STATUS_PROCESSING = 'processing';
     const STATUS_SUCCEEDED = 'succeeded';
-
     /**
      * Creates an InboundTransfer.
      *
@@ -53,14 +50,11 @@ class InboundTransfer extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of InboundTransfers sent from the specified FinancialAccount.
      *
@@ -74,10 +68,8 @@ class InboundTransfer extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing InboundTransfer.
      *
@@ -90,13 +82,11 @@ class InboundTransfer extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -110,7 +100,6 @@ class InboundTransfer extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/cancel';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

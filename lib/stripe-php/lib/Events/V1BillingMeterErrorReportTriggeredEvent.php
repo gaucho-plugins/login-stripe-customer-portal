@@ -1,17 +1,15 @@
 <?php
+namespace LSCP\Stripe\Events;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Events;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @property \Stripe\RelatedObject $related_object Object containing the reference to API resource relevant to the event
  * @property \Stripe\EventData\V1BillingMeterErrorReportTriggeredEventData $data data associated with the event
  */
-class V1BillingMeterErrorReportTriggeredEvent extends \Stripe\V2\Event
+class V1BillingMeterErrorReportTriggeredEvent extends \LSCP\Stripe\V2\Event
 {
     const LOOKUP_TYPE = 'v1.billing.meter.error_report_triggered';
-
     /**
      * Retrieves the related object from the API. Make an API request on every call.
      *
@@ -21,15 +19,7 @@ class V1BillingMeterErrorReportTriggeredEvent extends \Stripe\V2\Event
      */
     public function fetchRelatedObject()
     {
-        list($object, $options) = $this->_request(
-            'get',
-            $this->related_object->url,
-            [],
-            ['stripe_account' => $this->context],
-            [],
-            'v2'
-        );
-
-        return \Stripe\Util\Util::convertToStripeObject($object, $options, 'v2');
+        list($object, $options) = $this->_request('get', $this->related_object->url, [], ['stripe_account' => $this->context], [], 'v2');
+        return \LSCP\Stripe\Util\Util::convertToStripeObject($object, $options, 'v2');
     }
 }

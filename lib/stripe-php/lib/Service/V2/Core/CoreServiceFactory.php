@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Service\V2\Core;
 
-namespace Stripe\Service\V2\Core;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Service factory class for API resources in the root namespace.
@@ -9,7 +10,7 @@ namespace Stripe\Service\V2\Core;
  * @property EventService $events
  * // Doc: The end of the section generated from our OpenAPI spec
  */
-class CoreServiceFactory extends \Stripe\Service\AbstractServiceFactory
+class CoreServiceFactory extends \LSCP\Stripe\Service\AbstractServiceFactory
 {
     /**
      * @var array<string, string>
@@ -17,9 +18,7 @@ class CoreServiceFactory extends \Stripe\Service\AbstractServiceFactory
     private static $classMap = [
         // Class Map: The beginning of the section generated from our OpenAPI spec
         'events' => EventService::class,
-        // Class Map: The end of the section generated from our OpenAPI spec
     ];
-
     protected function getServiceClass($name)
     {
         return \array_key_exists($name, self::$classMap) ? self::$classMap[$name] : null;

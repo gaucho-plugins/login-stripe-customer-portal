@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Radar;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Radar;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ValueListService extends \Stripe\Service\AbstractService
+class ValueListService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of <code>ValueList</code> objects. The objects are sorted in
@@ -26,7 +25,6 @@ class ValueListService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/radar/value_lists', $params, $opts);
     }
-
     /**
      * Creates a new <code>ValueList</code> object, which can then be referenced in
      * rules.
@@ -42,7 +40,6 @@ class ValueListService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/radar/value_lists', $params, $opts);
     }
-
     /**
      * Deletes a <code>ValueList</code> object, also deleting any items contained
      * within the value list. To be deleted, a value list must not be referenced in any
@@ -60,7 +57,6 @@ class ValueListService extends \Stripe\Service\AbstractService
     {
         return $this->request('delete', $this->buildPath('/v1/radar/value_lists/%s', $id), $params, $opts);
     }
-
     /**
      * Retrieves a <code>ValueList</code> object.
      *
@@ -76,7 +72,6 @@ class ValueListService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/radar/value_lists/%s', $id), $params, $opts);
     }
-
     /**
      * Updates a <code>ValueList</code> object by setting the values of the parameters
      * passed. Any parameters not provided will be left unchanged. Note that

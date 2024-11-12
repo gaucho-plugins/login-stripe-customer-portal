@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\HttpClient;
 
-namespace Stripe\HttpClient;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 interface StreamingClientInterface
 {

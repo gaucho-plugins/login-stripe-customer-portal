@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * You can reverse some <a href="https://stripe.com/docs/api#received_credits">ReceivedCredits</a> depending on their network and source flow. Reversing a ReceivedCredit leads to the creation of a new object known as a CreditReversal.
@@ -22,17 +21,14 @@ namespace Stripe\Treasury;
  * @property \Stripe\StripeObject $status_transitions
  * @property null|string|\Stripe\Treasury\Transaction $transaction The Transaction associated with this object.
  */
-class CreditReversal extends \Stripe\ApiResource
+class CreditReversal extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'treasury.credit_reversal';
-
     const NETWORK_ACH = 'ach';
     const NETWORK_STRIPE = 'stripe';
-
     const STATUS_CANCELED = 'canceled';
     const STATUS_POSTED = 'posted';
     const STATUS_PROCESSING = 'processing';
-
     /**
      * Reverses a ReceivedCredit and creates a CreditReversal object.
      *
@@ -47,14 +43,11 @@ class CreditReversal extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of CreditReversals.
      *
@@ -68,10 +61,8 @@ class CreditReversal extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing CreditReversal by passing the unique
      * CreditReversal ID from either the CreditReversal creation request or
@@ -86,10 +77,9 @@ class CreditReversal extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class CreditNoteService extends \Stripe\Service\AbstractService
+class CreditNoteService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of credit notes.
@@ -24,7 +23,6 @@ class CreditNoteService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/credit_notes', $params, $opts);
     }
-
     /**
      * When retrieving a credit note, you’ll get a <strong>lines</strong> property
      * containing the first handful of those items. There is also a URL where you can
@@ -42,7 +40,6 @@ class CreditNoteService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', $this->buildPath('/v1/credit_notes/%s/lines', $parentId), $params, $opts);
     }
-
     /**
      * Issue a credit note to adjust the amount of a finalized invoice. For a
      * <code>status=open</code> invoice, a credit note reduces its
@@ -76,7 +73,6 @@ class CreditNoteService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/credit_notes', $params, $opts);
     }
-
     /**
      * Get a preview of a credit note without creating it.
      *
@@ -91,7 +87,6 @@ class CreditNoteService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', '/v1/credit_notes/preview', $params, $opts);
     }
-
     /**
      * When retrieving a credit note preview, you’ll get a <strong>lines</strong>
      * property containing the first handful of those items. This URL you can retrieve
@@ -108,7 +103,6 @@ class CreditNoteService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/credit_notes/preview/lines', $params, $opts);
     }
-
     /**
      * Retrieves the credit note object with the given identifier.
      *
@@ -124,7 +118,6 @@ class CreditNoteService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/credit_notes/%s', $id), $params, $opts);
     }
-
     /**
      * Updates an existing credit note.
      *
@@ -140,7 +133,6 @@ class CreditNoteService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/credit_notes/%s', $id), $params, $opts);
     }
-
     /**
      * Marks a credit note as void. Learn more about <a
      * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.

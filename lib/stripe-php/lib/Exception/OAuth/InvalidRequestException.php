@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception\OAuth;
 
-namespace Stripe\Exception\OAuth;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * InvalidRequestException is thrown when a code, refresh token, or grant

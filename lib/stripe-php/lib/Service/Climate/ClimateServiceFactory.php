@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Service\Climate;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Climate;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Service factory class for API resources in the Climate namespace.
@@ -11,17 +10,12 @@ namespace Stripe\Service\Climate;
  * @property ProductService $products
  * @property SupplierService $suppliers
  */
-class ClimateServiceFactory extends \Stripe\Service\AbstractServiceFactory
+class ClimateServiceFactory extends \LSCP\Stripe\Service\AbstractServiceFactory
 {
     /**
      * @var array<string, string>
      */
-    private static $classMap = [
-        'orders' => OrderService::class,
-        'products' => ProductService::class,
-        'suppliers' => SupplierService::class,
-    ];
-
+    private static $classMap = ['orders' => OrderService::class, 'products' => ProductService::class, 'suppliers' => SupplierService::class];
     protected function getServiceClass($name)
     {
         return \array_key_exists($name, self::$classMap) ? self::$classMap[$name] : null;

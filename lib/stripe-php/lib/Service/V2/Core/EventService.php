@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\V2\Core;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\V2\Core;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class EventService extends \Stripe\Service\AbstractService
+class EventService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * List events, going back up to 30 days.
@@ -24,7 +23,6 @@ class EventService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v2/core/events', $params, $opts);
     }
-
     /**
      * Retrieves the details of an event.
      *

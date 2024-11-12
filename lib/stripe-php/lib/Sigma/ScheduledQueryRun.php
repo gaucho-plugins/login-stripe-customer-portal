@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Sigma;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Sigma;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * If you have <a href="https://stripe.com/docs/sigma/scheduled-queries">scheduled a Sigma query</a>, you'll
@@ -22,10 +21,9 @@ namespace Stripe\Sigma;
  * @property string $status The query's execution status, which will be <code>completed</code> for successful runs, and <code>canceled</code>, <code>failed</code>, or <code>timed_out</code> otherwise.
  * @property string $title Title of the query.
  */
-class ScheduledQueryRun extends \Stripe\ApiResource
+class ScheduledQueryRun extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'scheduled_query_run';
-
     /**
      * Returns a list of scheduled query runs.
      *
@@ -39,10 +37,8 @@ class ScheduledQueryRun extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of an scheduled query run.
      *
@@ -55,13 +51,11 @@ class ScheduledQueryRun extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     public static function classUrl()
     {
         return '/v1/sigma/scheduled_query_runs';

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Climate;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Climate;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A supplier of carbon removal.
@@ -15,14 +14,12 @@ namespace Stripe\Climate;
  * @property string $name Name of this carbon removal supplier.
  * @property string $removal_pathway The scientific pathway used for carbon removal.
  */
-class Supplier extends \Stripe\ApiResource
+class Supplier extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'climate.supplier';
-
     const REMOVAL_PATHWAY_BIOMASS_CARBON_REMOVAL_AND_STORAGE = 'biomass_carbon_removal_and_storage';
     const REMOVAL_PATHWAY_DIRECT_AIR_CAPTURE = 'direct_air_capture';
     const REMOVAL_PATHWAY_ENHANCED_WEATHERING = 'enhanced_weathering';
-
     /**
      * Lists all available Climate supplier objects.
      *
@@ -36,10 +33,8 @@ class Supplier extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a Climate supplier object.
      *
@@ -52,10 +47,9 @@ class Supplier extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

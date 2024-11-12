@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Some payment methods have no required amount that a customer must send.
@@ -28,7 +27,6 @@ namespace Stripe;
 class SourceTransaction extends ApiResource
 {
     const OBJECT_NAME = 'source_transaction';
-
     const TYPE_ACH_CREDIT_TRANSFER = 'ach_credit_transfer';
     const TYPE_ACH_DEBIT = 'ach_debit';
     const TYPE_ALIPAY = 'alipay';

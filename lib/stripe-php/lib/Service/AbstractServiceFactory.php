@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Abstract base class for all service factories used to expose service
@@ -15,7 +16,6 @@ namespace Stripe\Service;
 abstract class AbstractServiceFactory
 {
     use ServiceNavigatorTrait;
-
     /**
      * @param \Stripe\StripeClientInterface $client
      */

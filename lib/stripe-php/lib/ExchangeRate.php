@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * <code>ExchangeRate</code> objects allow you to determine the rates that Stripe is currently
@@ -39,7 +38,6 @@ namespace Stripe;
 class ExchangeRate extends ApiResource
 {
     const OBJECT_NAME = 'exchange_rate';
-
     /**
      * Returns a list of objects that contain the rates at which foreign currencies are
      * converted to one another. Only shows the currencies for which Stripe supports.
@@ -54,10 +52,8 @@ class ExchangeRate extends ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the exchange rates from the given currency to every supported
      * currency.
@@ -71,10 +67,9 @@ class ExchangeRate extends ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Stripe Treasury provides users with a container for money called a FinancialAccount that is separate from their Payments balance.
@@ -25,15 +24,12 @@ namespace Stripe\Treasury;
  * @property \Stripe\StripeObject $status_details
  * @property string[] $supported_currencies The currencies the FinancialAccount can hold a balance in. Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
  */
-class FinancialAccount extends \Stripe\ApiResource
+class FinancialAccount extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'treasury.financial_account';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     const STATUS_CLOSED = 'closed';
     const STATUS_OPEN = 'open';
-
     /**
      * Creates a new FinancialAccount. For now, each connected account can only have
      * one FinancialAccount.
@@ -49,14 +45,11 @@ class FinancialAccount extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of FinancialAccounts.
      *
@@ -70,10 +63,8 @@ class FinancialAccount extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of a FinancialAccount.
      *
@@ -86,13 +77,11 @@ class FinancialAccount extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates the details of a FinancialAccount.
      *
@@ -108,14 +97,11 @@ class FinancialAccount extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -128,12 +114,10 @@ class FinancialAccount extends \Stripe\ApiResource
     {
         $url = $this->instanceUrl() . '/features';
         list($response, $opts) = $this->_request('get', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -147,7 +131,6 @@ class FinancialAccount extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/features';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

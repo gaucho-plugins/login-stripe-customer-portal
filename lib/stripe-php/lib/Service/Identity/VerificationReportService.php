@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Identity;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Identity;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class VerificationReportService extends \Stripe\Service\AbstractService
+class VerificationReportService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * List all verification reports.
@@ -24,7 +23,6 @@ class VerificationReportService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/identity/verification_reports', $params, $opts);
     }
-
     /**
      * Retrieves an existing VerificationReport.
      *

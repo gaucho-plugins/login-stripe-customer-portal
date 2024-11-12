@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Service factory class for API resources in the root namespace.
@@ -78,7 +79,7 @@ namespace Stripe\Service;
  * @property WebhookEndpointService $webhookEndpoints
  * // Doc: The end of the section generated from our OpenAPI spec
  */
-class CoreServiceFactory extends \Stripe\Service\AbstractServiceFactory
+class CoreServiceFactory extends \LSCP\Stripe\Service\AbstractServiceFactory
 {
     /**
      * @var array<string, string>
@@ -155,9 +156,7 @@ class CoreServiceFactory extends \Stripe\Service\AbstractServiceFactory
         'treasury' => Treasury\TreasuryServiceFactory::class,
         'v2' => V2\V2ServiceFactory::class,
         'webhookEndpoints' => WebhookEndpointService::class,
-        // Class Map: The end of the section generated from our OpenAPI spec
     ];
-
     protected function getServiceClass($name)
     {
         return \array_key_exists($name, self::$classMap) ? self::$classMap[$name] : null;

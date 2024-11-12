@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A billing meter is a resource that allows you to track usage of a particular event. For example, you might create a billing meter to track the number of API calls made by a particular user. You can then attach the billing meter to a price and attach the price to a subscription to charge the user for the number of API calls they make.
@@ -21,19 +20,15 @@ namespace Stripe\Billing;
  * @property int $updated Time at which the object was last updated. Measured in seconds since the Unix epoch.
  * @property \Stripe\StripeObject $value_settings
  */
-class Meter extends \Stripe\ApiResource
+class Meter extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'billing.meter';
-
-    use \Stripe\ApiOperations\NestedResource;
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\NestedResource;
+    use \LSCP\Stripe\ApiOperations\Update;
     const EVENT_TIME_WINDOW_DAY = 'day';
     const EVENT_TIME_WINDOW_HOUR = 'hour';
-
     const STATUS_ACTIVE = 'active';
     const STATUS_INACTIVE = 'inactive';
-
     /**
      * Creates a billing meter.
      *
@@ -48,14 +43,11 @@ class Meter extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Retrieve a list of billing meters.
      *
@@ -69,10 +61,8 @@ class Meter extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a billing meter given an ID.
      *
@@ -85,13 +75,11 @@ class Meter extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates a billing meter.
      *
@@ -107,14 +95,11 @@ class Meter extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -128,10 +113,8 @@ class Meter extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/deactivate';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -145,12 +128,9 @@ class Meter extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/reactivate';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     const PATH_EVENT_SUMMARIES = '/event_summaries';
-
     /**
      * @param string $id the ID of the meter on which to retrieve the meter event summaries
      * @param null|array $params

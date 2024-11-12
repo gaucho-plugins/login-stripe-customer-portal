@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A dispute occurs when a customer questions your charge with their card issuer.
@@ -32,9 +31,7 @@ namespace Stripe;
 class Dispute extends ApiResource
 {
     const OBJECT_NAME = 'dispute';
-
     use ApiOperations\Update;
-
     const REASON_BANK_CANNOT_PROCESS = 'bank_cannot_process';
     const REASON_CHECK_RETURNED = 'check_returned';
     const REASON_CREDIT_NOT_PROCESSED = 'credit_not_processed';
@@ -49,7 +46,6 @@ class Dispute extends ApiResource
     const REASON_PRODUCT_UNACCEPTABLE = 'product_unacceptable';
     const REASON_SUBSCRIPTION_CANCELED = 'subscription_canceled';
     const REASON_UNRECOGNIZED = 'unrecognized';
-
     const STATUS_LOST = 'lost';
     const STATUS_NEEDS_RESPONSE = 'needs_response';
     const STATUS_UNDER_REVIEW = 'under_review';
@@ -57,7 +53,6 @@ class Dispute extends ApiResource
     const STATUS_WARNING_NEEDS_RESPONSE = 'warning_needs_response';
     const STATUS_WARNING_UNDER_REVIEW = 'warning_under_review';
     const STATUS_WON = 'won';
-
     /**
      * Returns a list of your disputes.
      *
@@ -71,10 +66,8 @@ class Dispute extends ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the dispute with the given ID.
      *
@@ -87,13 +80,11 @@ class Dispute extends ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * When you get a dispute, contacting your customer is always the best first step.
      * If that doesn’t work, you can submit evidence to help us resolve the dispute in
@@ -117,14 +108,11 @@ class Dispute extends ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -138,7 +126,6 @@ class Dispute extends ApiResource
         $url = $this->instanceUrl() . '/close';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

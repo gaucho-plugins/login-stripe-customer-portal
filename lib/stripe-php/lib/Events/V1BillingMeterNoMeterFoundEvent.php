@@ -1,13 +1,12 @@
 <?php
+namespace LSCP\Stripe\Events;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Events;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @property \Stripe\EventData\V1BillingMeterNoMeterFoundEventData $data data associated with the event
  */
-class V1BillingMeterNoMeterFoundEvent extends \Stripe\V2\Event
+class V1BillingMeterNoMeterFoundEvent extends \LSCP\Stripe\V2\Event
 {
     const LOOKUP_TYPE = 'v1.billing.meter.no_meter_found';
 }

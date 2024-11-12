@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception\OAuth;
 
-namespace Stripe\Exception\OAuth;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * UnsupportedResponseTypeException is thrown when an unsupported response type

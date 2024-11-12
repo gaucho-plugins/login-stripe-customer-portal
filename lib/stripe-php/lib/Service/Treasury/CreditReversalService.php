@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class CreditReversalService extends \Stripe\Service\AbstractService
+class CreditReversalService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of CreditReversals.
@@ -24,7 +23,6 @@ class CreditReversalService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/treasury/credit_reversals', $params, $opts);
     }
-
     /**
      * Reverses a ReceivedCredit and creates a CreditReversal object.
      *
@@ -39,7 +37,6 @@ class CreditReversalService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/treasury/credit_reversals', $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing CreditReversal by passing the unique
      * CreditReversal ID from either the CreditReversal creation request or

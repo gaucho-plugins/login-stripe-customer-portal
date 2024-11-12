@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Forwarding;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Forwarding;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Instructs Stripe to make a request on your behalf using the destination URL. The destination URL
@@ -33,10 +32,9 @@ namespace Stripe\Forwarding;
  * @property null|\Stripe\StripeObject $response_details The response that the destination endpoint returned to us. We redact any sensitive fields.
  * @property null|string $url The destination URL for the forwarded request. Must be supported by the config.
  */
-class Request extends \Stripe\ApiResource
+class Request extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'forwarding.request';
-
     /**
      * Creates a ForwardingRequest object.
      *
@@ -51,14 +49,11 @@ class Request extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Lists all ForwardingRequest objects.
      *
@@ -72,10 +67,8 @@ class Request extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a ForwardingRequest object.
      *
@@ -88,10 +81,9 @@ class Request extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

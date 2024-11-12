@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception;
 
-namespace Stripe\Exception;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * AuthenticationException is thrown when invalid credentials are used to

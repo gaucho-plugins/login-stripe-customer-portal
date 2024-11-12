@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Util;
 
-namespace Stripe\Util;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Describes a logger instance.

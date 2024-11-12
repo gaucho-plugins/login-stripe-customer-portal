@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\FinancialConnections;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\FinancialConnections;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Describes a snapshot of the owners of an account at a particular point in time.
@@ -12,7 +11,7 @@ namespace Stripe\FinancialConnections;
  * @property int $created Time at which the object was created. Measured in seconds since the Unix epoch.
  * @property \Stripe\Collection<\Stripe\FinancialConnections\AccountOwner> $owners A paginated list of owners for this account.
  */
-class AccountOwnership extends \Stripe\ApiResource
+class AccountOwnership extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'financial_connections.account_ownership';
 }

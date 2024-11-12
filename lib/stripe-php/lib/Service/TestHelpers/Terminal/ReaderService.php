@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\TestHelpers\Terminal;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\TestHelpers\Terminal;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ReaderService extends \Stripe\Service\AbstractService
+class ReaderService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Presents a payment method on a simulated reader. Can be used to simulate

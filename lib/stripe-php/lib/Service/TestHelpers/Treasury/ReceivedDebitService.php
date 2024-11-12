@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\TestHelpers\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\TestHelpers\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ReceivedDebitService extends \Stripe\Service\AbstractService
+class ReceivedDebitService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third

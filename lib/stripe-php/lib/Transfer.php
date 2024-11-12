@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A <code>Transfer</code> object is created when you move funds between Stripe accounts as
@@ -37,14 +36,11 @@ namespace Stripe;
 class Transfer extends ApiResource
 {
     const OBJECT_NAME = 'transfer';
-
     use ApiOperations\NestedResource;
     use ApiOperations\Update;
-
     const SOURCE_TYPE_BANK_ACCOUNT = 'bank_account';
     const SOURCE_TYPE_CARD = 'card';
     const SOURCE_TYPE_FPX = 'fpx';
-
     /**
      * To send funds from your Stripe account to a connected account, you create a new
      * transfer object. Your <a href="#balance">Stripe balance</a> must be able to
@@ -61,14 +57,11 @@ class Transfer extends ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of existing transfers sent to connected accounts. The transfers
      * are returned in sorted order, with the most recently created transfers appearing
@@ -84,10 +77,8 @@ class Transfer extends ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing transfer. Supply the unique transfer ID
      * from either a transfer creation request or the transfer list, and Stripe will
@@ -102,13 +93,11 @@ class Transfer extends ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates the specified transfer by setting the values of the parameters passed.
      * Any parameters not provided will be left unchanged.
@@ -127,16 +116,12 @@ class Transfer extends ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     const PATH_REVERSALS = '/reversals';
-
     /**
      * @param string $id the ID of the transfer on which to retrieve the transfer reversals
      * @param null|array $params
@@ -150,7 +135,6 @@ class Transfer extends ApiResource
     {
         return self::_allNestedResources($id, static::PATH_REVERSALS, $params, $opts);
     }
-
     /**
      * @param string $id the ID of the transfer on which to create the transfer reversal
      * @param null|array $params
@@ -164,7 +148,6 @@ class Transfer extends ApiResource
     {
         return self::_createNestedResource($id, static::PATH_REVERSALS, $params, $opts);
     }
-
     /**
      * @param string $id the ID of the transfer to which the transfer reversal belongs
      * @param string $reversalId the ID of the transfer reversal to retrieve
@@ -179,7 +162,6 @@ class Transfer extends ApiResource
     {
         return self::_retrieveNestedResource($id, static::PATH_REVERSALS, $reversalId, $params, $opts);
     }
-
     /**
      * @param string $id the ID of the transfer to which the transfer reversal belongs
      * @param string $reversalId the ID of the transfer reversal to update

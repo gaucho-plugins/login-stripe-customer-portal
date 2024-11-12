@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class AccountSessionService extends \Stripe\Service\AbstractService
+class AccountSessionService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Creates a AccountSession object that includes a single-use token that the

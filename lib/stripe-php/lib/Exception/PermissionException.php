@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception;
 
-namespace Stripe\Exception;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * PermissionException is thrown in cases where access was attempted on a

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Entitlements;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Entitlements;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * An active entitlement describes access to a feature for a customer.
@@ -13,10 +12,9 @@ namespace Stripe\Entitlements;
  * @property bool $livemode Has the value <code>true</code> if the object exists in live mode or the value <code>false</code> if the object exists in test mode.
  * @property string $lookup_key A unique key you provide as your own system identifier. This may be up to 80 characters.
  */
-class ActiveEntitlement extends \Stripe\ApiResource
+class ActiveEntitlement extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'entitlements.active_entitlement';
-
     /**
      * Retrieve a list of active entitlements for a customer.
      *
@@ -30,10 +28,8 @@ class ActiveEntitlement extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieve an active entitlement.
      *
@@ -46,10 +42,9 @@ class ActiveEntitlement extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Subscriptions allow you to charge a customer on a recurring basis.
@@ -59,12 +58,9 @@ namespace Stripe;
 class Subscription extends ApiResource
 {
     const OBJECT_NAME = 'subscription';
-
     use ApiOperations\Update;
-
     const COLLECTION_METHOD_CHARGE_AUTOMATICALLY = 'charge_automatically';
     const COLLECTION_METHOD_SEND_INVOICE = 'send_invoice';
-
     const STATUS_ACTIVE = 'active';
     const STATUS_CANCELED = 'canceled';
     const STATUS_INCOMPLETE = 'incomplete';
@@ -73,7 +69,6 @@ class Subscription extends ApiResource
     const STATUS_PAUSED = 'paused';
     const STATUS_TRIALING = 'trialing';
     const STATUS_UNPAID = 'unpaid';
-
     /**
      * Creates a new subscription on an existing customer. Each customer can have up to
      * 500 active or scheduled subscriptions.
@@ -100,14 +95,11 @@ class Subscription extends ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * By default, returns a list of subscriptions that have not been canceled. In
      * order to list canceled subscriptions, specify <code>status=canceled</code>.
@@ -122,10 +114,8 @@ class Subscription extends ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the subscription with the given ID.
      *
@@ -138,13 +128,11 @@ class Subscription extends ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates an existing subscription to match the specified parameters. When
      * changing prices or quantities, we optionally prorate the price we charge next
@@ -208,30 +196,22 @@ class Subscription extends ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     use ApiOperations\Delete {
         delete as protected _delete;
-      }
-
+    }
     public static function getSavedNestedResources()
     {
         static $savedNestedResources = null;
         if (null === $savedNestedResources) {
-            $savedNestedResources = new Util\Set([
-                'source',
-            ]);
+            $savedNestedResources = new Util\Set(['source']);
         }
-
         return $savedNestedResources;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -244,20 +224,16 @@ class Subscription extends ApiResource
     {
         $url = $this->instanceUrl() . '/discount';
         list($response, $opts) = $this->_request('delete', $url, $params, $opts);
-        $this->refreshFrom(['discount' => null], $opts, true);
-
+        $this->refreshFrom(['discount' => null], $opts, \true);
         return $this;
     }
-
     const PAYMENT_BEHAVIOR_ALLOW_INCOMPLETE = 'allow_incomplete';
     const PAYMENT_BEHAVIOR_DEFAULT_INCOMPLETE = 'default_incomplete';
     const PAYMENT_BEHAVIOR_ERROR_IF_INCOMPLETE = 'error_if_incomplete';
     const PAYMENT_BEHAVIOR_PENDING_IF_INCOMPLETE = 'pending_if_incomplete';
-
     const PRORATION_BEHAVIOR_ALWAYS_INVOICE = 'always_invoice';
     const PRORATION_BEHAVIOR_CREATE_PRORATIONS = 'create_prorations';
     const PRORATION_BEHAVIOR_NONE = 'none';
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -271,10 +247,8 @@ class Subscription extends ApiResource
         $url = $this->instanceUrl();
         list($response, $opts) = $this->_request('delete', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -288,10 +262,8 @@ class Subscription extends ApiResource
         $url = $this->instanceUrl() . '/resume';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -303,7 +275,6 @@ class Subscription extends ApiResource
     public static function search($params = null, $opts = null)
     {
         $url = '/v1/subscriptions/search';
-
-        return static::_requestPage($url, \Stripe\SearchResult::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\SearchResult::class, $params, $opts);
     }
 }

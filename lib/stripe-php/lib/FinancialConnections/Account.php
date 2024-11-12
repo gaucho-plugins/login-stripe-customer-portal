@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\FinancialConnections;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\FinancialConnections;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A Financial Connections Account represents an account that exists outside of Stripe, to which you have been granted some degree of access.
@@ -27,26 +26,22 @@ namespace Stripe\FinancialConnections;
  * @property string[] $supported_payment_method_types The <a href="https://stripe.com/docs/api/payment_methods/object#payment_method_object-type">PaymentMethod type</a>(s) that can be created from this account.
  * @property null|\Stripe\StripeObject $transaction_refresh The state of the most recent attempt to refresh the account transactions.
  */
-class Account extends \Stripe\ApiResource
+class Account extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'financial_connections.account';
-
     const CATEGORY_CASH = 'cash';
     const CATEGORY_CREDIT = 'credit';
     const CATEGORY_INVESTMENT = 'investment';
     const CATEGORY_OTHER = 'other';
-
     const STATUS_ACTIVE = 'active';
     const STATUS_DISCONNECTED = 'disconnected';
     const STATUS_INACTIVE = 'inactive';
-
     const SUBCATEGORY_CHECKING = 'checking';
     const SUBCATEGORY_CREDIT_CARD = 'credit_card';
     const SUBCATEGORY_LINE_OF_CREDIT = 'line_of_credit';
     const SUBCATEGORY_MORTGAGE = 'mortgage';
     const SUBCATEGORY_OTHER = 'other';
     const SUBCATEGORY_SAVINGS = 'savings';
-
     /**
      * Returns a list of Financial Connections <code>Account</code> objects.
      *
@@ -60,10 +55,8 @@ class Account extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of an Financial Connections <code>Account</code>.
      *
@@ -76,13 +69,11 @@ class Account extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -96,10 +87,8 @@ class Account extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/disconnect';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param string $id
      * @param null|array $params
@@ -113,12 +102,10 @@ class Account extends \Stripe\ApiResource
     {
         $url = static::resourceUrl($id) . '/owners';
         list($response, $opts) = static::_staticRequest('get', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -132,10 +119,8 @@ class Account extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/refresh';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -149,10 +134,8 @@ class Account extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/subscribe';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -166,7 +149,6 @@ class Account extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/unsubscribe';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

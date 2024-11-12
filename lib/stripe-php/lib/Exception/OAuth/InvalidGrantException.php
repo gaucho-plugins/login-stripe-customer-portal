@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception\OAuth;
 
-namespace Stripe\Exception\OAuth;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * InvalidGrantException is thrown when a specified code doesn't exist, is

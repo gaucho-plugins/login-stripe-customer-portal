@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Service\BillingPortal;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\BillingPortal;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Service factory class for API resources in the BillingPortal namespace.
@@ -10,16 +9,12 @@ namespace Stripe\Service\BillingPortal;
  * @property ConfigurationService $configurations
  * @property SessionService $sessions
  */
-class BillingPortalServiceFactory extends \Stripe\Service\AbstractServiceFactory
+class BillingPortalServiceFactory extends \LSCP\Stripe\Service\AbstractServiceFactory
 {
     /**
      * @var array<string, string>
      */
-    private static $classMap = [
-        'configurations' => ConfigurationService::class,
-        'sessions' => SessionService::class,
-    ];
-
+    private static $classMap = ['configurations' => ConfigurationService::class, 'sessions' => SessionService::class];
     protected function getServiceClass($name)
     {
         return \array_key_exists($name, self::$classMap) ? self::$classMap[$name] : null;

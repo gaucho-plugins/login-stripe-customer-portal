@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Identity;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Identity;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A VerificationSession guides you through the process of collecting and verifying the identities
@@ -36,21 +35,17 @@ namespace Stripe\Identity;
  * @property null|string $verification_flow The configuration token of a Verification Flow from the dashboard.
  * @property null|\Stripe\StripeObject $verified_outputs The user’s verified data.
  */
-class VerificationSession extends \Stripe\ApiResource
+class VerificationSession extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'identity.verification_session';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     const STATUS_CANCELED = 'canceled';
     const STATUS_PROCESSING = 'processing';
     const STATUS_REQUIRES_INPUT = 'requires_input';
     const STATUS_VERIFIED = 'verified';
-
     const TYPE_DOCUMENT = 'document';
     const TYPE_ID_NUMBER = 'id_number';
     const TYPE_VERIFICATION_FLOW = 'verification_flow';
-
     /**
      * Creates a VerificationSession object.
      *
@@ -75,14 +70,11 @@ class VerificationSession extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of VerificationSessions.
      *
@@ -96,10 +88,8 @@ class VerificationSession extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of a VerificationSession that was previously created.
      *
@@ -116,13 +106,11 @@ class VerificationSession extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates a VerificationSession object.
      *
@@ -141,14 +129,11 @@ class VerificationSession extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -162,10 +147,8 @@ class VerificationSession extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/cancel';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -179,7 +162,6 @@ class VerificationSession extends \Stripe\ApiResource
         $url = $this->instanceUrl() . '/redact';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
 }

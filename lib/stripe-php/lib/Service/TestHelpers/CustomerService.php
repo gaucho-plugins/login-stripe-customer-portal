@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\TestHelpers;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\TestHelpers;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class CustomerService extends \Stripe\Service\AbstractService
+class CustomerService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Create an incoming testmode bank transfer.

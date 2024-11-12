@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class SubscriptionItemService extends \Stripe\Service\AbstractService
+class SubscriptionItemService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of your subscription items for a given subscription.
@@ -24,7 +23,6 @@ class SubscriptionItemService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/subscription_items', $params, $opts);
     }
-
     /**
      * For the specified subscription item, returns a list of summary objects. Each
      * object in the list provides usage information that’s been summarized from
@@ -49,7 +47,6 @@ class SubscriptionItemService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', $this->buildPath('/v1/subscription_items/%s/usage_record_summaries', $parentId), $params, $opts);
     }
-
     /**
      * Adds a new item to an existing subscription. No existing items will be changed
      * or replaced.
@@ -65,7 +62,6 @@ class SubscriptionItemService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/subscription_items', $params, $opts);
     }
-
     /**
      * Creates a usage record for a specified subscription item and date, and fills it
      * with a quantity.
@@ -103,7 +99,6 @@ class SubscriptionItemService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/subscription_items/%s/usage_records', $parentId), $params, $opts);
     }
-
     /**
      * Deletes an item from the subscription. Removing a subscription item from a
      * subscription will not cancel the subscription.
@@ -120,7 +115,6 @@ class SubscriptionItemService extends \Stripe\Service\AbstractService
     {
         return $this->request('delete', $this->buildPath('/v1/subscription_items/%s', $id), $params, $opts);
     }
-
     /**
      * Retrieves the subscription item with the given ID.
      *
@@ -136,7 +130,6 @@ class SubscriptionItemService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/subscription_items/%s', $id), $params, $opts);
     }
-
     /**
      * Updates the plan or quantity of an item on a current subscription.
      *

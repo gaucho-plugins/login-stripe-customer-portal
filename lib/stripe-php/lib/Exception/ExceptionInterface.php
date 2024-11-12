@@ -1,9 +1,10 @@
 <?php
+namespace LSCP\Stripe\Exception;
 
-namespace Stripe\Exception;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 // TODO: remove this check once we drop support for PHP 5
-if (\interface_exists(\Throwable::class, false)) {
+if (\interface_exists(\Throwable::class, \false)) {
     /**
      * The base interface for all Stripe exceptions.
      */

@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class TokenService extends \Stripe\Service\AbstractService
+class TokenService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Creates a single-use token that represents a bank account’s details. You can use
@@ -29,7 +28,6 @@ class TokenService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/tokens', $params, $opts);
     }
-
     /**
      * Retrieves the token with the given ID.
      *

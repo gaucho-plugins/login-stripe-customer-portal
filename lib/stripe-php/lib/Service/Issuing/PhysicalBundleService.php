@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Issuing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Issuing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class PhysicalBundleService extends \Stripe\Service\AbstractService
+class PhysicalBundleService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of physical bundle objects. The objects are sorted in descending
@@ -25,7 +24,6 @@ class PhysicalBundleService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/issuing/physical_bundles', $params, $opts);
     }
-
     /**
      * Retrieves a physical bundle object.
      *

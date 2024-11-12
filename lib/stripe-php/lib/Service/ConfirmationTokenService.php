@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ConfirmationTokenService extends \Stripe\Service\AbstractService
+class ConfirmationTokenService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Retrieves an existing ConfirmationToken object.

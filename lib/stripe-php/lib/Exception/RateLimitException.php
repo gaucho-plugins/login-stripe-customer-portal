@@ -1,6 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception;
 
-namespace Stripe\Exception;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * RateLimitException is thrown in cases where an account is putting too much

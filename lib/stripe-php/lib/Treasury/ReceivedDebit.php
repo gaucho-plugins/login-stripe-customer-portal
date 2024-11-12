@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * ReceivedDebits represent funds pulled from a <a href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. These are not initiated from the FinancialAccount.
@@ -24,23 +23,19 @@ namespace Stripe\Treasury;
  * @property string $status Status of the ReceivedDebit. ReceivedDebits are created with a status of either <code>succeeded</code> (approved) or <code>failed</code> (declined). The failure reason can be found under the <code>failure_code</code>.
  * @property null|string|\Stripe\Treasury\Transaction $transaction The Transaction associated with this object.
  */
-class ReceivedDebit extends \Stripe\ApiResource
+class ReceivedDebit extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'treasury.received_debit';
-
     const FAILURE_CODE_ACCOUNT_CLOSED = 'account_closed';
     const FAILURE_CODE_ACCOUNT_FROZEN = 'account_frozen';
     const FAILURE_CODE_INSUFFICIENT_FUNDS = 'insufficient_funds';
     const FAILURE_CODE_INTERNATIONAL_TRANSACTION = 'international_transaction';
     const FAILURE_CODE_OTHER = 'other';
-
     const NETWORK_ACH = 'ach';
     const NETWORK_CARD = 'card';
     const NETWORK_STRIPE = 'stripe';
-
     const STATUS_FAILED = 'failed';
     const STATUS_SUCCEEDED = 'succeeded';
-
     /**
      * Returns a list of ReceivedDebits.
      *
@@ -54,10 +49,8 @@ class ReceivedDebit extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing ReceivedDebit by passing the unique
      * ReceivedDebit ID from the ReceivedDebit list.
@@ -71,10 +64,9 @@ class ReceivedDebit extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

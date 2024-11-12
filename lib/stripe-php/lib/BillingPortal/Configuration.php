@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\BillingPortal;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\BillingPortal;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A portal configuration describes the functionality and behavior of a portal session.
@@ -21,12 +20,10 @@ namespace Stripe\BillingPortal;
  * @property null|\Stripe\StripeObject $metadata Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
  * @property int $updated Time at which the object was last updated. Measured in seconds since the Unix epoch.
  */
-class Configuration extends \Stripe\ApiResource
+class Configuration extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'billing_portal.configuration';
-
-    use \Stripe\ApiOperations\Update;
-
+    use \LSCP\Stripe\ApiOperations\Update;
     /**
      * Creates a configuration that describes the functionality and behavior of a
      * PortalSession.
@@ -42,14 +39,11 @@ class Configuration extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of configurations that describe the functionality of the customer
      * portal.
@@ -64,10 +58,8 @@ class Configuration extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves a configuration that describes the functionality of the customer
      * portal.
@@ -81,13 +73,11 @@ class Configuration extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates a configuration that describes the functionality of the customer portal.
      *
@@ -103,11 +93,9 @@ class Configuration extends \Stripe\ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
 }

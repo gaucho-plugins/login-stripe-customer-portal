@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class SubscriptionService extends \Stripe\Service\AbstractService
+class SubscriptionService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * By default, returns a list of subscriptions that have not been canceled. In
@@ -25,7 +24,6 @@ class SubscriptionService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/subscriptions', $params, $opts);
     }
-
     /**
      * Cancels a customer’s subscription immediately. The customer won’t be charged
      * again for the subscription. After it’s canceled, you can no longer update the
@@ -56,7 +54,6 @@ class SubscriptionService extends \Stripe\Service\AbstractService
     {
         return $this->request('delete', $this->buildPath('/v1/subscriptions/%s', $id), $params, $opts);
     }
-
     /**
      * Creates a new subscription on an existing customer. Each customer can have up to
      * 500 active or scheduled subscriptions.
@@ -83,7 +80,6 @@ class SubscriptionService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/subscriptions', $params, $opts);
     }
-
     /**
      * Removes the currently applied discount on a subscription.
      *
@@ -99,7 +95,6 @@ class SubscriptionService extends \Stripe\Service\AbstractService
     {
         return $this->request('delete', $this->buildPath('/v1/subscriptions/%s/discount', $id), $params, $opts);
     }
-
     /**
      * Initiates resumption of a paused subscription, optionally resetting the billing
      * cycle anchor and creating prorations. If a resumption invoice is generated, it
@@ -120,7 +115,6 @@ class SubscriptionService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', $this->buildPath('/v1/subscriptions/%s/resume', $id), $params, $opts);
     }
-
     /**
      * Retrieves the subscription with the given ID.
      *
@@ -136,7 +130,6 @@ class SubscriptionService extends \Stripe\Service\AbstractService
     {
         return $this->request('get', $this->buildPath('/v1/subscriptions/%s', $id), $params, $opts);
     }
-
     /**
      * Search for subscriptions you’ve previously created using Stripe’s <a
      * href="/docs/search#search-query-language">Search Query Language</a>. Don’t use
@@ -156,7 +149,6 @@ class SubscriptionService extends \Stripe\Service\AbstractService
     {
         return $this->requestSearchResult('get', '/v1/subscriptions/search', $params, $opts);
     }
-
     /**
      * Updates an existing subscription to match the specified parameters. When
      * changing prices or quantities, we optionally prorate the price we charge next

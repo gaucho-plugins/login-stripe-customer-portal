@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Reporting;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Reporting;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ReportRunService extends \Stripe\Service\AbstractService
+class ReportRunService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Returns a list of Report Runs, with the most recent appearing first.
@@ -24,7 +23,6 @@ class ReportRunService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/reporting/report_runs', $params, $opts);
     }
-
     /**
      * Creates a new object and begin running the report. (Certain report types require
      * a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.).
@@ -40,7 +38,6 @@ class ReportRunService extends \Stripe\Service\AbstractService
     {
         return $this->request('post', '/v1/reporting/report_runs', $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing Report Run.
      *

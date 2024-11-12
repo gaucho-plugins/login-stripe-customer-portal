@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class CountrySpecService extends \Stripe\Service\AbstractService
+class CountrySpecService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Lists all Country Spec objects available in the API.
@@ -24,7 +23,6 @@ class CountrySpecService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/country_specs', $params, $opts);
     }
-
     /**
      * Returns a Country Spec for a given Country code.
      *

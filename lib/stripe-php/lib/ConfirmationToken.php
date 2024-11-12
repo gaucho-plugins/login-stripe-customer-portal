@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * ConfirmationTokens help transport client side data collected by Stripe JS over
@@ -31,10 +30,8 @@ namespace Stripe;
 class ConfirmationToken extends ApiResource
 {
     const OBJECT_NAME = 'confirmation_token';
-
     const SETUP_FUTURE_USAGE_OFF_SESSION = 'off_session';
     const SETUP_FUTURE_USAGE_ON_SESSION = 'on_session';
-
     /**
      * Retrieves an existing ConfirmationToken object.
      *
@@ -47,10 +44,9 @@ class ConfirmationToken extends ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

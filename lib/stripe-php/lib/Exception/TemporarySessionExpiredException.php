@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Exception;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Exception;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class TemporarySessionExpiredException extends ApiErrorException
 {

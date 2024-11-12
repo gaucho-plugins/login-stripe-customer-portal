@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Customers with certain payments enabled have a cash balance, representing funds that were paid
@@ -29,7 +28,6 @@ namespace Stripe;
 class CustomerCashBalanceTransaction extends ApiResource
 {
     const OBJECT_NAME = 'customer_cash_balance_transaction';
-
     const TYPE_ADJUSTED_FOR_OVERDRAFT = 'adjusted_for_overdraft';
     const TYPE_APPLIED_TO_PAYMENT = 'applied_to_payment';
     const TYPE_FUNDED = 'funded';

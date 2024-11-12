@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Treasury;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Treasury;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * ReceivedCredits represent funds sent to a <a href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> (for example, via ACH or wire). These money movements are not initiated from the FinancialAccount.
@@ -24,23 +23,19 @@ namespace Stripe\Treasury;
  * @property string $status Status of the ReceivedCredit. ReceivedCredits are created either <code>succeeded</code> (approved) or <code>failed</code> (declined). If a ReceivedCredit is declined, the failure reason can be found in the <code>failure_code</code> field.
  * @property null|string|\Stripe\Treasury\Transaction $transaction The Transaction associated with this object.
  */
-class ReceivedCredit extends \Stripe\ApiResource
+class ReceivedCredit extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'treasury.received_credit';
-
     const FAILURE_CODE_ACCOUNT_CLOSED = 'account_closed';
     const FAILURE_CODE_ACCOUNT_FROZEN = 'account_frozen';
     const FAILURE_CODE_INTERNATIONAL_TRANSACTION = 'international_transaction';
     const FAILURE_CODE_OTHER = 'other';
-
     const NETWORK_ACH = 'ach';
     const NETWORK_CARD = 'card';
     const NETWORK_STRIPE = 'stripe';
     const NETWORK_US_DOMESTIC_WIRE = 'us_domestic_wire';
-
     const STATUS_FAILED = 'failed';
     const STATUS_SUCCEEDED = 'succeeded';
-
     /**
      * Returns a list of ReceivedCredits.
      *
@@ -54,10 +49,8 @@ class ReceivedCredit extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of an existing ReceivedCredit by passing the unique
      * ReceivedCredit ID from the ReceivedCredit list.
@@ -71,10 +64,9 @@ class ReceivedCredit extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

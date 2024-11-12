@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Billing;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Billing;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Indicates the credit balance for credits granted to a customer.
@@ -12,10 +11,9 @@ namespace Stripe\Billing;
  * @property string|\Stripe\Customer $customer The customer the balance is for.
  * @property bool $livemode Has the value <code>true</code> if the object exists in live mode or the value <code>false</code> if the object exists in test mode.
  */
-class CreditBalanceSummary extends \Stripe\SingletonApiResource
+class CreditBalanceSummary extends \LSCP\Stripe\SingletonApiResource
 {
     const OBJECT_NAME = 'billing.credit_balance_summary';
-
     /**
      * Retrieves the credit balance summary for a customer.
      *
@@ -27,10 +25,9 @@ class CreditBalanceSummary extends \Stripe\SingletonApiResource
      */
     public static function retrieve($opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static(null, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

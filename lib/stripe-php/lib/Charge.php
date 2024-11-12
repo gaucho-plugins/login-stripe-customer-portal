@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * The <code>Charge</code> object represents a single attempt to move money into your Stripe account.
@@ -62,14 +61,11 @@ namespace Stripe;
 class Charge extends ApiResource
 {
     const OBJECT_NAME = 'charge';
-
     use ApiOperations\NestedResource;
     use ApiOperations\Update;
-
     const STATUS_FAILED = 'failed';
     const STATUS_PENDING = 'pending';
     const STATUS_SUCCEEDED = 'succeeded';
-
     /**
      * This method is no longer recommended—use the <a
      * href="/docs/api/payment_intents">Payment Intents API</a> to initiate a new
@@ -87,14 +83,11 @@ class Charge extends ApiResource
     {
         self::_validateParams($params);
         $url = static::classUrl();
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $options);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Returns a list of charges you’ve previously created. The charges are returned in
      * sorted order, with the most recent charges appearing first.
@@ -109,10 +102,8 @@ class Charge extends ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves the details of a charge that has previously been created. Supply the
      * unique charge ID that was returned from your previous request, and Stripe will
@@ -128,13 +119,11 @@ class Charge extends ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
-
     /**
      * Updates the specified charge by setting the values of the parameters passed. Any
      * parameters not provided will be left unchanged.
@@ -151,14 +140,11 @@ class Charge extends ApiResource
     {
         self::_validateParams($params);
         $url = static::resourceUrl($id);
-
         list($response, $opts) = static::_staticRequest('post', $url, $params, $opts);
-        $obj = \Stripe\Util\Util::convertToStripeObject($response->json, $opts);
+        $obj = \LSCP\Stripe\Util\Util::convertToStripeObject($response->json, $opts);
         $obj->setLastResponse($response);
-
         return $obj;
     }
-
     /**
      * Possible string representations of decline codes.
      * These strings are applicable to the decline_code property of the \Stripe\Exception\CardException exception.
@@ -211,7 +197,6 @@ class Charge extends ApiResource
     const DECLINED_TRANSACTION_NOT_ALLOWED = 'transaction_not_allowed';
     const DECLINED_TRY_AGAIN_LATER = 'try_again_later';
     const DECLINED_WITHDRAWAL_COUNT_LIMIT_EXCEEDED = 'withdrawal_count_limit_exceeded';
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -225,10 +210,8 @@ class Charge extends ApiResource
         $url = $this->instanceUrl() . '/capture';
         list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
-
         return $this;
     }
-
     /**
      * @param null|array $params
      * @param null|array|string $opts
@@ -240,12 +223,9 @@ class Charge extends ApiResource
     public static function search($params = null, $opts = null)
     {
         $url = '/v1/charges/search';
-
-        return static::_requestPage($url, \Stripe\SearchResult::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\SearchResult::class, $params, $opts);
     }
-
     const PATH_REFUNDS = '/refunds';
-
     /**
      * @param string $id the ID of the charge on which to retrieve the refunds
      * @param null|array $params
@@ -259,7 +239,6 @@ class Charge extends ApiResource
     {
         return self::_allNestedResources($id, static::PATH_REFUNDS, $params, $opts);
     }
-
     /**
      * @param string $id the ID of the charge to which the refund belongs
      * @param string $refundId the ID of the refund to retrieve

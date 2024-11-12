@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class BalanceService extends \Stripe\Service\AbstractService
+class BalanceService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Retrieves the current account balance, based on the authentication that was used

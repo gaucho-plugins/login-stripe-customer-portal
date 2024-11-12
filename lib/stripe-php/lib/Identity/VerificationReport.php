@@ -1,8 +1,7 @@
 <?php
+namespace LSCP\Stripe\Identity;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Identity;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * A VerificationReport is the result of an attempt to collect and verify data from a user.
@@ -32,14 +31,12 @@ namespace Stripe\Identity;
  * @property null|string $verification_flow The configuration token of a Verification Flow from the dashboard.
  * @property null|string $verification_session ID of the VerificationSession that created this report.
  */
-class VerificationReport extends \Stripe\ApiResource
+class VerificationReport extends \LSCP\Stripe\ApiResource
 {
     const OBJECT_NAME = 'identity.verification_report';
-
     const TYPE_DOCUMENT = 'document';
     const TYPE_ID_NUMBER = 'id_number';
     const TYPE_VERIFICATION_FLOW = 'verification_flow';
-
     /**
      * List all verification reports.
      *
@@ -53,10 +50,8 @@ class VerificationReport extends \Stripe\ApiResource
     public static function all($params = null, $opts = null)
     {
         $url = static::classUrl();
-
-        return static::_requestPage($url, \Stripe\Collection::class, $params, $opts);
+        return static::_requestPage($url, \LSCP\Stripe\Collection::class, $params, $opts);
     }
-
     /**
      * Retrieves an existing VerificationReport.
      *
@@ -69,10 +64,9 @@ class VerificationReport extends \Stripe\ApiResource
      */
     public static function retrieve($id, $opts = null)
     {
-        $opts = \Stripe\Util\RequestOptions::parse($opts);
+        $opts = \LSCP\Stripe\Util\RequestOptions::parse($opts);
         $instance = new static($id, $opts);
         $instance->refresh();
-
         return $instance;
     }
 }

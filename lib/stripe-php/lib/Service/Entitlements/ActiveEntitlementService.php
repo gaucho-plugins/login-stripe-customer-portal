@@ -1,14 +1,13 @@
 <?php
+namespace LSCP\Stripe\Service\Entitlements;
 
-// File generated from our OpenAPI spec
-
-namespace Stripe\Service\Entitlements;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * @phpstan-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  * @psalm-import-type RequestOptionsArray from \Stripe\Util\RequestOptions
  */
-class ActiveEntitlementService extends \Stripe\Service\AbstractService
+class ActiveEntitlementService extends \LSCP\Stripe\Service\AbstractService
 {
     /**
      * Retrieve a list of active entitlements for a customer.
@@ -24,7 +23,6 @@ class ActiveEntitlementService extends \Stripe\Service\AbstractService
     {
         return $this->requestCollection('get', '/v1/entitlements/active_entitlements', $params, $opts);
     }
-
     /**
      * Retrieve an active entitlement.
      *

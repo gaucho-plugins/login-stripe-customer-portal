@@ -1,0 +1,3 @@
+= 1.0 =
+* Initial release with Stripe API integration and customizable login endpoint.
+* Secure login form for customers to access their Stripe Customer Portal.

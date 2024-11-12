@@ -43,6 +43,39 @@ if ( ! function_exists( 'lscp_fs' ) ) {
     do_action( 'lscp_fs_loaded' );
 }
 
+if ( ! function_exists( 'lscp_fs' ) ) {
+    // Create a helper function for easy SDK access.
+    function lscp_fs() {
+        global $lscp_fs;
+
+        if ( ! isset( $lscp_fs ) ) {
+            // Include Freemius SDK.
+            require_once dirname(__FILE__) . '/freemius/start.php';
+
+            $lscp_fs = fs_dynamic_init( array(
+                'id'                  => '16814',
+                'slug'                => 'login-stripe-customer-portal',
+                'type'                => 'plugin',
+                'public_key'          => 'pk_816f55d4825ad20415edb31060db5',
+                'is_premium'          => false,
+                'has_addons'          => false,
+                'has_paid_plans'      => false,
+                'menu'                => array(
+                    'slug'           => 'login-stripe-customer-portal',
+                    'account'        => false,
+                ),
+            ) );
+        }
+
+        return $lscp_fs;
+    }
+
+    // Init Freemius.
+    lscp_fs();
+    // Signal that SDK was initiated.
+    do_action( 'lscp_fs_loaded' );
+}
+
 // Ensure Stripe SDK is included
 require_once plugin_dir_path(__FILE__) . 'lib/stripe-php/init.php';  // Adjust path to where you placed the SDK 
 
@@ -65,7 +98,7 @@ class Plugin {
             __('Embed Stripe Customer Portal', 'login-stripe-customer-portal'),
             __('Stripe Portal', 'login-stripe-customer-portal'),
             'manage_options',
-            'lscp-stripe-portal-settings',
+            'login-stripe-customer-portal',
             [$this, 'render_settings_page'],
             'dashicons-businessperson',  // Custom icon for the menu item
             100  // This sets the position of the menu item at the bottom
@@ -324,7 +357,7 @@ class Plugin {
      * @return bool True if the customer exists, false otherwise.
      */
     public function check_if_customer_exists($email) {
-        \Stripe\Stripe::setApiKey(get_option('lscp_stripe_api_key'));
+        \LSCP\Stripe\Stripe::setApiKey(get_option('lscp_stripe_api_key'));
 
         try {
             $customers = \Stripe\Customer::all([

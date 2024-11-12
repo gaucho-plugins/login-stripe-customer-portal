@@ -2,46 +2,13 @@
 /**
  * Plugin Name: Login for Stripe Customer Portal
  * Description: Allow merchants to connect Stripe and provide a customer login endpoint for the Stripe Customer Portal.
- * Version: 1.0.2
+ * Version: 1.0.1
  * Author: Gaucho Plugins
  * License: GPLv3
  * Text Domain: login-stripe-customer-portal
  */
 
 namespace LSCP;
-
-if ( ! function_exists( 'lscp_fs' ) ) {
-    // Create a helper function for easy SDK access.
-    function lscp_fs() {
-        global $lscp_fs;
-
-        if ( ! isset( $lscp_fs ) ) {
-            // Include Freemius SDK.
-            require_once dirname(__FILE__) . '/freemius/start.php';
-
-            $lscp_fs = fs_dynamic_init( array(
-                'id'                  => '16814',
-                'slug'                => 'login-stripe-customer-portal',
-                'type'                => 'plugin',
-                'public_key'          => 'pk_816f55d4825ad20415edb31060db5',
-                'is_premium'          => false,
-                'has_addons'          => false,
-                'has_paid_plans'      => false,
-                'menu'                => array(
-                    'slug'           => 'login-stripe-customer-portal',
-                    'account'        => false,
-                ),
-            ) );
-        }
-
-        return $lscp_fs;
-    }
-
-    // Init Freemius.
-    lscp_fs();
-    // Signal that SDK was initiated.
-    do_action( 'lscp_fs_loaded' );
-}
 
 if ( ! function_exists( 'lscp_fs' ) ) {
     // Create a helper function for easy SDK access.
@@ -269,15 +236,15 @@ class Plugin {
                     $message = 'If your email address is registered, you should receive an email with a login link.';
     
                     // Check if validation for existing customers is enabled
-                    if (get_option('lscp_stripe_validate_existing_customers', '0') === '1') {
-                        if (!$this->check_if_customer_exists($email)) {
-                            $message = 'If your email address is registered, you should receive an email with a login link.';
-                            // Display message regardless, but no email sent
-                            return wp_die(esc_html($message), esc_html__('Login Message', 'login-stripe-customer-portal'));
-                        }
+                    $validate_existing_customers = get_option('lscp_stripe_validate_existing_customers', '0');
+                    $customer_exists = $this->check_if_customer_exists($email);
+    
+                    if ($validate_existing_customers === '1' && !$customer_exists) {
+                        // If the customer does not exist and validation is required, do not send the email
+                        wp_die(esc_html($message), esc_html__('Login Message', 'login-stripe-customer-portal'));
                     }
     
-                    // If the email is valid, send the login email
+                    // Send the login email if validation is not required or if the customer exists
                     if (is_email($email)) {
                         $this->send_login_email($email);
                     }
@@ -360,7 +327,7 @@ class Plugin {
         \LSCP\Stripe\Stripe::setApiKey(get_option('lscp_stripe_api_key'));
 
         try {
-            $customers = \Stripe\Customer::all([
+            $customers = \LSCP\Stripe\Customer::all([
                 'email' => $email,
                 'limit' => 1,
             ]);
@@ -426,19 +393,25 @@ class Plugin {
      */
     public function redirect_to_stripe_customer_portal($customer_id) {
         \LSCP\Stripe\Stripe::setApiKey(get_option('lscp_stripe_api_key'));
-
+    
         try {
+            // Ensure the return URL is properly set
+            $return_url = get_option('lscp_stripe_redirect_url', home_url('/' . get_option('lscp_stripe_endpoint_slug', 'customer-portal')));
+            if (empty($return_url)) {
+                $return_url = home_url(); // Fallback to home URL if the return URL is not set
+            }
+    
             $session = \LSCP\Stripe\BillingPortal\Session::create([
                 'customer' => $customer_id,
-                'return_url' => esc_url(get_option('lscp_stripe_redirect_url', home_url('/' . get_option('lscp_stripe_endpoint_slug', 'customer-portal')))),
+                'return_url' => esc_url($return_url),
             ]);
-
+    
             wp_redirect(esc_url_raw($session->url));
             exit;
         } catch (\Exception $e) {
             wp_die(esc_html__('Error redirecting to Stripe Customer Portal: ', 'login-stripe-customer-portal') . esc_html($e->getMessage()));
         }
-    }
+    }    
 }
 
 // Initialize the plugin

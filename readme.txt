@@ -1,5 +1,8 @@
 === Login for Stripe Customer Portal ===
-Contributors: gauchoplugins
+Contributors: gauchoplugins, brandonfire, freemius
+Author URI: https://gauchoplugins.com
+Plugin URI: https://gauchoplugins.com
+Donate link: https://gauchoplugins.com
 Tags: stripe, customer portal, login, api
 Stable tag: 1.0.1
 Requires at least: 5.0
@@ -23,6 +26,13 @@ The Customer Portal is still hosted on Stripe, but the Login page is on your dom
 * **Customizable Endpoint**: Admins can define a custom slug for the customer portal login page (e.g., `yourwebsite.com/customer-portal/`).
 * **Secure Authentication**: Users enter their email and are sent a secure login link to get access to the Stripe Customer Portal. 
 * **Redirect URL**: After logging out of the portal, customers are redirected back to a specified URL, which can be customized in the plugin settings.
+
+### Third-Party Service Disclaimer
+This plugin integrates with Stripe to provide the customer portal functionality. It uses Stripe's API to connect with and manage customer data securely. By using this plugin, you are consenting to the transmission of data to Stripe’s services.
+
+Service Terms: [Stripe Terms of Use](https://stripe.com/legal/ssa)
+Privacy Policy: [Stripe Privacy Policy](https://stripe.com/privacy)
+
 
 == Installation ==
 
@@ -55,7 +65,4 @@ Yes, the plugin allows you to customize the endpoint URL for the login page. You
 
 = 1.0.1 =
 * Added email login link functionality.
-
-
-
-
+* Add Freemius SDK. 

@@ -15,15 +15,16 @@ Create a customer login page for the Stripe Customer Portal directly from your W
 
 == Description ==
 
-The **Login for Stripe Customer Portal** plugin simplifies the process for Stripe merchants to integrate the Stripe Customer Portal into their WordPress website. By offering a customizable login endpoint, this plugin makes it easy for customers to log in and access their Stripe billing information securely.
+The **Login for Stripe Customer Portal** plugin simplifies the process for Stripe businesses to integrate the Stripe Customer Portal into their WordPress website. By offering a customizable login endpoint or embeddable form, the plugin makes it easy for customers to log in and access and manage their Stripe billing information securely. 
 
-Upon entering their email address, the platform checks your Stripe account for existing customers, and then generates a secure login link for the customer to login, which is only valid for 1 hour.
+Upon entering their email address, customers receive a secure login link, which is only valid for 1 hour. You can optionally restrict access only to your existing customers or allow new customers to register and add their information. 
 
-The Customer Portal is still hosted on Stripe, but the Login page is on your domain, giving a bit more control over your branding and experience. 
+The Customer Portal is still hosted on Stripe, but the Login page is on your website, giving you more control over professionally branding the experience customers have on your site. 
 
 ### Key Features:
 * **Stripe API Integration**: Allows WordPress site admins to connect their Stripe account via API and provide customer access to the Stripe Customer Portal.
 * **Customizable Endpoint**: Admins can define a custom slug for the customer portal login page (e.g., `yourwebsite.com/customer-portal/`).
+* **Shortcode Embeddable Form**: Use the shortcode `[login-stripe-customer-portal]` to put the login form anywhere on your site. 
 * **Secure Authentication**: Users enter their email and are sent a secure login link to get access to the Stripe Customer Portal. 
 * **Redirect URL**: After logging out of the portal, customers are redirected back to a specified URL, which can be customized in the plugin settings.
 
@@ -32,7 +33,6 @@ This plugin integrates with Stripe to provide the customer portal functionality.
 
 Service Terms: [Stripe Terms of Use](https://stripe.com/legal/ssa)
 Privacy Policy: [Stripe Privacy Policy](https://stripe.com/privacy)
-
 
 == Installation ==
 
@@ -53,11 +53,11 @@ Log into your Stripe Dashboard, and under "Developers" > "API keys", you will fi
 
 = Can I customize the login page? =
 
-Yes, the plugin allows you to customize the endpoint URL for the login page. You can define this under the settings.
+Yes, the plugin allows you to customize the endpoint URL for the login page. You can define this under the settings. Styling settings are coming soon, but for now you can use custom CSS. 
 
 == Screenshots ==
 
-1. Settings page to configure Stripe API key, redirect URL, and customer portal slu
+1. Settings page to configure Stripe API key, redirect URL, and customer portal slug
 2. Login form example - users can enter email and generate a login link
 3. Embeddable Stripe Customer Portal login form based on shortcode
 4. Confirmation message after submitting the email form

@@ -1,10 +1,10 @@
 === Login for Stripe Customer Portal ===
 Contributors: gauchoplugins, brandonfire, freemius
-Author URI: https://gauchoplugins.com
-Plugin URI: https://gauchoplugins.com
-Donate link: https://gauchoplugins.com
+Author URI: https://gauchoplugins.com/
+Plugin URI: https://gauchoplugins.com/
+Donate link: https://gauchoplugins.com/
 Tags: stripe, customer portal, login, api
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
@@ -17,7 +17,7 @@ Create a customer login page for the Stripe Customer Portal directly from your W
 
 The **Login for Stripe Customer Portal** plugin simplifies the process for Stripe merchants to integrate the Stripe Customer Portal into their WordPress website. By offering a customizable login endpoint, this plugin makes it easy for customers to log in and access their Stripe billing information securely.
 
-Upon entering their email address, the platform checks your Stripe account for existing customers, and then generates a secure login link for the customer to login, which is only valid for 1 hour.  
+Upon entering their email address, the platform checks your Stripe account for existing customers, and then generates a secure login link for the customer to login, which is only valid for 1 hour.
 
 The Customer Portal is still hosted on Stripe, but the Login page is on your domain, giving a bit more control over your branding and experience. 
 
@@ -57,12 +57,13 @@ Yes, the plugin allows you to customize the endpoint URL for the login page. You
 
 == Screenshots ==
 
-1. Settings page where you configure your Stripe API key, redirect URL, and customer portal slug.
-2. The customer login page where users enter their email.
-3. Confirmation message after submitting the email form.
+1. Settings page to configure Stripe API key, redirect URL, and customer portal slu
+2. Login form example - users can enter email and generate a login link
+3. Embeddable Stripe Customer Portal login form based on shortcode
+4. Confirmation message after submitting the email form
+5. Email including temporary login link for Stripe Customer Portal
 
 == Changelog ==
 
-= 1.0.1 =
-* Added email login link functionality.
-* Add Freemius SDK. 
+= 1.0.2 =
+* Added shortcode to embed login form anywhere on your site. 

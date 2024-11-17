@@ -4,6 +4,7 @@
  * Description: Allow merchants to connect Stripe and provide a customer login endpoint for the Stripe Customer Portal.
  * Version: 1.0.1
  * Author: Gaucho Plugins
+ * Author URI:      https://gauchoplugins.com/
  * License: GPLv3
  * Text Domain: login-stripe-customer-portal
  */
@@ -51,6 +52,7 @@ class Plugin {
         // Register settings and menus
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_action('admin_init', [$this, 'register_settings']);
+        add_action('init', [$this, 'register_shortcodes']);
         
         // Add endpoint and handle customer portal
         add_action('init', [$this, 'add_customer_portal_endpoint']);
@@ -191,7 +193,9 @@ class Plugin {
             <p><?php esc_html_e('Make sure to resave your permalinks after making changes to the customer portal slug by going to:', 'login-stripe-customer-portal'); ?>
             <a href="<?php echo esc_url(admin_url('options-permalink.php')); ?>" target="_blank"><?php esc_html_e('Permalinks Settings', 'login-stripe-customer-portal'); ?></a>.
             </p>
-
+            <h2><?php esc_html_e('Shortcode', 'login-stripe-customer-portal'); ?></h2>
+            <p><?php esc_html_e('Use the following shortcode to display the Stripe portal login form on any page or post:', 'login-stripe-customer-portal'); ?></p>
+            <p><code>[login-stripe-customer-portal]</code></p>
         </div>
         <?php
     }
@@ -212,48 +216,50 @@ class Plugin {
      */
     public function handle_customer_portal() {
         $slug = get_option('lscp_stripe_endpoint_slug', 'customer-portal');
-        if (empty($slug)) {
-            return; // Disable the customer portal page if the slug is empty
-        }
-    
         global $wp_query;
     
-        if (isset($wp_query->query_vars['lscp_stripe_customer_portal'])) {
+        // Handle form submission from either the endpoint or the shortcode
+        if (
+            isset($_POST['lscp_stripe_portal_nonce']) && 
+            isset($_SERVER['REQUEST_METHOD']) && 
+            $_SERVER['REQUEST_METHOD'] === 'POST'
+        ) {
+            // Unsanitize and sanitize the nonce
+            $nonce = sanitize_text_field(wp_unslash($_POST['lscp_stripe_portal_nonce']));
     
-            // Check if request method is POST and verify nonce
-            if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-                // Unsanitize and sanitize the nonce
-                $nonce = isset($_POST['lscp_stripe_portal_nonce']) ? sanitize_text_field(wp_unslash($_POST['lscp_stripe_portal_nonce'])) : '';
+            // Verify nonce
+            if (!wp_verify_nonce($nonce, 'lscp_stripe_portal_login_action')) {
+                wp_die(esc_html__('Security check failed', 'login-stripe-customer-portal'));
+            }
     
-                // Verify nonce
-                if (!wp_verify_nonce($nonce, 'lscp_stripe_portal_login_action')) {
-                    wp_die(esc_html__('Security check failed', 'login-stripe-customer-portal'));
-                }
+            // Process form data after nonce verification
+            if (isset($_POST['email'])) {
+                $email = sanitize_email(wp_unslash($_POST['email']));
+                $message = 'If your email address is registered, you should receive an email with a login link.';
     
-                // Process form data after nonce verification
-                if (isset($_POST['email'])) {
-                    $email = sanitize_email(wp_unslash($_POST['email']));
-                    $message = 'If your email address is registered, you should receive an email with a login link.';
+                // Check if validation for existing customers is enabled
+                $validate_existing_customers = get_option('lscp_stripe_validate_existing_customers', '0');
+                $customer_exists = $this->check_if_customer_exists($email);
     
-                    // Check if validation for existing customers is enabled
-                    $validate_existing_customers = get_option('lscp_stripe_validate_existing_customers', '0');
-                    $customer_exists = $this->check_if_customer_exists($email);
-    
-                    if ($validate_existing_customers === '1' && !$customer_exists) {
-                        // If the customer does not exist and validation is required, do not send the email
-                        wp_die(esc_html($message), esc_html__('Login Message', 'login-stripe-customer-portal'));
-                    }
-    
-                    // Send the login email if validation is not required or if the customer exists
-                    if (is_email($email)) {
-                        $this->send_login_email($email);
-                    }
-    
-                    // Always display this message after form submission
+                if ($validate_existing_customers === '1' && !$customer_exists) {
+                    // If the customer does not exist and validation is required, do not send the email
                     wp_die(esc_html($message), esc_html__('Login Message', 'login-stripe-customer-portal'));
                 }
-            } elseif (isset($_GET['token'])) {
-                // If a token is present in the URL, process login
+    
+                // Send the login email if validation is not required or if the customer exists
+                if (is_email($email)) {
+                    $this->send_login_email($email);
+                }
+    
+                // Always display this message after form submission
+                wp_die(esc_html($message), esc_html__('Login Message', 'login-stripe-customer-portal'));
+            }
+        }
+    
+        // Handle the endpoint-based customer portal
+        if (isset($wp_query->query_vars['lscp_stripe_customer_portal'])) {
+            // Process login via token
+            if (isset($_GET['token'])) {
                 $token = sanitize_text_field(wp_unslash($_GET['token']));
                 $email = get_transient('lscp_stripe_login_token_' . md5($token));
     
@@ -411,8 +417,36 @@ class Plugin {
         } catch (\Exception $e) {
             wp_die(esc_html__('Error redirecting to Stripe Customer Portal: ', 'login-stripe-customer-portal') . esc_html($e->getMessage()));
         }
-    }    
-}
+    }
+    
+        /**
+     * Add a shortcode to display the login form.
+     *
+     * Shortcode: [login-stripe-customer-portal]
+     */
+    public function render_shortcode_form() {
+        ob_start();
+        ?>
+        <div style="display: flex; justify-content: center; align-items: center; height: auto; background-color: #ffffff00;">
+            <form method="post" action="" style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 400px; width: 100%; text-align: center;">
+                <?php wp_nonce_field('lscp_stripe_portal_login_action', 'lscp_stripe_portal_nonce'); ?>
+                <label for="email" style="display: block; margin-bottom: 10px; font-weight: bold;"><?php esc_html_e('Enter your email address:', 'login-stripe-customer-portal'); ?></label>
+                <input type="email" name="email" id="email" required style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #ccc;" />
+                <input type="submit" value="<?php esc_html_e('Continue to Stripe Portal', 'login-stripe-customer-portal'); ?>" style="background-color: #0073aa; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px;" />
+            </form>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+
+        /**
+     * Register shortcodes for the plugin.
+     */
+    public function register_shortcodes() {
+        add_shortcode('login-stripe-customer-portal', [$this, 'render_shortcode_form']);
+    }
+
+}   
 
 // Initialize the plugin
 new Plugin();

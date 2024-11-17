@@ -1,3 +1,7 @@
+= 1.0.1 =
+* Added email login link functionality.
+* Added Freemius SDK. 
+
 = 1.0 =
 * Initial release with Stripe API integration and customizable login endpoint.
 * Secure login form for customers to access their Stripe Customer Portal.

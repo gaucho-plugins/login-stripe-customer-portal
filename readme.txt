@@ -1,10 +1,10 @@
-=== Login for Stripe Customer Portal ===
+=== Login for Stripe Customer Portal | Create an Account Login Page for the Stripe Customer Portal ===
 Contributors: gauchoplugins, brandonfire, freemius
 Author URI: https://gauchoplugins.com/
 Plugin URI: https://gauchoplugins.com/
 Donate link: https://gauchoplugins.com/
-Tags: stripe, customer portal, login, api
-Stable tag: 1.0.2
+Tags: stripe, portal, login, customer, account
+Stable tag: 1.0.3
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
@@ -65,5 +65,7 @@ Yes, the plugin allows you to customize the endpoint URL for the login page. You
 
 == Changelog ==
 
-= 1.0.2 =
-* Added shortcode to embed login form anywhere on your site. 
+= 1.0.3 =
+* Updated Freemius SDK.
+
+See our full changelog in our [documentation](https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin). 

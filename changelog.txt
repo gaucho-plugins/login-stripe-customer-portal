@@ -1,3 +1,6 @@
+= 1.0.2 =
+* Added shortcode to embed login form anywhere on your site. 
+
 = 1.0.1 =
 * Added email login link functionality.
 * Added Freemius SDK. 

@@ -6,7 +6,7 @@ Donate link: https://gauchoplugins.com/
 Tags: stripe, portal, login, customer, account
 Stable tag: 1.0.3
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html

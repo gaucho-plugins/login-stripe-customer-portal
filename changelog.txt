@@ -1,3 +1,6 @@
+= 1.0.3 =
+* Updated Freemius SDK.
+
 = 1.0.2 =
 * Added shortcode to embed login form anywhere on your site. 
 

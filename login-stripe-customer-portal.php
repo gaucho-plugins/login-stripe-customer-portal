@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Login for Stripe Customer Portal
  * Description: Allow merchants to connect Stripe and provide a customer login endpoint for the Stripe Customer Portal.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Gaucho Plugins
  * Author URI:      https://gauchoplugins.com/
  * License: GPLv3

@@ -4,7 +4,7 @@ Author URI: https://gauchoplugins.com/
 Plugin URI: https://gauchoplugins.com/
 Donate link: https://gauchoplugins.com/
 Tags: stripe, portal, login, customer, account
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
@@ -33,6 +33,24 @@ This plugin integrates with Stripe to provide the customer portal functionality.
 
 Service Terms: [Stripe Terms of Use](https://stripe.com/legal/ssa)
 Privacy Policy: [Stripe Privacy Policy](https://stripe.com/privacy)
+
+## GAUCHO PLUGINS PORTFOLIO
+
+**[Payment Page](https://wordpress.org/plugins/payment-page/)**: Start accepting payments in a beautiful payment form in less than 60 seconds
+
+**[Split Pay Plugin](https://wordpress.org/plugins/bsd-woo-stripe-connect-split-pay/)**: Split WooCommerce payments across multiple connected Stripe accounts. 
+
+**[Login for Stripe Customer Portal](https://wordpress.org/plugins/login-stripe-customer-portal/)**: Create an Account login area for your Stripe customers. 
+
+**[Gyta Buyback](https://wordpress.org/plugins/gyta-buyback/)**: Create a trade-in / buyback business using WooCommerce. 
+
+**[Version Info](https://wordpress.org/plugins/version-info/)**: Show WP, PHP, MySQL & Web Server Versions in the WP-Admin Dashboard.
+
+**[China Payments Plugin](https://wordpress.org/plugins/wp-stripe-global-payments/)**: Accept WeChat Pay and Alipay payments from Chinese customers.   
+
+**[Blocked in China](https://wordpress.org/plugins/blocked-in-china/)**: Check if your website is available in the Chinese mainland.  
+
+**Speed in China**: Check your website’s speed in the Chinese mainland - coming soon!
 
 == Installation ==
 
@@ -65,7 +83,7 @@ Yes, the plugin allows you to customize the endpoint URL for the login page. You
 
 == Changelog ==
 
-= 1.0.3 =
+= 1.0.4 =
 * Updated Freemius SDK.
 
 See our full changelog in our [documentation](https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin). 

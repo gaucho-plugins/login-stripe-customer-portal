@@ -35,7 +35,10 @@ final class Loader {
 		EmailTemplates::register();
 		EmailTemplateSettings::register();
 
-		// Phase 2: FormStyler::register();
+		// Phase 2: login-form styler.
+		FormStyler::register();
+		FormStylerSettings::register();
+
 		// Phase 3: UserBridge::register(); Integrations\WooCommerce::register(); ...
 		// Phase 4: WebhookEndpoint::register();
 		// Phase 5: MultiAccount::register(); WhiteLabel::register();

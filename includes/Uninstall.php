@@ -35,6 +35,13 @@ final class Uninstall {
 		'lscp_pro_email_footer_text',
 		'lscp_pro_email_from_name',
 		'lscp_pro_email_from_email',
+		// 1.1.0 — PRO form-styler feature options.
+		'lscp_pro_form_template',
+		'lscp_pro_form_primary_color',
+		'lscp_pro_form_heading',
+		'lscp_pro_form_subheading',
+		'lscp_pro_form_button_text',
+		'lscp_pro_form_placeholder',
 	);
 
 	/** @var array<int,string> Transient prefixes LSCP writes. */

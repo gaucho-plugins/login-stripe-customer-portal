@@ -4,10 +4,10 @@ Author URI: https://gauchoplugins.com/
 Plugin URI: https://gauchoplugins.com/
 Donate link: https://gauchoplugins.com/
 Tags: stripe, portal, login, customer, account
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 Requires at least: 5.0
 Tested up to: 6.9
-Requires PHP: 7.0
+Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -138,7 +138,41 @@ This plugin includes the Freemius SDK for license and update management. Data is
 
 == Changelog ==
 
+= 1.0.6 =
+
+**Security & privacy**
+
+* Fix: the Redirect URL setting is now persisted correctly. The 1.0.5 settings form emitted the input under a corrupted name attribute, so saving the Redirect URL silently failed and customers were always returned to the default endpoint.
+* Fix: magic-link URLs now use the configured Customer Portal slug instead of a hardcoded `/customer-portal` path. Renaming the endpoint no longer breaks outstanding login emails.
+* Fix: namespaced `catch (Exception $e)` clauses around the Stripe SDK calls resolved to the nonexistent class `LSCP\Exception` and never matched. Any Stripe failure now surfaces a graceful "Please try again later" message instead of a WSOD.
+* Hardening: stored magic-link tokens are now SHA-256 hashed at rest. A database snapshot no longer exposes unredeemed login links.
+* Hardening: per-email + per-IP rate limiter (5 requests / 10 minutes) on the magic-link form prevents the page from being abused as a mail relay or as an email-enumeration oracle against your Stripe customer list.
+* Hardening: the form response is now constant for valid, invalid, and unknown email addresses, and the wording is mode-aware. When "Only allow existing Stripe customers to login" is unchecked (default) the message is "A login link is on its way" — no longer the misleading "If your email address is registered…" wording, which implied gatekeeping that did not exist in that mode.
+* Hardening: settings page now explicitly checks `manage_options` before rendering, and every `wp_die()` message is HTML-escaped.
+* Hardening: Stripe Secret Key input renders a fixed-length mask. The field no longer leaks the real key length via "view source".
+* Hardening: Customer Portal Slug is length-capped (max 64 chars) so a pasted megabyte string can't bloat the rewrite engine.
+* Hardening: shortcode forms now render with per-instance unique `id` attributes. Embedding the shortcode multiple times on the same page no longer produces duplicate IDs that break `<label for>` binding, HTML5 validation, and screen-reader navigation.
+* Privacy: new `uninstall.php` cleans up every option and transient on plugin delete. The Stripe Secret Key no longer lingers in `wp_options` after the plugin is uninstalled.
+* Privacy: GDPR personal-data exporter and eraser are registered with WordPress Privacy Tools (Tools → Export Personal Data / Erase Personal Data).
+
+**UX**
+
+* Settings page description for the "Only allow existing Stripe customers to login" toggle now explicitly notes that unchecking it (the default) auto-creates a Stripe customer the first time a magic link is redeemed for a new email.
+* Magic-link form input now uses `<label for>`, `autocomplete="email"`, and `required` attributes for screen-reader and password-manager compatibility.
+
+**Reliability & ops**
+
+* New daily WP-Cron sweep removes expired magic-link tokens and rate-limit counters. WordPress's built-in transient GC is lazy and can leave expired rows in `wp_options` indefinitely on low-traffic sites.
+* New WP-CLI commands: `wp lscp purge-tokens`, `wp lscp limiter-reset <email>`, `wp lscp send <email>`, `wp lscp config`.
+* Full payments-grade test suite — 250 PHPUnit tests, 18,690 assertions, property-based fuzz on the token store, token-entropy distribution check, concurrent-redemption race test, slug path-traversal hardening, email-header injection hardening, multi-instance shortcode ID uniqueness, mode-aware confirmation message.
+
+**Compatibility & internal**
+
+* Bumps minimum PHP from 7.0 to 7.4 (PHP 7.0/7.1/7.2/7.3 are end-of-life).
+* Backwards-compatible public class surface — every public method on `LSCP\Plugin` from 1.0.x is preserved.
+* Plugin refactored into focused units (`Settings`, `TokenStore`, `TokenGC`, `StripeGateway`, `Mailer`, `RateLimiter`, `PortalController`, `FormRenderer`, `RewriteEndpoint`, `Shortcode`, `Privacy`, `Cli`, `Uninstall`, `DocsHelper`).
+
 = 1.0.5 =
 * Added contextual documentation links on the Stripe Portal settings page.
 
-See our full changelog in our [documentation](https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin). 
+See our full changelog in our [documentation](https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin).

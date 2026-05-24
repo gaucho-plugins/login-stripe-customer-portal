@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Login for Stripe Customer Portal
  * Description: Allow merchants to connect Stripe and provide a customer login endpoint for the Stripe Customer Portal.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Gaucho Plugins
  * Author URI:      https://gauchoplugins.com/
  * License: GPLv3
@@ -48,6 +48,8 @@ if ( ! function_exists( 'lscp_fs' ) ) {
 require_once plugin_dir_path(__FILE__) . 'lib/stripe-php/init.php';  // Adjust path to where you placed the SDK 
 
 class Plugin {
+    private const DOCS_BASE = 'https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin';
+
     public function __construct() {
         // Register settings and menus
         add_action('admin_menu', [$this, 'add_settings_page']);
@@ -126,6 +128,32 @@ class Plugin {
     }
 
     /**
+     * Build a GitBook documentation URL from an optional path.
+     *
+     * @param string $path Optional path relative to the docs base URL.
+     * @return string
+     */
+    private function docs_url( $path = '' ) {
+        $path = ltrim( (string) $path, '/' );
+        return $path ? self::DOCS_BASE . '/' . $path : self::DOCS_BASE;
+    }
+
+    /**
+     * Render a documentation link for the settings page.
+     *
+     * @param string $path Optional path relative to the docs base URL.
+     * @param string $text Link label.
+     * @return string
+     */
+    private function docs_link( $path, $text ) {
+        return sprintf(
+            '<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>',
+            esc_url( $this->docs_url( $path ) ),
+            esc_html( $text )
+        );
+    }
+
+    /**
      * Render the settings page for entering the Stripe API key, redirect URL, and endpoint slug.
      */
     public function render_settings_page() {
@@ -136,6 +164,16 @@ class Plugin {
         <div class="wrap">
             <h1><?php esc_html_e('Login for Stripe Customer Portal Settings', 'login-stripe-customer-portal'); ?></h1>
             <p><?php esc_html_e('Provide your Stripe Secret Key, Redirect URL, and Customer Portal Endpoint Slug below. After saving, the Secret Key will be hidden for security.', 'login-stripe-customer-portal'); ?></p>
+            <p class="description">
+                <?php
+                printf(
+                    /* translators: 1: Quick Setup doc link, 2: Documentation home link */
+                    esc_html__( 'Need help? See the %1$s or full %2$s.', 'login-stripe-customer-portal' ),
+                    $this->docs_link( 'getting-started/quick-setup', __( 'Quick Setup guide', 'login-stripe-customer-portal' ) ),
+                    $this->docs_link( '', __( 'documentation', 'login-stripe-customer-portal' ) )
+                );
+                ?>
+            </p>
             <form method="post" action="options.php">
                 <?php 
                 settings_fields('lscp_settings_group');
@@ -150,28 +188,60 @@ class Plugin {
                             $masked_key = $secret_key ? str_repeat('●', strlen($secret_key)) : '';
                             ?>
                             <input type="password" name="lscp_stripe_api_key" value="<?php echo esc_attr($masked_key); ?>" />
-                            <p class="description"><?php esc_html_e('Your Stripe Secret Key. After saving, it will be hidden.', 'login-stripe-customer-portal'); ?></p>
+                            <p class="description">
+                                <?php
+                                printf(
+                                    /* translators: %s: Documentation link */
+                                    esc_html__( 'Your Stripe Secret Key. After saving, it will be hidden. · %s', 'login-stripe-customer-portal' ),
+                                    $this->docs_link( 'getting-started/stripe-prerequisites', __( 'Learn how to get your API key', 'login-stripe-customer-portal' ) )
+                                );
+                                ?>
+                            </p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row"><?php esc_html_e('Redirect URL', 'login-stripe-customer-portal'); ?></th>
                         <td>
                             <input type="url" name="lscp_stripe_api_keylscp_stripe_redirect_url" value="<?php echo esc_url(get_option('lscp_stripe_api_keylscp_stripe_redirect_url', $customer_portal_url)); ?>" />
-                            <p class="description"><?php esc_html_e('The URL to redirect the user back to after they exit the Stripe portal. Default is the customer portal page.', 'login-stripe-customer-portal'); ?></p>
+                            <p class="description">
+                                <?php
+                                printf(
+                                    /* translators: %s: Documentation link */
+                                    esc_html__( 'The URL to redirect the user back to after they exit the Stripe portal. Default is the customer portal page. · %s', 'login-stripe-customer-portal' ),
+                                    $this->docs_link( 'configuration/settings-reference', __( 'Settings reference', 'login-stripe-customer-portal' ) )
+                                );
+                                ?>
+                            </p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row"><?php esc_html_e('Customer Portal Slug', 'login-stripe-customer-portal'); ?></th>
                         <td>
                             <input type="text" name="lscp_stripe_endpoint_slug" value="<?php echo esc_attr($slug); ?>" />
-                            <p class="description"><?php esc_html_e('Customize the slug for the customer portal page. Leave empty to disable the page.', 'login-stripe-customer-portal'); ?></p>
+                            <p class="description">
+                                <?php
+                                printf(
+                                    /* translators: %s: Documentation link */
+                                    esc_html__( 'Customize the slug for the customer portal page. Leave empty to disable the page. · %s', 'login-stripe-customer-portal' ),
+                                    $this->docs_link( 'usage/customer-portal-endpoint', __( 'Customer portal endpoint', 'login-stripe-customer-portal' ) )
+                                );
+                                ?>
+                            </p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row"><?php esc_html_e('Only allow existing Stripe customers to login', 'login-stripe-customer-portal'); ?></th>
                         <td>
                             <input type="checkbox" name="lscp_stripe_validate_existing_customers" value="1" <?php checked('1', $validate_existing_customers); ?> />
-                            <p class="description"><?php esc_html_e('If checked, only existing Stripe customers can log in to the portal.', 'login-stripe-customer-portal'); ?></p>
+                            <p class="description">
+                                <?php
+                                printf(
+                                    /* translators: %s: Documentation link */
+                                    esc_html__( 'If checked, only existing Stripe customers can log in to the portal. · %s', 'login-stripe-customer-portal' ),
+                                    $this->docs_link( 'usage/login-flow', __( 'Login flow', 'login-stripe-customer-portal' ) )
+                                );
+                                ?>
+                            </p>
                         </td>
                     </tr>
                 </table>
@@ -182,20 +252,54 @@ class Plugin {
             <?php if (!empty($slug)) : ?>
                 <h2><?php esc_html_e('Customer Portal URL', 'login-stripe-customer-portal'); ?></h2>
                 <p><?php esc_html_e('Your customer portal is available at:', 'login-stripe-customer-portal'); ?></p>
-                <p><a href="<?php echo esc_url($customer_portal_url); ?>" target="_blank">
+                <p><a href="<?php echo esc_url($customer_portal_url); ?>" target="_blank" rel="noopener noreferrer">
                     <?php echo esc_url($customer_portal_url); ?>
                 </a></p>
+                <p class="description">
+                    <?php
+                    printf(
+                        /* translators: %s: Documentation link */
+                        '%s',
+                        $this->docs_link( 'getting-started/quick-setup', __( 'Quick setup', 'login-stripe-customer-portal' ) )
+                    );
+                    ?>
+                </p>
             <?php else : ?>
                 <p><strong><?php esc_html_e('Customer Portal is disabled. Please set a slug to enable it.', 'login-stripe-customer-portal'); ?></strong></p>
             <?php endif; ?>
 
             <h2><?php esc_html_e('Permalink Settings', 'login-stripe-customer-portal'); ?></h2>
-            <p><?php esc_html_e('Make sure to resave your permalinks after making changes to the customer portal slug by going to:', 'login-stripe-customer-portal'); ?>
-            <a href="<?php echo esc_url(admin_url('options-permalink.php')); ?>" target="_blank"><?php esc_html_e('Permalinks Settings', 'login-stripe-customer-portal'); ?></a>.
+            <p>
+                <?php
+                printf(
+                    /* translators: 1: Permalinks settings link, 2: Documentation link */
+                    esc_html__( 'Make sure to resave your permalinks after making changes to the customer portal slug by going to %1$s. · %2$s', 'login-stripe-customer-portal' ),
+                    '<a href="' . esc_url( admin_url( 'options-permalink.php' ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Permalinks Settings', 'login-stripe-customer-portal' ) . '</a>',
+                    $this->docs_link( 'troubleshooting/troubleshooting', __( 'Troubleshooting permalinks', 'login-stripe-customer-portal' ) )
+                );
+                ?>
             </p>
             <h2><?php esc_html_e('Shortcode', 'login-stripe-customer-portal'); ?></h2>
-            <p><?php esc_html_e('Use the following shortcode to display the Stripe portal login form on any page or post:', 'login-stripe-customer-portal'); ?></p>
+            <p>
+                <?php
+                printf(
+                    /* translators: %s: Documentation link */
+                    esc_html__( 'Use the following shortcode to display the Stripe portal login form on any page or post: · %s', 'login-stripe-customer-portal' ),
+                    $this->docs_link( 'usage/shortcode', __( 'Shortcode documentation', 'login-stripe-customer-portal' ) )
+                );
+                ?>
+            </p>
             <p><code>[login-stripe-customer-portal]</code></p>
+            <p class="description">
+                <?php
+                printf(
+                    /* translators: 1: Documentation link, 2: WordPress.org support link */
+                    esc_html__( '%1$s · %2$s', 'login-stripe-customer-portal' ),
+                    $this->docs_link( '', __( 'Documentation', 'login-stripe-customer-portal' ) ),
+                    '<a href="https://wordpress.org/support/plugin/login-stripe-customer-portal/" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Support forum', 'login-stripe-customer-portal' ) . '</a>'
+                );
+                ?>
+            </p>
         </div>
         <?php
     }

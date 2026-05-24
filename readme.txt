@@ -4,7 +4,7 @@ Author URI: https://gauchoplugins.com/
 Plugin URI: https://gauchoplugins.com/
 Donate link: https://gauchoplugins.com/
 Tags: stripe, portal, login, customer, account
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
@@ -83,7 +83,7 @@ Yes, the plugin allows you to customize the endpoint URL for the login page. You
 
 == Changelog ==
 
-= 1.0.4 =
-* Updated Freemius SDK.
+= 1.0.5 =
+* Added contextual documentation links on the Stripe Portal settings page.
 
 See our full changelog in our [documentation](https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin). 

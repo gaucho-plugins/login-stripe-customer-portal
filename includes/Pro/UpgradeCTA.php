@@ -21,10 +21,13 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'LSCP_TEST_MODE' ) ) {
 final class UpgradeCTA {
 
 	/** Single, sober CTA copy used across every tab. */
-	public const CTA_LABEL = 'Upgrade to PRO — $99/yr';
+	public const CTA_LABEL = 'Upgrade to PRO — from $79/yr';
 
 	/** Default body sentence describing what PRO includes. */
 	public const CTA_BODY = 'Branded magic-link emails, login-form styler, WooCommerce / MemberPress integration, Stripe webhook → role automation, multi-Stripe-account support, and white-label.';
+
+	/** Site-count strip shown below the CTA button on full-tab renders. */
+	public const CTA_SITES_LINE = '1 site $79/yr · 3 sites $159/yr · 25 sites $299/yr · 100 sites + white-label $499/yr';
 
 	/**
 	 * True iff a premium build is active AND the user has consented to it.
@@ -93,7 +96,10 @@ final class UpgradeCTA {
 				<?php echo \esc_html( self::CTA_LABEL ); ?>
 			</a>
 			<p style="margin:12px 0 0;font-size:12px;color:#646970;">
-				1 site default · scales to 3 / 25 / 100 sites at checkout · white-label included
+				<?php echo \esc_html( self::CTA_SITES_LINE ); ?>
+			</p>
+			<p style="margin:6px 0 0;font-size:11px;color:#8c8f94;">
+				Every plan includes every feature — pick the license count that matches your portfolio.
 			</p>
 		</div>
 		<?php

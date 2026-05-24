@@ -3,7 +3,7 @@
 * New: `[lscp-message]` shortcode renders the inline confirmation/error message; drop it on a thank-you page if you want the form submission to redirect there instead of back to the form page.
 * New: extension surface — filters (`lscp_email_html_body`, `lscp_email_subject`, `lscp_email_from`, `lscp_email_headers`, `lscp_form_template`, `lscp_form_default_email`, `lscp_login_url`, `lscp_return_url`, `lscp_post_message`, `lscp_post_redirect_url`, `lscp_message_query_args`, `lscp_settings_tabs`, `lscp_settings_tab_<slug>_content`) and actions (`lscp_form_before`, `lscp_form_after`, `lscp_magic_link_sent`, `lscp_magic_link_redeemed`) so site owners and integrations can customize every stage of the flow.
 * New: tabbed settings page — General (existing settings) and stubs for Email Templates, Form Style, Integrations, Webhooks, Multi-Account (all PRO).
-* PRO: optional $99/yr upgrade unlocks branded email templates, login-form styler, WooCommerce / MemberPress / LearnDash integration, Stripe webhook → WP role automation, multi-Stripe-account support, and white-label. PRO ships via Freemius; free version on wp.org stays fully functional with the upgrade prompts.
+* PRO: optional upgrade unlocks branded email templates, login-form styler, WooCommerce / MemberPress / LearnDash integration, Stripe webhook → WP role automation, multi-Stripe-account support, and white-label. PRO tiers: 1 site $79/yr · 3 sites $159/yr · 25 sites $299/yr · 100 sites + white-label $499/yr — every tier includes every feature. PRO ships via Freemius; free version on wp.org stays fully functional with the upgrade prompts.
 
 = 1.0.6 =
 * Security: redirect URL setting is now persisted correctly (1.0.5 silently failed to save).

@@ -152,7 +152,13 @@ This plugin includes the Freemius SDK for license and update management. Data is
 
 **New (PRO — Freemius)**
 
-LSCP PRO ($99/yr, all features included, scales 1 / 3 / 25 / 100 sites at checkout) unlocks:
+LSCP PRO unlocks every feature below. Every license tier includes every feature — pick the count that matches your portfolio:
+* 1 site — $79/yr
+* 3 sites — $159/yr
+* 25 sites — $299/yr
+* 100 sites + white-label — $499/yr
+
+What you get:
 
 * Branded magic-link email templates (6 designs, logo upload, brand colors, custom subject + CTA)
 * Login-form styler (template library + color pickers + per-shortcode template overrides)

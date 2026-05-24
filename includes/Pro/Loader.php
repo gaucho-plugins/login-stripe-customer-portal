@@ -31,7 +31,10 @@ final class Loader {
 			return;
 		}
 
-		// Phase 1: EmailTemplates::register( $controller );
+		// Phase 1: branded magic-link email templates.
+		EmailTemplates::register();
+		EmailTemplateSettings::register();
+
 		// Phase 2: FormStyler::register();
 		// Phase 3: UserBridge::register(); Integrations\WooCommerce::register(); ...
 		// Phase 4: WebhookEndpoint::register();

@@ -31,8 +31,17 @@ final class UpgradeCTA {
 
 	/**
 	 * True iff a premium build is active AND the user has consented to it.
+	 *
+	 * Honors a development-only override (LSCP_PREMIUM_DEV_OVERRIDE constant
+	 * AND WP_DEBUG === true AND the wp-env / staging mu-plugin sets both).
+	 * The double-gate is intentional — a production install that
+	 * accidentally defines only one of the two does NOT bypass licensing.
 	 */
 	public static function is_premium(): bool {
+		if ( defined( 'WP_DEBUG' ) && true === constant( 'WP_DEBUG' )
+			&& defined( 'LSCP_PREMIUM_DEV_OVERRIDE' ) && true === constant( 'LSCP_PREMIUM_DEV_OVERRIDE' ) ) {
+			return true;
+		}
 		if ( ! function_exists( 'lscp_fs' ) ) {
 			return false;
 		}

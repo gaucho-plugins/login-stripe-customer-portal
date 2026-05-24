@@ -169,6 +169,150 @@ final class Sanitizer {
 	}
 
 	/**
+	 * Coerce arbitrary input to a 7-char `#rrggbb` hex color string. Accepts
+	 * 3- or 6-digit hex with or without leading #. Anything else returns the
+	 * empty string (Settings layer treats empty as "use default").
+	 *
+	 * @param mixed $input
+	 */
+	public static function sanitize_hex_color( $input ): string {
+		$value = is_string( $input ) ? trim( $input ) : '';
+		if ( '' === $value ) {
+			return '';
+		}
+		if ( '#' !== $value[0] ) {
+			$value = '#' . $value;
+		}
+		if ( preg_match( '/^#[0-9a-fA-F]{3}$/', $value ) ) {
+			$value = '#' . str_repeat( $value[1], 2 ) . str_repeat( $value[2], 2 ) . str_repeat( $value[3], 2 );
+		}
+		return preg_match( '/^#[0-9a-fA-F]{6}$/', $value ) ? strtolower( $value ) : '';
+	}
+
+	/**
+	 * Sanitize a logo URL. Accepts http(s) URLs only; everything else
+	 * becomes empty (settings UI then renders no logo).
+	 *
+	 * @param mixed $input
+	 */
+	public static function sanitize_logo_url( $input ): string {
+		$value = is_string( $input ) ? trim( $input ) : '';
+		if ( '' === $value ) {
+			return '';
+		}
+		if ( function_exists( 'esc_url_raw' ) ) {
+			$value = (string) \esc_url_raw( $value, array( 'http', 'https' ) );
+		}
+		if ( ! preg_match( '#^https?://#i', $value ) ) {
+			return '';
+		}
+		return $value;
+	}
+
+	/**
+	 * Single-line text intended for email subject / heading / CTA / footer.
+	 * Strips control chars + caps length to prevent abuse.
+	 *
+	 * @param mixed $input
+	 */
+	public static function sanitize_one_line_text( $input, int $max_length = 200 ): string {
+		$value = is_string( $input ) ? $input : '';
+		if ( '' === $value ) {
+			return '';
+		}
+		// Strip CR/LF/tab/null to defeat header-injection if reused in mail headers.
+		$value = preg_replace( '/[\r\n\t\0\x0B]+/', ' ', $value ) ?? '';
+		if ( function_exists( 'sanitize_text_field' ) ) {
+			$value = (string) \sanitize_text_field( $value );
+		}
+		$value = trim( $value );
+		if ( strlen( $value ) > $max_length ) {
+			$value = substr( $value, 0, $max_length );
+		}
+		return $value;
+	}
+
+	/**
+	 * Multi-line text for the email footer. Allows newlines but strips
+	 * control chars and caps length.
+	 *
+	 * @param mixed $input
+	 */
+	public static function sanitize_multi_line_text( $input, int $max_length = 500 ): string {
+		$value = is_string( $input ) ? $input : '';
+		if ( '' === $value ) {
+			return '';
+		}
+		// Allow \n but strip \r and other control chars.
+		$value = str_replace( "\r\n", "\n", $value );
+		$value = preg_replace( '/[\r\t\0\x0B]/', '', $value ) ?? '';
+		if ( function_exists( 'sanitize_textarea_field' ) ) {
+			$value = (string) \sanitize_textarea_field( $value );
+		}
+		$value = trim( $value );
+		if ( strlen( $value ) > $max_length ) {
+			$value = substr( $value, 0, $max_length );
+		}
+		return $value;
+	}
+
+	/**
+	 * Sanitize a From: email address. Returns '' if not a valid address —
+	 * caller should treat empty as "fall back to wp_mail default".
+	 *
+	 * @param mixed $input
+	 */
+	public static function sanitize_from_email( $input ): string {
+		$value = is_string( $input ) ? trim( $input ) : '';
+		if ( '' === $value ) {
+			return '';
+		}
+		// Strip header-injection vectors.
+		$value = preg_replace( '/[\r\n\t\0\x0B,;]+/', '', $value ) ?? '';
+		if ( function_exists( 'is_email' ) ) {
+			$valid = \is_email( $value );
+			return is_string( $valid ) ? $valid : '';
+		}
+		return filter_var( $value, FILTER_VALIDATE_EMAIL ) ? $value : '';
+	}
+
+	/**
+	 * Sanitize a From: display name. Strips header-injection vectors and
+	 * caps length.
+	 *
+	 * @param mixed $input
+	 */
+	public static function sanitize_from_name( $input ): string {
+		$value = is_string( $input ) ? $input : '';
+		$value = preg_replace( '/[\r\n\t\0\x0B,;<>]+/', '', $value ) ?? '';
+		if ( function_exists( 'sanitize_text_field' ) ) {
+			$value = (string) \sanitize_text_field( $value );
+		}
+		$value = trim( $value );
+		if ( strlen( $value ) > 100 ) {
+			$value = substr( $value, 0, 100 );
+		}
+		return $value;
+	}
+
+	/**
+	 * Resolve an arbitrary slug against a whitelist of allowed values.
+	 * Whitelist is the SOLE source of truth — anything not in it falls
+	 * back to $default. Use for template/style pickers backed by a
+	 * filesystem so users can't path-traverse via the option value.
+	 *
+	 * @param mixed              $input
+	 * @param array<string,mixed> $allowed map slug => anything (only keys matter)
+	 */
+	public static function sanitize_whitelisted_slug( $input, array $allowed, string $fallback ): string {
+		$value = is_string( $input ) ? strtolower( trim( $input ) ) : '';
+		if ( '' === $value ) {
+			return $fallback;
+		}
+		return isset( $allowed[ $value ] ) ? $value : $fallback;
+	}
+
+	/**
 	 * True iff the input contains *only* mask characters and is non-empty.
 	 */
 	public static function is_pure_mask( string $input ): bool {

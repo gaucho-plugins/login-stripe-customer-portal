@@ -25,6 +25,16 @@ final class Uninstall {
 		'lscp_stripe_redirect_url',
 		'lscp_stripe_endpoint_slug',
 		'lscp_stripe_validate_existing_customers',
+		// 1.1.0 — PRO email-templates feature options.
+		'lscp_pro_email_template',
+		'lscp_pro_email_logo_url',
+		'lscp_pro_email_primary_color',
+		'lscp_pro_email_subject',
+		'lscp_pro_email_heading',
+		'lscp_pro_email_cta_text',
+		'lscp_pro_email_footer_text',
+		'lscp_pro_email_from_name',
+		'lscp_pro_email_from_email',
 	);
 
 	/** @var array<int,string> Transient prefixes LSCP writes. */

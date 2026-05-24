@@ -42,6 +42,14 @@ final class Uninstall {
 		'lscp_pro_form_subheading',
 		'lscp_pro_form_button_text',
 		'lscp_pro_form_placeholder',
+		// 1.1.0 — PRO user bridge + integrations options.
+		'lscp_pro_bridge_prefill_email',
+		'lscp_pro_bridge_auto_create_user',
+		'lscp_pro_bridge_default_role',
+		'lscp_pro_integration_woocommerce',
+		'lscp_pro_integration_memberpress',
+		'lscp_pro_integration_learndash',
+		'lscp_pro_integration_button_label',
 	);
 
 	/** @var array<int,string> Transient prefixes LSCP writes. */

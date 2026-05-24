@@ -39,7 +39,13 @@ final class Loader {
 		FormStyler::register();
 		FormStylerSettings::register();
 
-		// Phase 3: UserBridge::register(); Integrations\WooCommerce::register(); ...
+		// Phase 3: WP user ↔ Stripe customer bridge + integrations.
+		UserBridge::register();
+		IntegrationsSettings::register();
+		Integrations\WooCommerce::register();
+		Integrations\MemberPress::register();
+		Integrations\LearnDash::register();
+
 		// Phase 4: WebhookEndpoint::register();
 		// Phase 5: MultiAccount::register(); WhiteLabel::register();
 	}

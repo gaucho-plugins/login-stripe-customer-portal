@@ -53,6 +53,13 @@ final class Plugin {
 		$this->privacy->register_hooks();
 
 		Cli::register();
+
+		// Bootstrap LSCP PRO units when the Freemius runtime confirms premium
+		// is active. The Loader is a no-op when premium is not in use, so
+		// loading it unconditionally is safe (and keeps the bootstrap simple).
+		if ( class_exists( '\\LSCP\\Pro\\Loader' ) ) {
+			\LSCP\Pro\Loader::register();
+		}
 	}
 
 	// --------------------------------------------------------------------

@@ -1,3 +1,10 @@
+= 1.1.0 = (in development on release/1.1 branch)
+* Fix (UX): shortcode form submission no longer lands on a blank wp_die screen. The plugin now redirects back to the host page with `?lscp_message=sent` so the theme chrome is preserved. The confirmation message renders inline via the new `[lscp-message]` shortcode (or automatically on the rewrite endpoint). Closes user-reported issue from the wp.org support forum (sc-7015).
+* New: `[lscp-message]` shortcode renders the inline confirmation/error message; drop it on a thank-you page if you want the form submission to redirect there instead of back to the form page.
+* New: extension surface — filters (`lscp_email_html_body`, `lscp_email_subject`, `lscp_email_from`, `lscp_email_headers`, `lscp_form_template`, `lscp_form_default_email`, `lscp_login_url`, `lscp_return_url`, `lscp_post_message`, `lscp_post_redirect_url`, `lscp_message_query_args`, `lscp_settings_tabs`, `lscp_settings_tab_<slug>_content`) and actions (`lscp_form_before`, `lscp_form_after`, `lscp_magic_link_sent`, `lscp_magic_link_redeemed`) so site owners and integrations can customize every stage of the flow.
+* New: tabbed settings page — General (existing settings) and stubs for Email Templates, Form Style, Integrations, Webhooks, Multi-Account (all PRO).
+* PRO: optional $99/yr upgrade unlocks branded email templates, login-form styler, WooCommerce / MemberPress / LearnDash integration, Stripe webhook → WP role automation, multi-Stripe-account support, and white-label. PRO ships via Freemius; free version on wp.org stays fully functional with the upgrade prompts.
+
 = 1.0.6 =
 * Security: redirect URL setting is now persisted correctly (1.0.5 silently failed to save).
 * Security: magic-link URLs honor the configured Customer Portal slug instead of a hardcoded path.

@@ -4,7 +4,7 @@ Author URI: https://gauchoplugins.com/
 Plugin URI: https://gauchoplugins.com/
 Donate link: https://gauchoplugins.com/
 Tags: stripe, portal, login, customer, account
-Stable tag: 1.0.6
+Stable tag: 1.1.0-dev
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -137,6 +137,29 @@ This plugin includes the Freemius SDK for license and update management. Data is
 5. Email including temporary login link for Stripe Customer Portal
 
 == Changelog ==
+
+= 1.1.0 = (in development on release/1.1 branch)
+
+**Bug fixes**
+
+* Fix (UX): the shortcode form submission no longer lands on a blank `wp_die` screen. The plugin now redirects back to the page that hosted the form with `?lscp_message=sent`, so your theme chrome and surrounding content are preserved. The confirmation message renders inline via the new `[lscp-message]` shortcode (or automatically on the rewrite endpoint). Closes a user-reported issue from the wp.org support forum.
+
+**New (free tier)**
+
+* New shortcode `[lscp-message]` — renders the inline success/error message. Drop it on a thank-you page if you want submissions to redirect there instead of back to the form page.
+* New: tabbed settings page with General + previews of the PRO-tier tabs (Email Templates, Form Style, Integrations, Webhooks, Multi-Account).
+* New: developer extension surface — filters and actions for every stage of the magic-link flow (email body, subject, headers, form template, login URL, return URL, message text, redirect target). Lets third-party integrations and PRO add-ons plug in without forking the plugin.
+
+**New (PRO — Freemius)**
+
+LSCP PRO ($99/yr, all features included, scales 1 / 3 / 25 / 100 sites at checkout) unlocks:
+
+* Branded magic-link email templates (6 designs, logo upload, brand colors, custom subject + CTA)
+* Login-form styler (template library + color pickers + per-shortcode template overrides)
+* WooCommerce / MemberPress / LearnDash integration ("Manage Billing" buttons + WP-user ↔ Stripe-customer bridge)
+* Stripe webhook listener with rules-based WP role automation (replaces a separate $99/yr SaaS membership tool)
+* Multi-Stripe-account support (run several accounts from one site, routed by URL slug / email domain / role)
+* Agency white-label (removes the "Powered by Gaucho Plugins" attribution)
 
 = 1.0.6 =
 

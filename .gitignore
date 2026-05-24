@@ -2,3 +2,9 @@
 .DS_Store
 
 /dev files
+
+# wp-env local development (runtime — not committed)
+.wp-env/
+wordpress/
+tests-wordpress/
+.wp-env.override.json

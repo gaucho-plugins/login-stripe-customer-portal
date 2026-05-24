@@ -1,0 +1,13 @@
+# Dev tooling — never ship in plugin releases
+.distignore
+.git
+.github
+.gitignore
+.gitattributes
+.cursor
+.editorconfig
+.DS_Store
+Thumbs.db
+.wp-env.json
+.wp-env.*.json
+.wp-env.override.json

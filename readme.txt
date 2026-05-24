@@ -1,4 +1,4 @@
-=== Login for Stripe Customer Portal | Create an Account Login Page for the Stripe Customer Portal ===
+=== Login for Stripe Customer Portal | Stripe Billing Login Page | Magic Link Customer Account ===
 Contributors: gauchoplugins, brandonfire, freemius
 Author URI: https://gauchoplugins.com/
 Plugin URI: https://gauchoplugins.com/
@@ -11,28 +11,39 @@ Requires PHP: 7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Create a customer login page for the Stripe Customer Portal directly from your WordPress site.
+Stripe Customer Portal login for WordPress — magic-link email authentication, custom login page, and embeddable shortcode.
 
 == Description ==
 
-The **Login for Stripe Customer Portal** plugin simplifies the process for Stripe businesses to integrate the Stripe Customer Portal into their WordPress website. By offering a customizable login endpoint or embeddable form, the plugin makes it easy for customers to log in and access and manage their Stripe billing information securely. 
+Need a branded way for Stripe customers to access the Stripe Customer Portal from your WordPress site? **Login for Stripe Customer Portal** adds a secure login page on your domain, sends one-time magic links by email, and redirects customers to Stripe's hosted billing portal to manage subscriptions and payment methods.
 
-Upon entering their email address, customers receive a secure login link, which is only valid for 1 hour. You can optionally restrict access only to your existing customers or allow new customers to register and add their information. 
+## 🔐 STRIPE CUSTOMER PORTAL ON YOUR SITE
+> Connect your Stripe account and give customers a login page on your WordPress site instead of sending them directly to Stripe.
 
-The Customer Portal is still hosted on Stripe, but the Login page is on your website, giving you more control over professionally branding the experience customers have on your site. 
+## ✉️ MAGIC-LINK EMAIL AUTHENTICATION
+> Customers enter their email address and receive a secure login link valid for 1 hour — no passwords to manage on your site.
 
-### Key Features:
-* **Stripe API Integration**: Allows WordPress site admins to connect their Stripe account via API and provide customer access to the Stripe Customer Portal.
-* **Customizable Endpoint**: Admins can define a custom slug for the customer portal login page (e.g., `yourwebsite.com/customer-portal/`).
-* **Shortcode Embeddable Form**: Use the shortcode `[login-stripe-customer-portal]` to put the login form anywhere on your site. 
-* **Secure Authentication**: Users enter their email and are sent a secure login link to get access to the Stripe Customer Portal. 
-* **Redirect URL**: After logging out of the portal, customers are redirected back to a specified URL, which can be customized in the plugin settings.
+## 🧩 CUSTOM LOGIN PAGE OR SHORTCODE
+> Define a custom URL slug for your portal login page (e.g. `yourwebsite.com/customer-portal/`) or embed the form anywhere with `[login-stripe-customer-portal]`.
 
-### Third-Party Service Disclaimer
-This plugin integrates with Stripe to provide the customer portal functionality. It uses Stripe's API to connect with and manage customer data securely. By using this plugin, you are consenting to the transmission of data to Stripe’s services.
+## 🎛️ CONTROL WHO CAN LOG IN
+> Optionally restrict access to existing Stripe customers only, or allow new customers to register through the flow.
 
-Service Terms: [Stripe Terms of Use](https://stripe.com/legal/ssa)
-Privacy Policy: [Stripe Privacy Policy](https://stripe.com/privacy)
+## ↩️ CUSTOM POST-LOGOUT REDIRECT
+> After customers log out of the Stripe Customer Portal, redirect them back to a URL you configure in the plugin settings.
+
+## ✅ PERFECT FOR:
+* SaaS and subscription businesses using Stripe Billing.
+* Membership sites that use the Stripe Customer Portal for self-service billing.
+* Agencies hosting client sites that need a branded Stripe portal login experience.
+* WordPress stores that want customers to update payment methods without support tickets.
+
+📕 [DOCUMENTATION](https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin) | 🆘 [SUPPORT FORUM](https://wordpress.org/support/plugin/login-stripe-customer-portal/)
+
+### Roadmap:
+
+* Built-in styling settings for the login form (use custom CSS today).
+* Additional customization options for the login endpoint and emails.
 
 ## GAUCHO PLUGINS PORTFOLIO
 
@@ -50,7 +61,7 @@ Privacy Policy: [Stripe Privacy Policy](https://stripe.com/privacy)
 
 **[Blocked in China](https://wordpress.org/plugins/blocked-in-china/)**: Check if your website is available in the Chinese mainland.  
 
-**Speed in China**: Check your website’s speed in the Chinese mainland - coming soon!
+**[Speed in China](https://wordpress.org/plugins/speed-in-china/)**: Check your website's speed in the Chinese mainland.
 
 == Installation ==
 
@@ -63,7 +74,7 @@ Privacy Policy: [Stripe Privacy Policy](https://stripe.com/privacy)
 
 = What does this plugin do? =
 
-This plugin allows you to provide a customer login page for Stripe’s Customer Portal directly from your WordPress site. It enables customers to access and manage their Stripe account details securely.
+This plugin allows you to provide a customer login page for Stripe's Customer Portal directly from your WordPress site. It enables customers to access and manage their Stripe billing details securely.
 
 = How do I get my Stripe Secret API key? =
 
@@ -71,7 +82,51 @@ Log into your Stripe Dashboard, and under "Developers" > "API keys", you will fi
 
 = Can I customize the login page? =
 
-Yes, the plugin allows you to customize the endpoint URL for the login page. You can define this under the settings. Styling settings are coming soon, but for now you can use custom CSS. 
+Yes, the plugin allows you to customize the endpoint URL for the login page. You can define this under the settings. Styling settings are coming soon, but for now you can use custom CSS.
+
+= Is the Stripe Customer Portal still hosted by Stripe? =
+
+Yes. This plugin provides the login page on your WordPress site. After authentication, customers are redirected to Stripe's hosted Customer Portal to manage billing, subscriptions, and payment methods.
+
+= How does the magic link login work? =
+
+Customers enter their email address on your login page. The plugin uses the Stripe API to send a secure, time-limited login link to that email address. The link is valid for 1 hour.
+
+= Can I embed the login form on any page? =
+
+Yes. Use the shortcode `[login-stripe-customer-portal]` to embed the login form on any page or post.
+
+= Can I restrict login to existing Stripe customers only? =
+
+Yes. You can optionally restrict access to existing customers or allow new customers to register through the login flow. Configure this in the plugin settings.
+
+= Does this plugin replace Stripe Billing or WooCommerce? =
+
+No. It adds a WordPress login entry point for the Stripe Customer Portal. Your Stripe products, subscriptions, and billing logic remain in Stripe.
+
+= Where can I find documentation? =
+
+Setup guides and changelog notes are available in our [documentation](https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin).
+
+= Where can I get support? =
+
+Post in the [WordPress.org support forum](https://wordpress.org/support/plugin/login-stripe-customer-portal/) for help with the free plugin.
+
+== External Services ==
+
+This plugin connects to the following external services.
+
+= Stripe (api.stripe.com) =
+This plugin uses your Stripe Secret API key to authenticate customers and generate secure links to the Stripe Customer Portal. Customer email addresses are sent to Stripe when a user requests a login link. Stripe hosts the Customer Portal where customers manage billing information.
+
+* [Stripe Terms of Service](https://stripe.com/legal/ssa)
+* [Stripe Privacy Policy](https://stripe.com/privacy)
+
+= Freemius (api.freemius.com, freemius.com) =
+This plugin includes the Freemius SDK for license and update management. Data is sent to Freemius only when you opt in through the Freemius connect screen.
+
+* [Freemius Terms of Service](https://freemius.com/terms/)
+* [Freemius Privacy Policy](https://freemius.com/privacy/)
 
 == Screenshots ==
 

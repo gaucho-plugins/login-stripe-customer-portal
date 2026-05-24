@@ -57,6 +57,25 @@ if ( ! function_exists( 'lscp_fs' ) ) {
 
 	lscp_fs();
 	do_action( 'lscp_fs_loaded' );
+
+	// Freemius requires uninstall logic to be registered via its after_uninstall
+	// hook (NOT via a standalone uninstall.php) so the SDK can capture the
+	// uninstall reason / feedback survey before WordPress tears the plugin
+	// down. The cleanup logic itself lives in LSCP\Uninstall::run().
+	lscp_fs()->add_action(
+		'after_uninstall',
+		function () {
+			if ( ! class_exists( 'LSCP\\Uninstall' ) ) {
+				$path = LSCP_PLUGIN_DIR . 'includes/Uninstall.php';
+				if ( file_exists( $path ) ) {
+					require_once $path;
+				}
+			}
+			if ( class_exists( 'LSCP\\Uninstall' ) ) {
+				LSCP\Uninstall::run();
+			}
+		}
+	);
 }
 
 // Stripe SDK (vendored).

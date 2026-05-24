@@ -152,7 +152,7 @@ This plugin includes the Freemius SDK for license and update management. Data is
 * Hardening: Stripe Secret Key input renders a fixed-length mask. The field no longer leaks the real key length via "view source".
 * Hardening: Customer Portal Slug is length-capped (max 64 chars) so a pasted megabyte string can't bloat the rewrite engine.
 * Hardening: shortcode forms now render with per-instance unique `id` attributes. Embedding the shortcode multiple times on the same page no longer produces duplicate IDs that break `<label for>` binding, HTML5 validation, and screen-reader navigation.
-* Privacy: new `uninstall.php` cleans up every option and transient on plugin delete. The Stripe Secret Key no longer lingers in `wp_options` after the plugin is uninstalled.
+* Privacy: plugin uninstall now cleans up every option and transient (registered via Freemius's `after_uninstall` hook so the uninstall feedback survey still fires). The Stripe Secret Key no longer lingers in `wp_options` after the plugin is uninstalled.
 * Privacy: GDPR personal-data exporter and eraser are registered with WordPress Privacy Tools (Tools → Export Personal Data / Erase Personal Data).
 
 **UX**

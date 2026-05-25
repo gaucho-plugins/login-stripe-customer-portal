@@ -56,6 +56,11 @@ final class Uninstall {
 		'lscp_pro_webhook_role_on_deleted',
 		'lscp_pro_webhook_role_when_past_due',
 		'lscp_pro_webhook_events_enabled',
+		// 1.1.0 — PRO multi-account + white-label options.
+		'lscp_pro_accounts',
+		'lscp_pro_white_label_enabled',
+		'lscp_pro_white_label_brand_name',
+		'lscp_pro_white_label_hide_upgrade',
 	);
 
 	/** @var array<int,string> Transient prefixes LSCP writes. */

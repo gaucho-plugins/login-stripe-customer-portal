@@ -50,6 +50,9 @@ final class Loader {
 		WebhookEndpoint::register();
 		WebhookSettings::register();
 
-		// Phase 5: MultiAccount::register(); WhiteLabel::register();
+		// Phase 5: multi-Stripe-account + white-label.
+		AccountRouter::register();
+		AccountsSettings::register();
+		WhiteLabel::register();
 	}
 }

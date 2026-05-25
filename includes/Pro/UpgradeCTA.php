@@ -123,6 +123,9 @@ final class UpgradeCTA {
 		if ( self::is_premium() ) {
 			return;
 		}
+		if ( class_exists( '\\LSCP\\Pro\\WhiteLabel' ) && \LSCP\Pro\WhiteLabel::hide_upgrade() ) {
+			return;
+		}
 		$url = self::pricing_url();
 		?>
 		<div class="lscp-upgrade-banner notice notice-info" style="padding:12px 16px;">

@@ -1,8 +1,8 @@
 === Login for Stripe Customer Portal | Stripe Billing Login Page | Magic Link Customer Account ===
 Contributors: gauchoplugins, brandonfire, freemius
-Author URI: https://gauchoplugins.com/
-Plugin URI: https://gauchoplugins.com/
-Donate link: https://gauchoplugins.com/
+Author URI: https://customerportalplugin.com/
+Plugin URI: https://customerportalplugin.com/
+Donate link: https://customerportalplugin.com/
 Tags: stripe, portal, login, customer, account
 Stable tag: 1.1.0-dev
 Requires at least: 5.0
@@ -11,106 +11,205 @@ Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Stripe Customer Portal login for WordPress — magic-link email authentication, custom login page, and embeddable shortcode.
+Stripe Customer Portal login for WordPress — passwordless magic-link email, branded login page, [shortcode] embed, GDPR-ready.
 
 == Description ==
 
-Need a branded way for Stripe customers to access the Stripe Customer Portal from your WordPress site? **Login for Stripe Customer Portal** adds a secure login page on your domain, sends one-time magic links by email, and redirects customers to Stripe's hosted billing portal to manage subscriptions and payment methods.
+**The fastest way to put a branded Stripe Customer Portal login page on your WordPress site — no passwords, no developer required.**
 
-## 🔐 STRIPE CUSTOMER PORTAL ON YOUR SITE
-> Connect your Stripe account and give customers a login page on your WordPress site instead of sending them directly to Stripe.
+Customers want to update their card, change their plan, or download an invoice WITHOUT emailing support. Stripe's Customer Portal already does all of that — what's been missing is a clean, branded **login entry point on your own domain**.
 
-## ✉️ MAGIC-LINK EMAIL AUTHENTICATION
-> Customers enter their email address and receive a secure login link valid for 1 hour — no passwords to manage on your site.
+**Login for Stripe Customer Portal** solves that in 60 seconds: paste your Stripe Secret Key, save, and a passwordless magic-link form is live on your site. Customers enter their email, click the link in their inbox, and land directly inside Stripe's hosted Customer Portal — already authenticated.
 
-## 🧩 CUSTOM LOGIN PAGE OR SHORTCODE
-> Define a custom URL slug for your portal login page (e.g. `yourwebsite.com/customer-portal/`) or embed the form anywhere with `[login-stripe-customer-portal]`.
+[https://customerportalplugin.com/](https://customerportalplugin.com/) — visit the website to see the plugin in action, browse the email template gallery, and view the PRO feature tour.
 
-## 🎛️ CONTROL WHO CAN LOG IN
-> Optionally restrict access to existing Stripe customers only, or allow new customers to register through the flow.
+== ✅ FREE FEATURES (this plugin) ==
 
-## ↩️ CUSTOM POST-LOGOUT REDIRECT
-> After customers log out of the Stripe Customer Portal, redirect them back to a URL you configure in the plugin settings.
+* **🔐 Stripe Customer Portal login** — connect your Stripe account, customers manage billing themselves.
+* **✉️ Magic-link email authentication** — one-time link valid for 1 hour; no passwords to manage.
+* **🧩 Shortcode embed** — drop `[login-stripe-customer-portal]` on any page; works multiple times on one page.
+* **💬 Inline confirmation** — submissions stay on your page (new in 1.1.0 — no more blank `wp_die` screens).
+* **🔗 Custom URL slug** — host the login at `yoursite.com/billing/`, `/account/`, or any path you like.
+* **↩️ Custom return URL** — pick where customers land after logging out of Stripe's portal.
+* **🎛️ Existing-customer gate** — optionally restrict access to email addresses that already have a Stripe customer record.
+* **🛡️ Security hardened** — SHA-256 token hashing, per-email + per-IP rate limiting, CSRF nonces, no enumeration oracle.
+* **🇪🇺 GDPR-compliant** — exporter + eraser registered with WordPress Privacy Tools out of the box.
+* **🧰 WP-CLI commands** — `wp lscp purge-tokens / limiter-reset / send / config`.
+* **🧹 Daily token cleanup** — WP-Cron sweep removes expired magic-link tokens automatically.
+* **🧑‍💻 Developer extension surface** — 12+ filters and actions for customizing every stage of the flow.
 
-## ✅ PERFECT FOR:
-* SaaS and subscription businesses using Stripe Billing.
-* Membership sites that use the Stripe Customer Portal for self-service billing.
-* Agencies hosting client sites that need a branded Stripe portal login experience.
-* WordPress stores that want customers to update payment methods without support tickets.
+📕 [Documentation](https://docs.customerportalplugin.com/) · 🆘 [Support forum](https://wordpress.org/support/plugin/login-stripe-customer-portal/) · 🌐 [Website](https://customerportalplugin.com/)
 
-📕 [DOCUMENTATION](https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin) | 🆘 [SUPPORT FORUM](https://wordpress.org/support/plugin/login-stripe-customer-portal/)
+== 🚀 UNLOCK MORE WITH PRO ==
 
-### Roadmap:
+Need branded emails, a styled login form, role automation on Stripe events, or to run multiple Stripe accounts from one site? **[Upgrade to PRO](https://customerportalplugin.com/pricing/)** — every license tier includes every feature, including white-label.
 
-* Built-in styling settings for the login form (use custom CSS today).
-* Additional customization options for the login endpoint and emails.
+[**👉 See PRO pricing — from $79/year**](https://customerportalplugin.com/pricing/)
 
-## GAUCHO PLUGINS PORTFOLIO
+= 🎨 Branded magic-link emails =
 
-**[Payment Page](https://wordpress.org/plugins/payment-page/)**: Start accepting payments in a beautiful payment form in less than 60 seconds
+Replace the plain HTML email with one of **6 pre-built templates** (Minimal, Card, Bold, Stripe-like, Newsletter, Card-with-logo). Pick a brand color, drop in your logo URL, customize the subject / heading / CTA / footer — every change is shown in a **live preview iframe** inside the admin BEFORE you save. No "send a test email" loop required.
 
-**[Split Pay Plugin](https://wordpress.org/plugins/bsd-woo-stripe-connect-split-pay/)**: Split WooCommerce payments across multiple connected Stripe accounts. 
+= 💅 Login-form styler =
 
-**[Login for Stripe Customer Portal](https://wordpress.org/plugins/login-stripe-customer-portal/)**: Create an Account login area for your Stripe customers. 
+Style the public login form to match your site — **6 form templates** (Minimal, Card, Inline, Full-width, Centered, Branded), brand color, custom heading / subheading / button label / email placeholder, all with the same live-preview iframe.
 
-**[Gyta Buyback](https://wordpress.org/plugins/gyta-buyback/)**: Create a trade-in / buyback business using WooCommerce. 
+= 🔗 WP user ↔ Stripe customer bridge =
 
-**[Version Info](https://wordpress.org/plugins/version-info/)**: Show WP, PHP, MySQL & Web Server Versions in the WP-Admin Dashboard.
+Pre-fill the magic-link form for logged-in WP users (one click instead of typing). On every successful redemption, link the Stripe customer id to the WP user as `_lscp_stripe_customer_id` user-meta — your other plugins and themes can read it. Optionally auto-create the WP user (with a configurable default role) the first time someone redeems.
 
-**[China Payments Plugin](https://wordpress.org/plugins/wp-stripe-global-payments/)**: Accept WeChat Pay and Alipay payments from Chinese customers.   
+= 🛒 WooCommerce / MemberPress / LearnDash integration =
 
-**[Blocked in China](https://wordpress.org/plugins/blocked-in-china/)**: Check if your website is available in the Chinese mainland.  
+Adds a configurable **"Manage Billing"** button to:
 
-**[Speed in China](https://wordpress.org/plugins/speed-in-china/)**: Check your website's speed in the Chinese mainland.
+* The **WooCommerce My Account** dashboard (classic *and* block-based templates).
+* The **MemberPress** account home.
+* The **LearnDash** profile page (`[ld_profile]`).
+
+One click sends the user to your branded portal login — pre-filled with their email if they're logged in.
+
+= 🪝 Stripe webhooks → WP role automation =
+
+A REST endpoint (`/wp-json/lscp/v1/webhook`) verifies the Stripe `Stripe-Signature` header (HMAC-SHA256 + 5-minute timestamp tolerance, constant-time compare) and **automates WordPress role changes** on the events that matter:
+
+* `customer.subscription.created` / `.updated` → assign your configured "active" role.
+* `customer.subscription.deleted` → remove the role (or assign a downgrade role).
+* `invoice.payment_failed` → assign your "past due" role.
+* `invoice.paid` → fire an extensible action (`lscp_pro_webhook_invoice_paid`).
+
+7-day SHA-256-keyed idempotency cache means Stripe retries are safe — no double-firing.
+
+= 🌐 Multi-Stripe-account routing =
+
+Run **multiple Stripe accounts from one WordPress install**. Each account gets its own URL slug (`/billing-eu/`, `/billing-us/`), API key, validate-existing toggle, redirect URL, and From email. Requests are routed transparently via WordPress's `pre_option_*` filters — the FREE plugin code is unchanged.
+
+= 🏷️ Agency white-label =
+
+Replace "Powered by Gaucho Plugins" with your own brand name across every admin string. Hide the upgrade prompts entirely. **Included with every PRO tier** — no need to buy the most expensive plan.
+
+= 💌 Priority email support =
+
+PRO customers get a dedicated support inbox — typical reply within one business day.
+
+= 💵 Pricing (every tier includes every feature) =
+
+| Tier | Sites | Price |
+|------|-------|-------|
+| Personal | 1 site | **$79/year** |
+| Plus | 3 sites | **$159/year** |
+| Business | 25 sites | **$299/year** |
+| Agency | 100 sites | **$499/year** |
+
+The **only difference** between tiers is how many sites the license covers. White-label, multi-account, every PRO feature — included at the $79 tier.
+
+[**👉 Compare plans & upgrade**](https://customerportalplugin.com/pricing/)
+
+== ✅ PERFECT FOR ==
+
+* **SaaS founders** using Stripe Billing who want customers to self-serve.
+* **Membership sites** that need a branded billing portal.
+* **WooCommerce stores** using Stripe Subscriptions (PRO adds the My Account button).
+* **MemberPress / LearnDash sites** that want a one-click Manage Billing entry point.
+* **Digital agencies** managing client portfolios with multiple Stripe accounts.
+
+== 🤝 WORKS WITH ==
+
+* **Stripe Billing** (subscriptions, invoices, customer portal) — required.
+* **WooCommerce** — PRO integration adds the Manage Billing button to My Account.
+* **MemberPress** — PRO integration adds the button to the account page.
+* **LearnDash** — PRO integration adds the button to the profile page.
+* Any WordPress theme — classic *or* block-based.
+* Any caching plugin (the rewrite endpoint marks itself uncacheable).
+* WP Mail SMTP, FluentSMTP, Brevo, SendGrid, Postmark, etc. (uses standard `wp_mail`).
+
+== 📚 RESOURCES ==
+
+* **Website:** [customerportalplugin.com](https://customerportalplugin.com/)
+* **Documentation:** [docs.customerportalplugin.com](https://docs.customerportalplugin.com/)
+* **Pricing & PRO upgrade:** [customerportalplugin.com/pricing](https://customerportalplugin.com/pricing/)
+* **Changelog:** [customerportalplugin.com/changelog](https://customerportalplugin.com/changelog/)
+* **Free support:** [WordPress.org support forum](https://wordpress.org/support/plugin/login-stripe-customer-portal/)
+* **PRO support:** included with every PRO license
+
+== 🧰 GAUCHO PLUGINS PORTFOLIO ==
+
+* [**Payment Page**](https://wordpress.org/plugins/payment-page/) — Stripe payment forms in under 60 seconds.
+* [**Split Pay**](https://wordpress.org/plugins/bsd-woo-stripe-connect-split-pay/) — Split WooCommerce payments across multiple connected Stripe accounts.
+* [**Gyta Buyback**](https://wordpress.org/plugins/gyta-buyback/) — Trade-in / buyback for WooCommerce.
+* [**China Payments**](https://wordpress.org/plugins/wp-stripe-global-payments/) — WeChat Pay + Alipay in WooCommerce.
+* [**Speed in China**](https://wordpress.org/plugins/speed-in-china/) / [**Blocked in China**](https://wordpress.org/plugins/blocked-in-china/) — China-region site diagnostics.
+* [**Version Info**](https://wordpress.org/plugins/version-info/) — WP, PHP, MySQL, web-server versions in the admin dashboard.
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/` directory or install the plugin through the WordPress plugins screen.
-2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Navigate to "Stripe Portal" in the WordPress admin menu to configure the plugin settings.
-4. Enter your Stripe Secret API Key, customize the endpoint slug, and set your desired redirect URL.
+1. Upload the plugin files to `/wp-content/plugins/` or install through the WordPress plugins screen.
+2. Activate via the Plugins screen.
+3. Navigate to **Stripe Portal** in the WordPress admin menu.
+4. Paste your Stripe Secret API key, pick a slug for the login page (e.g. `customer-portal`), set a return URL, and save.
+5. Visit `yourdomain.com/<your-slug>/` to see the login form — or drop `[login-stripe-customer-portal]` on any page.
+6. (Recommended) Go to **Settings → Permalinks → Save** once after changing the slug.
+
+Full setup guide: [docs.customerportalplugin.com](https://docs.customerportalplugin.com/)
 
 == Frequently Asked Questions ==
 
-= What does this plugin do? =
+= What problem does this plugin solve? =
 
-This plugin allows you to provide a customer login page for Stripe's Customer Portal directly from your WordPress site. It enables customers to access and manage their Stripe billing details securely.
+Stripe's hosted Customer Portal is great, but the URL to access it is unique per customer and not shareable. This plugin puts a clean **public login page on your own domain** so customers can enter their email and get an instant magic-link to their portal session — without needing a password, your support team, or a custom Stripe API integration.
+
+= Do I need PRO to use the plugin? =
+
+No. The free version on WordPress.org has everything you need to put a working magic-link Stripe portal login on your site: shortcode embed, custom URL slug, GDPR tools, rate limiting, SHA-256-hashed tokens, WP-CLI commands. PRO adds branding, integrations, webhook automation, and multi-account routing.
 
 = How do I get my Stripe Secret API key? =
 
-Log into your Stripe Dashboard, and under "Developers" > "API keys", you will find the option to copy your Secret API key.
+Log into your Stripe Dashboard → Developers → API keys. Copy the Secret Key (starts with `sk_live_…` for live mode or `sk_test_…` for test mode). Paste it into **Stripe Portal → Settings**.
 
-= Can I customize the login page? =
+= Can I customize the login page styling? =
 
-Yes, the plugin allows you to customize the endpoint URL for the login page. You can define this under the settings. Styling settings are coming soon, but for now you can use custom CSS.
+Yes — two ways:
 
-= Is the Stripe Customer Portal still hosted by Stripe? =
+* **Free:** Add custom CSS targeting `.lscp-portal-form`. The form HTML is fully filterable via the `lscp_form_template` filter for advanced theming.
+* **PRO:** Use the built-in form styler — 6 templates, brand color pickers, custom heading/button label, live preview in admin. No CSS required.
 
-Yes. This plugin provides the login page on your WordPress site. After authentication, customers are redirected to Stripe's hosted Customer Portal to manage billing, subscriptions, and payment methods.
+= Can I brand the magic-link email? =
 
-= How does the magic link login work? =
+* **Free:** the email body is filterable via `lscp_email_html_body` (developer route).
+* **PRO:** pick from 6 pre-built templates in the admin, set your brand color + logo + custom heading/CTA, see a live preview as you type.
 
-Customers enter their email address on your login page. The plugin uses the Stripe API to send a secure, time-limited login link to that email address. The link is valid for 1 hour.
+= Does the plugin replace WooCommerce / MemberPress / LearnDash billing? =
 
-= Can I embed the login form on any page? =
+No — it complements them. Your Stripe products, subscriptions, and billing logic stay in Stripe. With PRO, a **"Manage Billing"** button gets added to the WC / MP / LD account page so logged-in customers go to your branded portal login in one click.
 
-Yes. Use the shortcode `[login-stripe-customer-portal]` to embed the login form on any page or post.
+= How does the magic link login actually work? =
 
-= Can I restrict login to existing Stripe customers only? =
+1. Customer enters their email on your login form.
+2. Plugin (rate-limited) issues a single-use token, stores its SHA-256 hash as a 1-hour transient, and emails the customer a link.
+3. Customer clicks the link → token is verified, marked used, and the Stripe Customer Portal session is created.
+4. Customer is redirected to Stripe's hosted portal — already authenticated.
 
-Yes. You can optionally restrict access to existing customers or allow new customers to register through the login flow. Configure this in the plugin settings.
+The token never appears in your database in cleartext. The link expires after one hour or after a single use, whichever comes first.
 
-= Does this plugin replace Stripe Billing or WooCommerce? =
+= Can I run multiple Stripe accounts on one site? =
 
-No. It adds a WordPress login entry point for the Stripe Customer Portal. Your Stripe products, subscriptions, and billing logic remain in Stripe.
+Yes, with PRO. The Multi-Account tab lets you add as many Stripe accounts as your license allows, each with its own URL slug, API key, redirect URL, and from email. The free version is single-account.
 
-= Where can I find documentation? =
+= Does the webhook listener handle Stripe retries safely? =
 
-Setup guides and changelog notes are available in our [documentation](https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin).
+Yes. PRO's webhook endpoint dedupes by Stripe `event.id` with a 7-day SHA-256-keyed transient — a retried event returns `200 {"replayed": true}` without re-firing your role automation rules.
+
+= Is the plugin GDPR compliant? =
+
+Yes. The free version registers a Privacy Tools exporter and eraser so site owners can satisfy data subject access and erasure requests via **Tools → Export / Erase Personal Data**.
+
+= Where can I find the changelog? =
+
+Recent changes are below. The full changelog (every release) is at [customerportalplugin.com/changelog](https://customerportalplugin.com/changelog/).
 
 = Where can I get support? =
 
-Post in the [WordPress.org support forum](https://wordpress.org/support/plugin/login-stripe-customer-portal/) for help with the free plugin.
+* **Free:** [WordPress.org support forum](https://wordpress.org/support/plugin/login-stripe-customer-portal/).
+* **PRO:** priority email support is included with every PRO license.
 
 == External Services ==
 
@@ -130,78 +229,37 @@ This plugin includes the Freemius SDK for license and update management. Data is
 
 == Screenshots ==
 
-1. Settings page to configure Stripe API key, redirect URL, and customer portal slug
-2. Login form example - users can enter email and generate a login link
-3. Embeddable Stripe Customer Portal login form based on shortcode
-4. Confirmation message after submitting the email form
-5. Email including temporary login link for Stripe Customer Portal
+1. Settings page — Stripe API key, redirect URL, customer portal slug.
+2. Public login form — customer enters their email.
+3. Confirmation message — inline, on the same page (1.1.0 UX fix).
+4. Magic-link email — branded template preview (PRO).
+5. Form-styler — brand color + heading + button (PRO).
+6. Multi-Stripe-account — multiple accounts on one site, each at its own URL slug (PRO).
+7. Webhook listener — assign WP roles on Stripe events (PRO).
+8. WooCommerce integration — Manage Billing button on My Account (PRO).
 
 == Changelog ==
 
-= 1.1.0 = (in development on release/1.1 branch)
-
-**Bug fixes**
-
-* Fix (UX): the shortcode form submission no longer lands on a blank `wp_die` screen. The plugin now redirects back to the page that hosted the form with `?lscp_message=sent`, so your theme chrome and surrounding content are preserved. The confirmation message renders inline via the new `[lscp-message]` shortcode (or automatically on the rewrite endpoint). Closes a user-reported issue from the wp.org support forum.
-
-**New (free tier)**
-
-* New shortcode `[lscp-message]` — renders the inline success/error message. Drop it on a thank-you page if you want submissions to redirect there instead of back to the form page.
-* New: tabbed settings page with General + previews of the PRO-tier tabs (Email Templates, Form Style, Integrations, Webhooks, Multi-Account).
-* New: developer extension surface — filters and actions for every stage of the magic-link flow (email body, subject, headers, form template, login URL, return URL, message text, redirect target). Lets third-party integrations and PRO add-ons plug in without forking the plugin.
-
-**New (PRO — Freemius)**
-
-LSCP PRO unlocks every feature below. Every license tier includes every feature — pick the count that matches your portfolio:
-* 1 site — $79/yr
-* 3 sites — $159/yr
-* 25 sites — $299/yr
-* 100 sites + white-label — $499/yr
-
-What you get:
-
-* Branded magic-link email templates (6 designs, logo upload, brand colors, custom subject + CTA)
-* Login-form styler (template library + color pickers + per-shortcode template overrides)
-* WooCommerce / MemberPress / LearnDash integration ("Manage Billing" buttons + WP-user ↔ Stripe-customer bridge)
-* Stripe webhook listener with rules-based WP role automation (replaces a separate $99/yr SaaS membership tool)
-* Multi-Stripe-account support (run several accounts from one site, routed by URL slug / email domain / role)
-* Agency white-label (removes the "Powered by Gaucho Plugins" attribution)
+= 1.1.0 =
+* New (FREE): Inline confirmation message — form submissions no longer land on a blank `wp_die` screen.
+* New (FREE): `[lscp-message]` shortcode for rendering the success/error message on a custom page.
+* New (FREE): Tabbed settings page; developer extension surface (12+ filters and actions).
+* New (PRO): Branded magic-link emails — 6 templates with live preview.
+* New (PRO): Login-form styler — 6 templates with live preview.
+* New (PRO): WP user ↔ Stripe customer bridge (auto-link, pre-fill, optional auto-create).
+* New (PRO): WooCommerce / MemberPress / LearnDash integrations (Manage Billing button).
+* New (PRO): Stripe webhook listener with WP role automation (HMAC-verified, idempotent).
+* New (PRO): Multi-Stripe-account routing — multiple accounts at different URL slugs.
+* New (PRO): Agency white-label — included at every license tier.
 
 = 1.0.6 =
-
-**Security & privacy**
-
-* Fix: the Redirect URL setting is now persisted correctly. The 1.0.5 settings form emitted the input under a corrupted name attribute, so saving the Redirect URL silently failed and customers were always returned to the default endpoint.
-* Fix: magic-link URLs now use the configured Customer Portal slug instead of a hardcoded `/customer-portal` path. Renaming the endpoint no longer breaks outstanding login emails.
-* Fix: namespaced `catch (Exception $e)` clauses around the Stripe SDK calls resolved to the nonexistent class `LSCP\Exception` and never matched. Any Stripe failure now surfaces a graceful "Please try again later" message instead of a WSOD.
-* Hardening: stored magic-link tokens are now SHA-256 hashed at rest. A database snapshot no longer exposes unredeemed login links.
-* Hardening: per-email + per-IP rate limiter (5 requests / 10 minutes) on the magic-link form prevents the page from being abused as a mail relay or as an email-enumeration oracle against your Stripe customer list.
-* Hardening: the form response is now constant for valid, invalid, and unknown email addresses, and the wording is mode-aware. When "Only allow existing Stripe customers to login" is unchecked (default) the message is "A login link is on its way" — no longer the misleading "If your email address is registered…" wording, which implied gatekeeping that did not exist in that mode.
-* Hardening: settings page now explicitly checks `manage_options` before rendering, and every `wp_die()` message is HTML-escaped.
-* Hardening: Stripe Secret Key input renders a fixed-length mask. The field no longer leaks the real key length via "view source".
-* Hardening: Customer Portal Slug is length-capped (max 64 chars) so a pasted megabyte string can't bloat the rewrite engine.
-* Hardening: shortcode forms now render with per-instance unique `id` attributes. Embedding the shortcode multiple times on the same page no longer produces duplicate IDs that break `<label for>` binding, HTML5 validation, and screen-reader navigation.
-* Privacy: plugin uninstall now cleans up every option and transient (registered via Freemius's `after_uninstall` hook so the uninstall feedback survey still fires). The Stripe Secret Key no longer lingers in `wp_options` after the plugin is uninstalled.
-* Privacy: GDPR personal-data exporter and eraser are registered with WordPress Privacy Tools (Tools → Export Personal Data / Erase Personal Data).
-
-**UX**
-
-* Settings page description for the "Only allow existing Stripe customers to login" toggle now explicitly notes that unchecking it (the default) auto-creates a Stripe customer the first time a magic link is redeemed for a new email.
-* Magic-link form input now uses `<label for>`, `autocomplete="email"`, and `required` attributes for screen-reader and password-manager compatibility.
-
-**Reliability & ops**
-
-* New daily WP-Cron sweep removes expired magic-link tokens and rate-limit counters. WordPress's built-in transient GC is lazy and can leave expired rows in `wp_options` indefinitely on low-traffic sites.
-* New WP-CLI commands: `wp lscp purge-tokens`, `wp lscp limiter-reset <email>`, `wp lscp send <email>`, `wp lscp config`.
-* Full payments-grade test suite — 250 PHPUnit tests, 18,690 assertions, property-based fuzz on the token store, token-entropy distribution check, concurrent-redemption race test, slug path-traversal hardening, email-header injection hardening, multi-instance shortcode ID uniqueness, mode-aware confirmation message.
-
-**Compatibility & internal**
-
-* Bumps minimum PHP from 7.0 to 7.4 (PHP 7.0/7.1/7.2/7.3 are end-of-life).
-* Backwards-compatible public class surface — every public method on `LSCP\Plugin` from 1.0.x is preserved.
-* Plugin refactored into focused units (`Settings`, `TokenStore`, `TokenGC`, `StripeGateway`, `Mailer`, `RateLimiter`, `PortalController`, `FormRenderer`, `RewriteEndpoint`, `Shortcode`, `Privacy`, `Cli`, `Uninstall`, `DocsHelper`).
+* Security: SHA-256 token hashing, per-email + per-IP rate limiting, namespaced exception handling, length-capped slug.
+* Privacy: GDPR exporter + eraser registered; uninstall scrubs all options.
+* Reliability: daily WP-Cron token GC; full payments-grade test suite (250 tests, 18,690 assertions).
+* Ops: WP-CLI commands (`wp lscp purge-tokens / limiter-reset / send / config`).
+* Compatibility: minimum PHP bumped to 7.4 (older versions are end-of-life).
 
 = 1.0.5 =
 * Added contextual documentation links on the Stripe Portal settings page.
 
-See our full changelog in our [documentation](https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin).
+Full changelog: [customerportalplugin.com/changelog](https://customerportalplugin.com/changelog/)

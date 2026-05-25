@@ -1,37 +1,60 @@
-= 1.1.0 = (in development on release/1.1 branch)
-* Fix (UX): shortcode form submission no longer lands on a blank wp_die screen. The plugin now redirects back to the host page with `?lscp_message=sent` so the theme chrome is preserved. The confirmation message renders inline via the new `[lscp-message]` shortcode (or automatically on the rewrite endpoint). Closes user-reported issue from the wp.org support forum (sc-7015).
-* New: `[lscp-message]` shortcode renders the inline confirmation/error message; drop it on a thank-you page if you want the form submission to redirect there instead of back to the form page.
-* New: extension surface — filters (`lscp_email_html_body`, `lscp_email_subject`, `lscp_email_from`, `lscp_email_headers`, `lscp_form_template`, `lscp_form_default_email`, `lscp_login_url`, `lscp_return_url`, `lscp_post_message`, `lscp_post_redirect_url`, `lscp_message_query_args`, `lscp_settings_tabs`, `lscp_settings_tab_<slug>_content`) and actions (`lscp_form_before`, `lscp_form_after`, `lscp_magic_link_sent`, `lscp_magic_link_redeemed`) so site owners and integrations can customize every stage of the flow.
-* New: tabbed settings page — General (existing settings) and stubs for Email Templates, Form Style, Integrations, Webhooks, Multi-Account (all PRO).
-* PRO: optional upgrade unlocks branded email templates, login-form styler, WooCommerce / MemberPress / LearnDash integration, Stripe webhook → WP role automation, multi-Stripe-account support, and white-label. PRO tiers: 1 site $79/yr · 3 sites $159/yr · 25 sites $299/yr · 100 sites + white-label $499/yr — every tier includes every feature. PRO ships via Freemius; free version on wp.org stays fully functional with the upgrade prompts.
+= 1.1.0 =
+
+**Fixes (FREE)**
+* UX: shortcode form submission no longer lands on a blank `wp_die` screen. The plugin now redirects back to the host page with `?lscp_message=sent` so the theme chrome is preserved. The confirmation message renders inline via the new `[lscp-message]` shortcode (or automatically on the rewrite endpoint). Closes user-reported issue from the wp.org support forum (sc-7015).
+
+**New (FREE)**
+* `[lscp-message]` shortcode renders the inline confirmation/error message; drop it on a thank-you page if you want the form submission to redirect there instead of back to the form page.
+* Tabbed settings page — General (existing settings) and Email Templates / Form Style / Integrations / Webhooks / Multi-Account (PRO tabs preview the upgrade card in FREE).
+* Developer extension surface — filters (`lscp_email_html_body`, `lscp_email_subject`, `lscp_email_from`, `lscp_email_headers`, `lscp_form_template`, `lscp_form_default_email`, `lscp_login_url`, `lscp_return_url`, `lscp_post_message`, `lscp_post_redirect_url`, `lscp_message_query_args`, `lscp_settings_tabs`, `lscp_settings_tab_<slug>_content`) and actions (`lscp_form_before`, `lscp_form_after`, `lscp_magic_link_sent`, `lscp_magic_link_redeemed`).
+
+**New (PRO — via Freemius upgrade)**
+
+Every PRO tier includes every PRO feature. Pricing: 1 site $79/yr · 3 sites $159/yr · 25 sites $299/yr · 100 sites $499/yr.
+
+* Branded magic-link email templates — 6 designs (Minimal, Card, Bold, Stripe-like, Newsletter, Card-with-logo), brand color, logo URL, custom subject / heading / CTA / footer, custom From email + name. **Live preview iframe in the admin** updates as you type — no test-send loop.
+* Login-form styler — 6 form templates (Minimal, Card, Inline, Full-width, Centered, Branded), brand color, custom heading / subheading / button label / placeholder. Same live preview iframe.
+* WP user ↔ Stripe customer bridge — pre-fills the magic-link form for logged-in WP users; on every redemption stores the Stripe customer id as `_lscp_stripe_customer_id` user-meta; optionally auto-creates the WP user (with configurable default role) when the email doesn't match an existing user.
+* WooCommerce / MemberPress / LearnDash integration — adds a configurable "Manage Billing" button to each platform's account page. WooCommerce works on both classic *and* block-based My Account templates (via `wp_footer` + `did_action` fallback when the legacy template hook doesn't fire).
+* Stripe webhook listener — REST endpoint at `/wp-json/lscp/v1/webhook` verifies the Stripe `Stripe-Signature` header (HMAC-SHA256, 5-minute timestamp tolerance, constant-time `hash_equals` comparison) and dispatches `customer.subscription.created` / `.updated` / `.deleted`, `invoice.paid`, and `invoice.payment_failed` events to WP role mutations. 7-day SHA-256-keyed idempotency cache (`lscp_wh_` transient prefix) prevents replay double-firing. Per-event extension action `lscp_pro_webhook_<event_type>` for custom integrations.
+* Multi-Stripe-account routing — store multiple accounts in `lscp_pro_accounts`; per-request `pre_option_lscp_stripe_*` filters swap api_key, slug, validate_existing, redirect_url, and From email based on which account's URL slug was hit. The FREE plugin code is unchanged.
+* Agency white-label — toggle replaces "Gaucho Plugins" attribution via `gettext` filter (text-domain scoped), strips PRO 🔓 markers from the tab nav, and hides the upgrade banner. Included at **every** PRO tier.
+
+**Test-suite & quality**
+* 464 PHPUnit tests / 19,444 assertions (up from 289 at 1.0.6). 70+ Playwright specs running on a live staging install. wp.org Plugin Check + free-zip docker smoke pass on every phase. PHPCS clean across 43 source files.
+
+**Compatibility**
+* WordPress 5.0–6.9. PHP 7.4+. Stripe SDK bundled. Backwards-compatible `LSCP\Plugin` public surface preserved from 1.0.x.
 
 = 1.0.6 =
-* Security: redirect URL setting is now persisted correctly (1.0.5 silently failed to save).
-* Security: magic-link URLs honor the configured Customer Portal slug instead of a hardcoded path.
-* Security: stored magic-link tokens are now SHA-256 hashed at rest.
-* Security: settings page enforces manage_options; every wp_die() message is HTML-escaped.
-* Security: per-email + per-IP rate limiter (5 / 10 min) on magic-link issuance.
-* Security: form response wording is mode-aware and constant for valid/invalid/unknown emails (no enumeration oracle, no misleading "if registered" wording when validate-existing is off).
-* Security: Secret Key input renders a fixed-length mask (no length leak).
-* Security: customer portal slug is now length-capped (max 64 chars) to prevent rewrite-engine bloat.
-* Security: namespaced Exception catch fixed — Stripe failures now render a graceful message instead of WSOD.
-* UX: settings description now explicitly notes that unchecking the existing-customers toggle auto-creates a Stripe customer on first redemption.
-* a11y: shortcode forms now use per-instance unique `id` attributes so embedding the shortcode multiple times on one page no longer produces duplicate IDs.
-* a11y: front-end form uses `<label for>`, `autocomplete="email"`, `required`.
-* Privacy: plugin uninstall now cleans up every option and transient (Stripe Secret Key no longer lingers in wp_options after uninstall).
-* Privacy: GDPR personal-data exporter and eraser registered with WordPress Privacy Tools.
-* Reliability: new daily WP-Cron sweep removes expired magic-link tokens and rate-limit counters.
-* Ops: new WP-CLI commands — `wp lscp purge-tokens`, `wp lscp limiter-reset <email>`, `wp lscp send <email>`, `wp lscp config`.
-* Reliability: 250 PHPUnit tests, 18,690 assertions, property-based fuzz, token-entropy distribution, concurrent-redemption race, CRLF/email-header hardening, slug path-traversal hardening.
-* Compatibility: minimum PHP bumped to 7.4 (PHP 7.0–7.3 are end-of-life). Backwards-compatible LSCP\Plugin public surface preserved.
-* Internal: refactored into focused units (Settings, TokenStore, TokenGC, StripeGateway, Mailer, RateLimiter, PortalController, FormRenderer, RewriteEndpoint, Shortcode, Privacy, Cli, Uninstall, DocsHelper).
-* Privacy: new uninstall.php cleans up every option and transient on plugin delete — your Stripe Secret Key no longer lingers in wp_options after uninstall.
-* Privacy: GDPR personal-data exporter and eraser registered with WordPress Privacy Tools.
-* Reliability: new daily cron sweep proactively removes expired magic-link tokens (WP's transient GC is otherwise lazy).
-* Reliability: 240+ PHPUnit tests, 18,000+ assertions, property-based fuzz on the token store, token-entropy distribution check, concurrent-redemption race test.
-* Ops: new WP-CLI commands — `wp lscp purge-tokens`, `wp lscp limiter-reset <email>`, `wp lscp send <email>`, `wp lscp config`.
-* Compatibility: backwards-compatible LSCP\Plugin public surface preserved.
-* Internal: refactored into focused units (Settings, TokenStore, TokenGC, StripeGateway, Mailer, RateLimiter, PortalController, FormRenderer, RewriteEndpoint, Shortcode, Privacy, Cli, Uninstall, DocsHelper).
+
+**Security & privacy**
+* Redirect URL setting is now persisted correctly (1.0.5 silently failed to save under a corrupted input name).
+* Magic-link URLs honor the configured Customer Portal slug instead of a hardcoded `/customer-portal` path.
+* Stored magic-link tokens are now SHA-256 hashed at rest.
+* Settings page enforces `manage_options`; every `wp_die()` message is HTML-escaped.
+* Per-email + per-IP rate limiter (5 requests / 10 min) on magic-link issuance.
+* Form response wording is mode-aware and constant for valid / invalid / unknown emails (no enumeration oracle).
+* Stripe Secret Key input renders a fixed-length mask (no length leak via view source).
+* Customer Portal slug length-capped at 64 chars to prevent rewrite-engine bloat.
+* Namespaced `Exception` catch fixed — Stripe failures now render a graceful message instead of a WSOD.
+* Plugin uninstall (via Freemius's `after_uninstall` hook) cleans up every option and transient.
+* GDPR personal-data exporter + eraser registered with WordPress Privacy Tools.
+
+**UX & accessibility**
+* Settings description for the "Only allow existing Stripe customers" toggle now explicitly notes the default auto-creates a Stripe customer on first redemption.
+* Front-end form uses `<label for>`, `autocomplete="email"`, `required`.
+* Shortcode forms render per-instance unique `id` attributes so multiple embeds on one page don't collide.
+
+**Reliability & ops**
+* Daily WP-Cron sweep removes expired magic-link tokens + rate-limit counters (WP's built-in transient GC is lazy on low-traffic sites).
+* WP-CLI commands: `wp lscp purge-tokens`, `wp lscp limiter-reset <email>`, `wp lscp send <email>`, `wp lscp config`.
+* Full payments-grade test suite — 250 PHPUnit tests, 18,690 assertions, property-based fuzz on the token store, token-entropy distribution, concurrent-redemption race test, CRLF / email-header hardening, slug path-traversal hardening.
+
+**Compatibility & internal**
+* Minimum PHP bumped from 7.0 to 7.4 (older versions are end-of-life).
+* Backwards-compatible `LSCP\Plugin` public surface preserved.
+* Plugin refactored into focused units (Settings, TokenStore, TokenGC, StripeGateway, Mailer, RateLimiter, PortalController, FormRenderer, RewriteEndpoint, Shortcode, Privacy, Cli, Uninstall, DocsHelper).
 
 = 1.0.5 =
 * Added contextual documentation links on the Stripe Portal settings page.

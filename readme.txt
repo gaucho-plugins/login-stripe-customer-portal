@@ -240,6 +240,8 @@ This plugin includes the Freemius SDK for license and update management. Data is
 
 == Changelog ==
 
+Only the current version is shown here. The full release history is in `changelog.txt` (bundled with the plugin) and at [customerportalplugin.com/changelog](https://customerportalplugin.com/changelog/).
+
 = 1.1.0 =
 * New (FREE): Inline confirmation message — form submissions no longer land on a blank `wp_die` screen.
 * New (FREE): `[lscp-message]` shortcode for rendering the success/error message on a custom page.
@@ -251,15 +253,3 @@ This plugin includes the Freemius SDK for license and update management. Data is
 * New (PRO): Stripe webhook listener with WP role automation (HMAC-verified, idempotent).
 * New (PRO): Multi-Stripe-account routing — multiple accounts at different URL slugs.
 * New (PRO): Agency white-label — included at every license tier.
-
-= 1.0.6 =
-* Security: SHA-256 token hashing, per-email + per-IP rate limiting, namespaced exception handling, length-capped slug.
-* Privacy: GDPR exporter + eraser registered; uninstall scrubs all options.
-* Reliability: daily WP-Cron token GC; full payments-grade test suite (250 tests, 18,690 assertions).
-* Ops: WP-CLI commands (`wp lscp purge-tokens / limiter-reset / send / config`).
-* Compatibility: minimum PHP bumped to 7.4 (older versions are end-of-life).
-
-= 1.0.5 =
-* Added contextual documentation links on the Stripe Portal settings page.
-
-Full changelog: [customerportalplugin.com/changelog](https://customerportalplugin.com/changelog/)

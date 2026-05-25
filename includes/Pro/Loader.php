@@ -34,17 +34,29 @@ final class Loader {
 		// Phase 1: branded magic-link email templates.
 		EmailTemplates::register();
 		EmailTemplateSettings::register();
+		EmailPreview::register();
 
 		// Phase 2: login-form styler.
 		FormStyler::register();
 		FormStylerSettings::register();
+		FormStylePreview::register();
 
 		// Phase 3: WP user ↔ Stripe customer bridge + integrations.
 		UserBridge::register();
 		IntegrationsSettings::register();
-		Integrations\WooCommerce::register();
-		Integrations\MemberPress::register();
-		Integrations\LearnDash::register();
+		// Integrations defer to plugins_loaded — class_exists('WooCommerce')
+		// etc. returns false at bootstrap-time because LSCP loads BEFORE
+		// the third-party plugins. By plugins_loaded priority 20 every
+		// active plugin has loaded its classes and detection is reliable.
+		\add_action(
+			'plugins_loaded',
+			static function () {
+				Integrations\WooCommerce::register();
+				Integrations\MemberPress::register();
+				Integrations\LearnDash::register();
+			},
+			20
+		);
 
 		// Phase 4: Stripe webhook listener + WP role automation.
 		WebhookEndpoint::register();

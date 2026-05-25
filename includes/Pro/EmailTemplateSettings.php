@@ -164,10 +164,15 @@ final class EmailTemplateSettings {
 		$from_name        = (string) \get_option( EmailTemplates::OPTION_FROM_NAME, '' );
 		$from_email       = (string) \get_option( EmailTemplates::OPTION_FROM_EMAIL, '' );
 
+		$preview_base = function_exists( '\rest_url' )
+			? \rest_url( EmailPreview::REST_NAMESPACE . EmailPreview::REST_ROUTE )
+			: '/wp-json/' . EmailPreview::REST_NAMESPACE . EmailPreview::REST_ROUTE;
 		?>
 		<h2><?php \esc_html_e( 'Branded magic-link emails', 'login-stripe-customer-portal' ); ?></h2>
 		<p class="description"><?php \esc_html_e( 'Pick a template, set your brand color, and (optionally) upload a logo URL. The chosen template is rendered for every magic-link email sent to your customers.', 'login-stripe-customer-portal' ); ?></p>
 
+		<div class="lscp-pro-preview-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,420px);gap:24px;align-items:start;margin-top:16px;">
+			<div>
 		<form method="post" action="options.php">
 			<?php \settings_fields( self::GROUP ); ?>
 			<table class="form-table" role="presentation">
@@ -247,6 +252,53 @@ final class EmailTemplateSettings {
 			</table>
 			<?php \submit_button(); ?>
 		</form>
+			</div>
+			<aside class="lscp-pro-preview-pane" style="position:sticky;top:48px;">
+				<h3 style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:0.5px;color:#646970;"><?php \esc_html_e( 'Live preview', 'login-stripe-customer-portal' ); ?></h3>
+				<p class="description" style="margin:0 0 8px;"><?php \esc_html_e( 'Updates as you type. This is exactly what your customers receive — the magic-link is a placeholder.', 'login-stripe-customer-portal' ); ?></p>
+				<iframe
+					id="lscp-pro-email-preview"
+					title="<?php \esc_attr_e( 'Email preview', 'login-stripe-customer-portal' ); ?>"
+					sandbox="allow-same-origin"
+					style="width:100%;height:620px;border:1px solid #c3c4c7;border-radius:4px;background:#fff;"
+					src="<?php echo \esc_url( $preview_base ); ?>"></iframe>
+			</aside>
+		</div>
+
+		<script>
+		(function(){
+			var iframe = document.getElementById('lscp-pro-email-preview');
+			if (!iframe) return;
+			var base = <?php echo \wp_json_encode( $preview_base ); ?>;
+			var fieldMap = {
+				'<?php echo \esc_js( EmailTemplates::OPTION_TEMPLATE ); ?>'      : 'template',
+				'<?php echo \esc_js( EmailTemplates::OPTION_LOGO_URL ); ?>'      : 'logo_url',
+				'<?php echo \esc_js( EmailTemplates::OPTION_PRIMARY_COLOR ); ?>' : 'primary_color',
+				'<?php echo \esc_js( EmailTemplates::OPTION_HEADING ); ?>'       : 'heading',
+				'<?php echo \esc_js( EmailTemplates::OPTION_CTA_TEXT ); ?>'      : 'cta_text',
+				'<?php echo \esc_js( EmailTemplates::OPTION_FOOTER_TEXT ); ?>'   : 'footer_text'
+			};
+			function currentParams() {
+				var params = new URLSearchParams();
+				Object.keys(fieldMap).forEach(function(optName){
+					var el = document.querySelector('[name="' + optName + '"]');
+					if (el && el.value !== '') params.set(fieldMap[optName], el.value);
+				});
+				return params.toString();
+			}
+			function updatePreview() {
+				var qs = currentParams();
+				iframe.src = base + (qs ? ('?' + qs) : '');
+			}
+			var debounce;
+			document.querySelectorAll('input,select,textarea').forEach(function(el){
+				el.addEventListener('input',  function(){ clearTimeout(debounce); debounce = setTimeout(updatePreview, 250); });
+				el.addEventListener('change', updatePreview);
+			});
+			// Initial render with current saved values.
+			updatePreview();
+		})();
+		</script>
 		<?php
 	}
 }

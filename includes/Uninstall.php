@@ -50,12 +50,19 @@ final class Uninstall {
 		'lscp_pro_integration_memberpress',
 		'lscp_pro_integration_learndash',
 		'lscp_pro_integration_button_label',
+		// 1.1.0 — PRO webhook listener options.
+		'lscp_pro_webhook_secret',
+		'lscp_pro_webhook_role_on_created',
+		'lscp_pro_webhook_role_on_deleted',
+		'lscp_pro_webhook_role_when_past_due',
+		'lscp_pro_webhook_events_enabled',
 	);
 
 	/** @var array<int,string> Transient prefixes LSCP writes. */
 	public const TRANSIENT_PREFIXES = array(
 		'lscp_token_',
 		'lscp_rl_',
+		'lscp_wh_',
 	);
 
 	/**

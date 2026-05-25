@@ -46,7 +46,10 @@ final class Loader {
 		Integrations\MemberPress::register();
 		Integrations\LearnDash::register();
 
-		// Phase 4: WebhookEndpoint::register();
+		// Phase 4: Stripe webhook listener + WP role automation.
+		WebhookEndpoint::register();
+		WebhookSettings::register();
+
 		// Phase 5: MultiAccount::register(); WhiteLabel::register();
 	}
 }

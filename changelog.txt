@@ -10,7 +10,7 @@
 
 **New (PRO — via Freemius upgrade)**
 
-Every PRO tier includes every PRO feature. Pricing: 1 site $79/yr · 3 sites $159/yr · 25 sites $299/yr · 100 sites $499/yr.
+Every PRO tier includes every PRO feature, white-label included. License count is the only difference between tiers — see [customerportalplugin.com/pricing](https://customerportalplugin.com/pricing/) for current plans.
 
 * Branded magic-link email templates — 6 designs (Minimal, Card, Bold, Stripe-like, Newsletter, Card-with-logo), brand color, logo URL, custom subject / heading / CTA / footer, custom From email + name. **Live preview iframe in the admin** updates as you type — no test-send loop.
 * Login-form styler — 6 form templates (Minimal, Card, Inline, Full-width, Centered, Branded), brand color, custom heading / subheading / button label / placeholder. Same live preview iframe.

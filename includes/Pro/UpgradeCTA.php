@@ -21,13 +21,13 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'LSCP_TEST_MODE' ) ) {
 final class UpgradeCTA {
 
 	/** Single, sober CTA copy used across every tab. */
-	public const CTA_LABEL = 'Upgrade to PRO — from $79/yr';
+	public const CTA_LABEL = 'Upgrade to PRO';
 
 	/** Default body sentence describing what PRO includes. */
 	public const CTA_BODY = 'Branded magic-link emails, login-form styler, WooCommerce / MemberPress integration, Stripe webhook → role automation, multi-Stripe-account support, and white-label.';
 
-	/** Site-count strip shown below the CTA button on full-tab renders. */
-	public const CTA_SITES_LINE = '1 site $79/yr · 3 sites $159/yr · 25 sites $299/yr · 100 sites + white-label $499/yr';
+	/** Tier-equality strip shown below the CTA button on full-tab renders. */
+	public const CTA_SITES_LINE = 'Every PRO tier (1 / 3 / 25 / 100 sites) unlocks every feature, white-label included.';
 
 	/**
 	 * True iff a premium build is active AND the user has consented to it.

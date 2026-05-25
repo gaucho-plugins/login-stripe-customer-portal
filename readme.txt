@@ -44,7 +44,7 @@ Customers want to update their card, change their plan, or download an invoice W
 
 Need branded emails, a styled login form, role automation on Stripe events, or to run multiple Stripe accounts from one site? **[Upgrade to PRO](https://customerportalplugin.com/pricing/)** — every license tier includes every feature, including white-label.
 
-[**👉 See PRO pricing — from $79/year**](https://customerportalplugin.com/pricing/)
+[**👉 Compare PRO plans on the website**](https://customerportalplugin.com/pricing/)
 
 = 🎨 Branded magic-link emails =
 
@@ -91,18 +91,11 @@ Replace "Powered by Gaucho Plugins" with your own brand name across every admin 
 
 PRO customers get a dedicated support inbox — typical reply within one business day.
 
-= 💵 Pricing (every tier includes every feature) =
+= 💵 PRO licensing =
 
-| Tier | Sites | Price |
-|------|-------|-------|
-| Personal | 1 site | **$79/year** |
-| Plus | 3 sites | **$159/year** |
-| Business | 25 sites | **$299/year** |
-| Agency | 100 sites | **$499/year** |
+Every PRO tier unlocks every PRO feature, white-label included. Tiers differ only in how many sites a license covers.
 
-The **only difference** between tiers is how many sites the license covers. White-label, multi-account, every PRO feature — included at the $79 tier.
-
-[**👉 Compare plans & upgrade**](https://customerportalplugin.com/pricing/)
+[**👉 Compare plans on the website**](https://customerportalplugin.com/pricing/)
 
 == ✅ PERFECT FOR ==
 

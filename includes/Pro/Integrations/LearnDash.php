@@ -25,9 +25,9 @@ final class LearnDash {
 		// LearnDash fires `ld_profile_after_top` inside its profile template
 		// after the user header; we render the billing button there.
 		\add_action( 'ld_profile_after_top', array( __CLASS__, 'render_profile_button' ) );
-		// Template-override / block-page fallback: append on the LD profile
-		// page via the_content. Idempotent.
-		\add_filter( 'the_content', array( __CLASS__, 'maybe_inject_into_profile_content' ), 20 );
+		// Universal fallback: wp_footer-based injection when the [ld_profile]
+		// shortcode is present in the current page content.
+		\add_action( 'wp_footer', array( __CLASS__, 'maybe_inject_footer_button' ), 5 );
 	}
 
 	public static function render_profile_button(): void {
@@ -35,20 +35,34 @@ final class LearnDash {
 		echo IntegrationContext::render_button( $user_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- IntegrationContext escapes internally.
 	}
 
-	public static function maybe_inject_into_profile_content( $content ) {
-		static $injected = false;
-		if ( $injected || ! is_string( $content ) ) {
-			return $content;
+	public static function maybe_inject_footer_button(): void {
+		if ( did_action( 'ld_profile_after_top' ) > 0 ) {
+			return; // legacy LD profile template already rendered it
 		}
-		// LearnDash profile detection: a page with the [ld_profile] shortcode
-		// OR a post of CPT 'sfwd-courses' / 'sfwd-lessons' won't match — we
-		// only inject when the [ld_profile] shortcode is present in content
-		// (avoids injecting on every LD content page).
-		if ( false === strpos( $content, '[ld_profile' ) && false === strpos( $content, 'wp-block-learndash' ) ) {
-			return $content;
+		if ( ! self::is_ld_profile_page() ) {
+			return;
 		}
-		$user_id  = function_exists( '\get_current_user_id' ) ? (int) \get_current_user_id() : 0;
-		$injected = true;
-		return $content . IntegrationContext::render_button( $user_id );
+		$user_id = function_exists( '\get_current_user_id' ) ? (int) \get_current_user_id() : 0;
+		echo '<div class="lscp-manage-billing-fallback" style="max-width:640px;margin:0 auto 32px;padding:0 24px;">';
+		echo IntegrationContext::render_button( $user_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- IntegrationContext escapes internally.
+		echo '</div>';
+	}
+
+	/**
+	 * LD profile detection: page contains the [ld_profile] shortcode OR
+	 * the wp-block-learndash profile block. Avoids injecting on every
+	 * unrelated LD content page (courses/lessons).
+	 */
+	private static function is_ld_profile_page(): bool {
+		if ( ! function_exists( '\get_post' ) ) {
+			return false;
+		}
+		$post = \get_post();
+		if ( ! is_object( $post ) || empty( $post->post_content ) ) {
+			return false;
+		}
+		$content = (string) $post->post_content;
+		return false !== strpos( $content, '[ld_profile' )
+			|| false !== strpos( $content, 'wp-block-learndash' );
 	}
 }

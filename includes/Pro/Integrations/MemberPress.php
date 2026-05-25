@@ -22,13 +22,12 @@ final class MemberPress {
 		if ( ! IntegrationContext::is_memberpress_enabled() ) {
 			return;
 		}
-		// MemberPress fires `mepr-account-nav` inside its account-tabs nav and
-		// `mepr_account_home_after` after the account-home content. We render
-		// at the latter so the button shows below the welcome message.
+		// MemberPress fires `mepr_account_home_after` after the account-home
+		// content. Hook it so the button shows below the welcome message.
 		\add_action( 'mepr_account_home_after', array( __CLASS__, 'render_account_button' ) );
-		// Block-based / template-override fallback: append on the MP account
-		// page via the_content. The action fires only on the legacy template.
-		\add_filter( 'the_content', array( __CLASS__, 'maybe_inject_into_account_content' ), 20 );
+		// Universal fallback: wp_footer + is-MP-account detection. Mirrors
+		// the WC adapter — fires only when the legacy action didn't.
+		\add_action( 'wp_footer', array( __CLASS__, 'maybe_inject_footer_button' ), 5 );
 	}
 
 	public static function render_account_button(): void {
@@ -36,24 +35,31 @@ final class MemberPress {
 		echo IntegrationContext::render_button( $user_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- IntegrationContext escapes internally.
 	}
 
-	public static function maybe_inject_into_account_content( $content ) {
-		static $injected = false;
-		if ( $injected || ! is_string( $content ) ) {
-			return $content;
+	public static function maybe_inject_footer_button(): void {
+		if ( did_action( 'mepr_account_home_after' ) > 0 ) {
+			return; // classic template path already rendered it
 		}
-		// MemberPress sets a flag on its account page; class_exists check
-		// avoids a fatal on sites where the integration option was left on
-		// but MP was later deactivated.
-		if ( ! class_exists( 'MeprAccountCtrl' ) || ! function_exists( '\MeprUtils' ) ) {
-			$on_account = false;
-		} else {
-			$on_account = method_exists( '\MeprAccountCtrl', 'is_account_page' ) ? (bool) \MeprAccountCtrl::is_account_page() : false;
+		if ( ! self::is_mp_account_page() ) {
+			return;
 		}
-		if ( ! $on_account ) {
-			return $content;
+		$user_id = function_exists( '\get_current_user_id' ) ? (int) \get_current_user_id() : 0;
+		echo '<div class="lscp-manage-billing-fallback" style="max-width:640px;margin:0 auto 32px;padding:0 24px;">';
+		echo IntegrationContext::render_button( $user_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- IntegrationContext escapes internally.
+		echo '</div>';
+	}
+
+	private static function is_mp_account_page(): bool {
+		if ( class_exists( 'MeprAccountCtrl' ) && method_exists( '\MeprAccountCtrl', 'is_account_page' ) ) {
+			if ( (bool) \MeprAccountCtrl::is_account_page() ) {
+				return true;
+			}
 		}
-		$user_id  = function_exists( '\get_current_user_id' ) ? (int) \get_current_user_id() : 0;
-		$injected = true;
-		return $content . IntegrationContext::render_button( $user_id );
+		// Page-id fallback: MP stores its account-page id in the
+		// `mepr_options` array, keyed by `account_page_id`.
+		$opts = \get_option( 'mepr_options', array() );
+		if ( ! is_array( $opts ) || empty( $opts['account_page_id'] ) ) {
+			return false;
+		}
+		return function_exists( '\get_queried_object_id' ) && (int) \get_queried_object_id() === (int) $opts['account_page_id'];
 	}
 }

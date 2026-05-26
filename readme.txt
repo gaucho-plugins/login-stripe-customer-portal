@@ -70,6 +70,8 @@ One click sends the user to your branded portal login — pre-filled with their 
 
 = 🪝 Stripe webhooks → WP role automation =
 
+> **PRO-only feature.** The webhook REST endpoint, signature verification, and idempotency cache all ship in the PRO build. Without PRO, Stripe events sent to your site are not processed by this plugin — subscription state will not auto-sync to WP roles. If you only need the public login form + portal redirect, FREE is enough.
+
 A REST endpoint (`/wp-json/lscp/v1/webhook`) verifies the Stripe `Stripe-Signature` header (HMAC-SHA256 + 5-minute timestamp tolerance, constant-time compare) and **automates WordPress role changes** on the events that matter:
 
 * `customer.subscription.created` / `.updated` → assign your configured "active" role.

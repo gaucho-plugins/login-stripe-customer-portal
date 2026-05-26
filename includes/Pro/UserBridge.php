@@ -48,8 +48,8 @@ final class UserBridge {
 	 * when the admin opt-in is on. Other filters at higher priority can
 	 * still override.
 	 *
-	 * @param string $default Existing default (empty in FREE).
-	 * @param array  $args    Form render args.
+	 * @param string $current_default Existing default (empty in FREE).
+	 * @param array  $args            Form render args.
 	 */
 	public static function maybe_prefill_email( $current_default, $args = array() ): string {
 		if ( '' !== (string) $current_default ) {

@@ -93,8 +93,7 @@ final class Sanitizer {
 		}
 
 		if ( function_exists( 'esc_url_raw' ) ) {
-			$normalized = \esc_url_raw( $input );
-			return is_string( $normalized ) ? $normalized : '';
+			return (string) \esc_url_raw( $input );
 		}
 
 		// Fallback for unit context — accept only http/https schemes.
@@ -140,7 +139,7 @@ final class Sanitizer {
 			$slug = trim( substr( $slug, 0, self::MAX_SLUG_LENGTH ), '-' );
 		}
 
-		return $slug ?? '';
+		return $slug;
 	}
 
 	/**

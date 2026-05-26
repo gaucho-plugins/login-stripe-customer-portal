@@ -130,7 +130,7 @@ final class AccountRouter {
 	 * @param array<string,string> $context
 	 */
 	public static function maybe_override_from_header( $headers, $context ): array {
-		$headers = is_array( $headers ) ? $headers : array();
+		$headers = (array) $headers;
 		$account = self::active_account();
 		if ( null === $account || '' === $account['from_email'] ) {
 			return $headers;

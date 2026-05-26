@@ -49,8 +49,13 @@ final class MemberPress {
 	}
 
 	private static function is_mp_account_page(): bool {
-		if ( class_exists( 'MeprAccountCtrl' ) && method_exists( '\MeprAccountCtrl', 'is_account_page' ) ) {
-			if ( (bool) \MeprAccountCtrl::is_account_page() ) {
+		// `is_account_page()` has been a public MeprAccountCtrl method
+		// since MemberPress 1.x; if the class is loaded, the method exists.
+		// (PHPStan can't see MP's source so it would flag method_exists()
+		// as always-false; the class_exists guard alone is sufficient.)
+		if ( class_exists( 'MeprAccountCtrl' ) ) {
+			$is_account = \MeprAccountCtrl::is_account_page();
+			if ( (bool) $is_account ) {
 				return true;
 			}
 		}

@@ -83,7 +83,7 @@ final class EmailTemplates {
 	 */
 	public static function filter_body( $body, $login_url, $context ): string {
 		$branding = self::branding();
-		$context  = is_array( $context ) ? $context : array();
+		$context  = (array) $context;
 
 		$request = array(
 			'email'     => (string) ( $context['email'] ?? '' ),
@@ -104,7 +104,7 @@ final class EmailTemplates {
 	 * @param array<string,string> $context
 	 */
 	public static function filter_headers( $headers, $context ): array {
-		$headers  = is_array( $headers ) ? $headers : array();
+		$headers  = (array) $headers;
 		$branding = self::branding();
 		$email    = $branding['from_email'];
 

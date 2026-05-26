@@ -61,7 +61,7 @@ final class FormStyler {
 			return (string) $existing;
 		}
 
-		$args = is_array( $args ) ? $args : array();
+		$args = (array) $args;
 
 		$nonce_field = '';
 		if ( function_exists( 'wp_nonce_field' ) ) {

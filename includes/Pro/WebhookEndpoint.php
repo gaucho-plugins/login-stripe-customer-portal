@@ -59,6 +59,14 @@ final class WebhookEndpoint {
 	 *                       get_body() + get_header()).
 	 */
 	public static function handle_request( $request ) {
+		/**
+		 * Fires on every POST to the LSCP webhook endpoint, regardless of
+		 * outcome. The plugin-testing-suite hooks this via
+		 * `do_action('pts_increment_counter', 'lscp_webhook_received')`
+		 * to assert end-to-end behavior in CI.
+		 */
+		\do_action( 'pts_increment_counter', 'lscp_webhook_received' );
+
 		$secret = (string) \get_option( self::OPTION_SECRET, '' );
 		if ( '' === $secret ) {
 			return self::respond( 503, array( 'error' => 'webhook_secret_not_configured' ) );
@@ -81,6 +89,7 @@ final class WebhookEndpoint {
 		}
 
 		if ( ! WebhookSignature::verify( $body, $signature, $secret ) ) {
+			\do_action( 'pts_increment_counter', 'lscp_webhook_signature_failed' );
 			return self::respond( 401, array( 'error' => 'invalid_signature' ) );
 		}
 
@@ -95,6 +104,7 @@ final class WebhookEndpoint {
 		}
 
 		if ( ! WebhookIdempotency::mark_seen( $event_id ) ) {
+			\do_action( 'pts_increment_counter', 'lscp_webhook_replay_blocked' );
 			return self::respond(
 				200,
 				array(
@@ -106,6 +116,7 @@ final class WebhookEndpoint {
 
 		try {
 			$summary = WebhookRules::dispatch( $event );
+			\do_action( 'pts_increment_counter', 'lscp_webhook_processed' );
 		} catch ( \Throwable $e ) {
 			return self::respond(
 				500,

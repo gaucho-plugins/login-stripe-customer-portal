@@ -256,7 +256,7 @@ final class Settings {
 			case self::TAB_WEBHOOKS:
 				$this->render_pro_tab_stub(
 					\__( 'Stripe webhooks → WP role automation', 'login-stripe-customer-portal' ),
-					\__( 'Subscribe to Stripe events (subscription.created/updated/deleted, invoice.paid/payment_failed, …) and assign / remove WP roles or fire custom action hooks. Replaces a separate $99/yr SaaS membership tool.', 'login-stripe-customer-portal' )
+					\__( 'PRO unlocks the /wp-json/lscp/v1/webhook REST endpoint, HMAC-SHA256 signature verification, 7-day SHA-256 idempotency cache, and the WP role mutation rule engine (subscription.created/updated/deleted + invoice.paid/payment_failed). Without PRO, Stripe events sent to your site are not processed — subscription state will not auto-sync to WP roles.', 'login-stripe-customer-portal' )
 				);
 				return;
 			case self::TAB_MULTI_ACCOUNT:

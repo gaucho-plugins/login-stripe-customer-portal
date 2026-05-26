@@ -24,8 +24,15 @@ final class TokenGC {
 	public const HOOK = 'lscp_token_gc';
 
 	public function register_hooks(): void {
-		\add_action( self::HOOK, array( $this, 'sweep' ) );
+		// Action callbacks must not return a value. sweep() returns the
+		// deleted count (used by CLI + tests); on_cron_tick is a thin void
+		// wrapper safe for use as an action callback.
+		\add_action( self::HOOK, array( $this, 'on_cron_tick' ) );
 		\add_action( 'init', array( $this, 'maybe_schedule' ) );
+	}
+
+	public function on_cron_tick(): void {
+		$this->sweep();
 	}
 
 	public function maybe_schedule(): void {

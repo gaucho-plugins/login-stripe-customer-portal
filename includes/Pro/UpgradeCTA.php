@@ -38,6 +38,23 @@ final class UpgradeCTA {
 	 * accidentally defines only one of the two does NOT bypass licensing.
 	 */
 	public static function is_premium(): bool {
+		$is_premium = self::resolve_premium_state();
+		/**
+		 * Filter the resolved premium state. Returning `true` from a
+		 * mu-plugin (after a paranoid double-gate check) lets test runners
+		 * exercise PRO code paths without a real Freemius license. Site
+		 * owners should NEVER hook this filter — bypassing the license
+		 * check violates the GPL+Freemius licensing model.
+		 *
+		 * @param bool $is_premium True when the Freemius runtime reports
+		 *                         an active PRO license OR the local
+		 *                         WP_DEBUG+LSCP_PREMIUM_DEV_OVERRIDE
+		 *                         constants are both true.
+		 */
+		return (bool) \apply_filters( 'lscp_is_premium', $is_premium );
+	}
+
+	private static function resolve_premium_state(): bool {
 		if ( defined( 'WP_DEBUG' ) && true === constant( 'WP_DEBUG' )
 			&& defined( 'LSCP_PREMIUM_DEV_OVERRIDE' ) && true === constant( 'LSCP_PREMIUM_DEV_OVERRIDE' ) ) {
 			return true;

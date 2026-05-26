@@ -244,7 +244,7 @@ final class WebhookRules {
 				'fields'     => 'all',
 			)
 		);
-		return is_array( $users ) ? $users : array();
+		return (array) $users;
 	}
 
 	private static function add_role_if_missing( object $user, string $role ): void {

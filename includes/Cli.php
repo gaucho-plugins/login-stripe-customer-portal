@@ -2,12 +2,30 @@
 /**
  * WP-CLI commands for LSCP ops tooling.
  *
- * Registered only when WP_CLI is defined.
+ * Registered via `WP_CLI::add_command('lscp', __CLASS__)` only when
+ * WP_CLI is defined. Available since 1.0.6.
  *
- *   wp lscp purge-tokens           — delete every outstanding magic-link token
- *   wp lscp limiter-reset <email>  — clear rate-limit counters
- *   wp lscp send <email>           — send a magic link
- *   wp lscp config                 — dump current settings (secret masked)
+ * ## Command contract
+ *
+ * | Command                            | Returns      | Exit code                                  |
+ * |------------------------------------|--------------|--------------------------------------------|
+ * | `wp lscp purge-tokens [--dry-run]` | int (count)  | 0                                          |
+ * | `wp lscp limiter-reset <email>`    | int (count)  | 0 / 1 if email arg missing                 |
+ * | `wp lscp send <email>`             | bool         | 0 on success / 1 on invalid email or failure |
+ * | `wp lscp config`                   | array        | 0 (Stripe Secret Key always masked)        |
+ *
+ * Notes:
+ * - `purge-tokens` accepts `--dry-run` (boolean flag). Without the flag,
+ *   every magic-link token is deleted (expired AND fresh). With the
+ *   flag, only the expired-count is reported and no writes happen.
+ * - `send` honors the public-form rate limiter — if the email is over
+ *   the per-email/per-IP cap, the CLI reports "did not send" without
+ *   throwing.
+ * - `config` masks the Stripe Secret Key as `(set, N chars)` — the key
+ *   itself is never printed to stdout.
+ *
+ * All commands run `@when after_wp_load`. Only `send` makes a Stripe
+ * round-trip; the rest are local DB operations.
  *
  * @package LSCP
  */

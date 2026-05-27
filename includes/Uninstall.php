@@ -93,7 +93,8 @@ final class Uninstall {
 		// and _transient_timeout_<k> rows. Use a single targeted DELETE so
 		// uninstall stays O(n) in the number of matching rows.
 		global $wpdb;
-		if ( isset( $wpdb ) && is_object( $wpdb ) && method_exists( $wpdb, 'query' ) ) {
+		/** @var \wpdb|null $wpdb */
+		if ( isset( $wpdb ) && $wpdb instanceof \wpdb ) {
 			foreach ( self::TRANSIENT_PREFIXES as $prefix ) {
 				$like_value   = $wpdb->esc_like( '_transient_' . $prefix ) . '%';
 				$like_timeout = $wpdb->esc_like( '_transient_timeout_' . $prefix ) . '%';

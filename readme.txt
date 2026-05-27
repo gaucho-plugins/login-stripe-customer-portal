@@ -23,7 +23,7 @@ Customers want to update their card, change their plan, or download an invoice W
 
 [https://customerportalplugin.com/](https://customerportalplugin.com/) — visit the website to see the plugin in action, browse the email template gallery, and view the PRO feature tour.
 
-== ✅ FREE FEATURES (this plugin) ==
+== ✅ FREE FEATURES ==
 
 * **🔐 Stripe Customer Portal login** — connect your Stripe account, customers manage billing themselves.
 * **✉️ Magic-link email authentication** — one-time link valid for 1 hour; no passwords to manage.

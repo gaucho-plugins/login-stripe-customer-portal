@@ -4,7 +4,7 @@ Author URI: https://customerportalplugin.com/
 Plugin URI: https://customerportalplugin.com/
 Donate link: https://customerportalplugin.com/
 Tags: stripe, portal, login, customer, account
-Stable tag: 1.1.0-dev
+Stable tag: 1.1.0
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4

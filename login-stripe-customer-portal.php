@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Login for Stripe Customer Portal
  * Description: Allow merchants to connect Stripe and provide a customer login endpoint for the Stripe Customer Portal.
- * Version: 1.1.0-dev
+ * Version: 1.1.0
  * Author: Gaucho Plugins
  * Author URI:      https://gauchoplugins.com/
  * License: GPLv3
@@ -22,7 +22,7 @@ if ( ! defined( 'LSCP_PLUGIN_DIR' ) ) {
 	define( 'LSCP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 if ( ! defined( 'LSCP_PLUGIN_VERSION' ) ) {
-	define( 'LSCP_PLUGIN_VERSION', '1.1.0-dev' );
+	define( 'LSCP_PLUGIN_VERSION', '1.1.0' );
 }
 
 if ( ! function_exists( 'lscp_fs' ) ) {

@@ -11,3 +11,4 @@ Thumbs.db
 .wp-env.json
 .wp-env.*.json
 .wp-env.override.json
+.playwright-mcp

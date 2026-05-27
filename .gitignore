@@ -8,3 +8,6 @@
 wordpress/
 tests-wordpress/
 .wp-env.override.json
+
+# Playwright MCP scratch — test-only, never ship
+.playwright-mcp/

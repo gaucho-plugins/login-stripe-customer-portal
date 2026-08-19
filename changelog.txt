@@ -1,3 +1,11 @@
+= 1.1.1 =
+
+**Maintenance**
+* Updated Freemius SDK to 2.13.4.
+* Tested up to WordPress 7.1.
+* Ships the WP 5.0+/PHP 7.x compatibility headers (Requires at least / Tested up to / Requires PHP) in the Freemius build.
+* Restores the Freemius-generated free build on WordPress.org.
+
 = 1.1.0 =
 
 **Fixes (FREE)**
@@ -24,7 +32,7 @@ Every PRO tier includes every PRO feature, white-label included. License count i
 * 464 PHPUnit tests / 19,444 assertions (up from 289 at 1.0.6). 70+ Playwright specs running on a live staging install. wp.org Plugin Check + free-zip docker smoke pass on every phase. PHPCS clean across 43 source files.
 
 **Compatibility**
-* WordPress 5.0–6.9. PHP 7.4+. Stripe SDK bundled. Backwards-compatible `LSCP\Plugin` public surface preserved from 1.0.x.
+* WordPress 5.0–7.0. PHP 7.2+ (the 1.0.6 floor of 7.4 was lowered back to 7.2 in the 1.1.0/1.1.1 headers after a full `php -l` pass on PHP 7.2 across the plugin, bundled Stripe SDK and Freemius SDK). Stripe SDK bundled. Backwards-compatible `LSCP\Plugin` public surface preserved from 1.0.x.
 
 = 1.0.6 =
 
@@ -52,7 +60,7 @@ Every PRO tier includes every PRO feature, white-label included. License count i
 * Full payments-grade test suite — 250 PHPUnit tests, 18,690 assertions, property-based fuzz on the token store, token-entropy distribution, concurrent-redemption race test, CRLF / email-header hardening, slug path-traversal hardening.
 
 **Compatibility & internal**
-* Minimum PHP bumped from 7.0 to 7.4 (older versions are end-of-life).
+* Minimum PHP bumped from 7.0 to 7.4 (older versions are end-of-life). Note: 1.1.0/1.1.1 lowered the declared floor back to 7.2 after lint verification on PHP 7.2.
 * Backwards-compatible `LSCP\Plugin` public surface preserved.
 * Plugin refactored into focused units (Settings, TokenStore, TokenGC, StripeGateway, Mailer, RateLimiter, PortalController, FormRenderer, RewriteEndpoint, Shortcode, Privacy, Cli, Uninstall, DocsHelper).
 

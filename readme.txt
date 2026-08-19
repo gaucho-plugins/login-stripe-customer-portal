@@ -4,9 +4,9 @@ Author URI: https://customerportalplugin.com/
 Plugin URI: https://customerportalplugin.com/
 Donate link: https://customerportalplugin.com/
 Tags: stripe, portal, login, customer, account
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires at least: 5.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -237,14 +237,8 @@ This plugin includes the Freemius SDK for license and update management. Data is
 
 Only the current version is shown here. The full release history is in `changelog.txt` (bundled with the plugin) and at [customerportalplugin.com/changelog](https://customerportalplugin.com/changelog/).
 
-= 1.1.0 =
-* New (FREE): Inline confirmation message — form submissions no longer land on a blank `wp_die` screen.
-* New (FREE): `[lscp-message]` shortcode for rendering the success/error message on a custom page.
-* New (FREE): Tabbed settings page; developer extension surface (12+ filters and actions).
-* New (PRO): Branded magic-link emails — 6 templates with live preview.
-* New (PRO): Login-form styler — 6 templates with live preview.
-* New (PRO): WP user ↔ Stripe customer bridge (auto-link, pre-fill, optional auto-create).
-* New (PRO): WooCommerce / MemberPress / LearnDash integrations (Manage Billing button).
-* New (PRO): Stripe webhook listener with WP role automation (HMAC-verified, idempotent).
-* New (PRO): Multi-Stripe-account routing — multiple accounts at different URL slugs.
-* New (PRO): Agency white-label — included at every license tier.
+= 1.1.1 =
+* Updated Freemius SDK to 2.13.4.
+* Tested up to WordPress 7.1.
+* Ships the WP 5.0+/PHP 7.x compatibility headers in the Freemius build.
+* Restores the Freemius-generated free build on WordPress.org.

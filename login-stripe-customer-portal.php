@@ -2,9 +2,9 @@
 /**
  * Plugin Name: Login for Stripe Customer Portal
  * Description: Allow merchants to connect Stripe and provide a customer login endpoint for the Stripe Customer Portal.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Requires at least: 5.0
- * Tested up to: 7.0
+ * Tested up to: 7.1
  * Requires PHP: 7.2
  * Author: Gaucho Plugins
  * Author URI:      https://gauchoplugins.com/
@@ -25,7 +25,7 @@ if ( ! defined( 'LSCP_PLUGIN_DIR' ) ) {
 	define( 'LSCP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 if ( ! defined( 'LSCP_PLUGIN_VERSION' ) ) {
-	define( 'LSCP_PLUGIN_VERSION', '1.1.0' );
+	define( 'LSCP_PLUGIN_VERSION', '1.1.1' );
 }
 
 if ( ! function_exists( 'lscp_fs' ) ) {
@@ -42,7 +42,6 @@ if ( ! function_exists( 'lscp_fs' ) ) {
 				array(
 					'id'             => '16814',
 					'slug'           => 'login-stripe-customer-portal',
-					'premium_slug'   => 'login-stripe-customer-portal-pro',
 					'type'           => 'plugin',
 					'public_key'     => 'pk_816f55d4825ad20415edb31060db5',
 					'is_premium'     => true,

@@ -197,7 +197,7 @@ class PortalController {
 	private function handle_token_redemption( string $token ): void {
 		$email = $this->tokens->consume( $token );
 		if ( '' === $email ) {
-			\wp_die( \esc_html__( 'Invalid or expired token.', 'login-stripe-customer-portal' ) );
+			\wp_die( \esc_html__( 'Invalid or expired token.', 'login-stripe-customer-portal' ), '', array( 'response' => 403 ) );
 		}
 
 		$gateway = $this->build_gateway();

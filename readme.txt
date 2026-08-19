@@ -242,3 +242,4 @@ Only the current version is shown here. The full release history is in `changelo
 * Tested up to WordPress 7.1.
 * Ships the WP 5.0+/PHP 7.x compatibility headers in the Freemius build.
 * Restores the Freemius-generated free build on WordPress.org.
+* Redeeming an invalid or already-used magic link now returns HTTP 403 (was 500).

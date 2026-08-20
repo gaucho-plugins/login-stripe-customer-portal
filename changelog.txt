@@ -1,11 +1,7 @@
 = 1.1.1 =
-
-**Maintenance**
-* Updated Freemius SDK to 2.13.4.
-* Tested up to WordPress 7.1.
-* Ships the WP 5.0+/PHP 7.x compatibility headers (Requires at least / Tested up to / Requires PHP) in the Freemius build.
-* Restores the Freemius-generated free build on WordPress.org.
-* Redeeming an invalid or already-used magic link now returns HTTP 403 (was 500).
+* Fixed: an invalid or already used magic link now shows a proper error page instead of a server error.
+* Improved: the WordPress.org free download is generated again from the official build.
+* Compatibility: Tested up to WordPress 7.1. Requires PHP 7.2 or newer. Updated Freemius SDK.
 
 = 1.1.0 =
 
@@ -33,7 +29,7 @@ Every PRO tier includes every PRO feature, white-label included. License count i
 * 464 PHPUnit tests / 19,444 assertions (up from 289 at 1.0.6). 70+ Playwright specs running on a live staging install. wp.org Plugin Check + free-zip docker smoke pass on every phase. PHPCS clean across 43 source files.
 
 **Compatibility**
-* WordPress 5.0–7.0. PHP 7.2+ (the 1.0.6 floor of 7.4 was lowered back to 7.2 in the 1.1.0/1.1.1 headers after a full `php -l` pass on PHP 7.2 across the plugin, bundled Stripe SDK and Freemius SDK). Stripe SDK bundled. Backwards-compatible `LSCP\Plugin` public surface preserved from 1.0.x.
+* WordPress 5.0–7.0. PHP 7.2+ (lowered back from the 7.4 floor declared at 1.0.6). Stripe SDK bundled.
 
 = 1.0.6 =
 

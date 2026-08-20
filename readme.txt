@@ -235,11 +235,9 @@ This plugin includes the Freemius SDK for license and update management. Data is
 
 == Changelog ==
 
-Only the current version is shown here. The full release history is in `changelog.txt` (bundled with the plugin) and at [customerportalplugin.com/changelog](https://customerportalplugin.com/changelog/).
-
 = 1.1.1 =
-* Updated Freemius SDK to 2.13.4.
-* Tested up to WordPress 7.1.
-* Ships the WP 5.0+/PHP 7.x compatibility headers in the Freemius build.
-* Restores the Freemius-generated free build on WordPress.org.
-* Redeeming an invalid or already-used magic link now returns HTTP 403 (was 500).
+* Fixed: an invalid or already used magic link now shows a proper error page instead of a server error.
+* Improved: the WordPress.org free download is generated again from the official build.
+* Compatibility: Tested up to WordPress 7.1. Requires PHP 7.2 or newer. Updated Freemius SDK.
+
+See changelog.txt for the full version history.

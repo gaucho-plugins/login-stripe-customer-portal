@@ -10,26 +10,26 @@
 
 **New (FREE)**
 * `[lscp-message]` shortcode renders the inline confirmation/error message; drop it on a thank-you page if you want the form submission to redirect there instead of back to the form page.
-* Tabbed settings page — General (existing settings) and Email Templates / Form Style / Integrations / Webhooks / Multi-Account (PRO tabs preview the upgrade card in FREE).
-* Developer extension surface — filters (`lscp_email_html_body`, `lscp_email_subject`, `lscp_email_from`, `lscp_email_headers`, `lscp_form_template`, `lscp_form_default_email`, `lscp_login_url`, `lscp_return_url`, `lscp_post_message`, `lscp_post_redirect_url`, `lscp_message_query_args`, `lscp_settings_tabs`, `lscp_settings_tab_<slug>_content`) and actions (`lscp_form_before`, `lscp_form_after`, `lscp_magic_link_sent`, `lscp_magic_link_redeemed`).
+* Tabbed settings page - General (existing settings) and Email Templates / Form Style / Integrations / Webhooks / Multi-Account (PRO tabs preview the upgrade card in FREE).
+* Developer extension surface - filters (`lscp_email_html_body`, `lscp_email_subject`, `lscp_email_from`, `lscp_email_headers`, `lscp_form_template`, `lscp_form_default_email`, `lscp_login_url`, `lscp_return_url`, `lscp_post_message`, `lscp_post_redirect_url`, `lscp_message_query_args`, `lscp_settings_tabs`, `lscp_settings_tab_<slug>_content`) and actions (`lscp_form_before`, `lscp_form_after`, `lscp_magic_link_sent`, `lscp_magic_link_redeemed`).
 
-**New (PRO — via Freemius upgrade)**
+**New (PRO - via Freemius upgrade)**
 
-Every PRO tier includes every PRO feature, white-label included. License count is the only difference between tiers — see [customerportalplugin.com/pricing](https://customerportalplugin.com/pricing/) for current plans.
+Every PRO tier includes every PRO feature, white-label included. License count is the only difference between tiers - see [customerportalplugin.com/pricing](https://customerportalplugin.com/pricing/) for current plans.
 
-* Branded magic-link email templates — 6 designs (Minimal, Card, Bold, Stripe-like, Newsletter, Card-with-logo), brand color, logo URL, custom subject / heading / CTA / footer, custom From email + name. **Live preview iframe in the admin** updates as you type — no test-send loop.
-* Login-form styler — 6 form templates (Minimal, Card, Inline, Full-width, Centered, Branded), brand color, custom heading / subheading / button label / placeholder. Same live preview iframe.
-* WP user ↔ Stripe customer bridge — pre-fills the magic-link form for logged-in WP users; on every redemption stores the Stripe customer id as `_lscp_stripe_customer_id` user-meta; optionally auto-creates the WP user (with configurable default role) when the email doesn't match an existing user.
-* WooCommerce / MemberPress / LearnDash integration — adds a configurable "Manage Billing" button to each platform's account page. WooCommerce works on both classic *and* block-based My Account templates (via `wp_footer` + `did_action` fallback when the legacy template hook doesn't fire).
-* Stripe webhook listener — REST endpoint at `/wp-json/lscp/v1/webhook` verifies the Stripe `Stripe-Signature` header (HMAC-SHA256, 5-minute timestamp tolerance, constant-time `hash_equals` comparison) and dispatches `customer.subscription.created` / `.updated` / `.deleted`, `invoice.paid`, and `invoice.payment_failed` events to WP role mutations. 7-day SHA-256-keyed idempotency cache (`lscp_wh_` transient prefix) prevents replay double-firing. Per-event extension action `lscp_pro_webhook_<event_type>` for custom integrations.
-* Multi-Stripe-account routing — store multiple accounts in `lscp_pro_accounts`; per-request `pre_option_lscp_stripe_*` filters swap api_key, slug, validate_existing, redirect_url, and From email based on which account's URL slug was hit. The FREE plugin code is unchanged.
-* Agency white-label — toggle replaces "Gaucho Plugins" attribution via `gettext` filter (text-domain scoped), strips PRO 🔓 markers from the tab nav, and hides the upgrade banner. Included at **every** PRO tier.
+* Branded magic-link email templates - 6 designs (Minimal, Card, Bold, Stripe-like, Newsletter, Card-with-logo), brand color, logo URL, custom subject / heading / CTA / footer, custom From email + name. **Live preview iframe in the admin** updates as you type - no test-send loop.
+* Login-form styler - 6 form templates (Minimal, Card, Inline, Full-width, Centered, Branded), brand color, custom heading / subheading / button label / placeholder. Same live preview iframe.
+* WP user ↔ Stripe customer bridge - pre-fills the magic-link form for logged-in WP users; on every redemption stores the Stripe customer id as `_lscp_stripe_customer_id` user-meta; optionally auto-creates the WP user (with configurable default role) when the email doesn't match an existing user.
+* WooCommerce / MemberPress / LearnDash integration - adds a configurable "Manage Billing" button to each platform's account page. WooCommerce works on both classic *and* block-based My Account templates (via `wp_footer` + `did_action` fallback when the legacy template hook doesn't fire).
+* Stripe webhook listener - REST endpoint at `/wp-json/lscp/v1/webhook` verifies the Stripe `Stripe-Signature` header (HMAC-SHA256, 5-minute timestamp tolerance, constant-time `hash_equals` comparison) and dispatches `customer.subscription.created` / `.updated` / `.deleted`, `invoice.paid`, and `invoice.payment_failed` events to WP role mutations. 7-day SHA-256-keyed idempotency cache (`lscp_wh_` transient prefix) prevents replay double-firing. Per-event extension action `lscp_pro_webhook_<event_type>` for custom integrations.
+* Multi-Stripe-account routing - store multiple accounts in `lscp_pro_accounts`; per-request `pre_option_lscp_stripe_*` filters swap api_key, slug, validate_existing, redirect_url, and From email based on which account's URL slug was hit. The FREE plugin code is unchanged.
+* Agency white-label - toggle replaces "Gaucho Plugins" attribution via `gettext` filter (text-domain scoped), strips PRO 🔓 markers from the tab nav, and hides the upgrade banner. Included at **every** PRO tier.
 
 **Test-suite & quality**
 * 464 PHPUnit tests / 19,444 assertions (up from 289 at 1.0.6). 70+ Playwright specs running on a live staging install. wp.org Plugin Check + free-zip docker smoke pass on every phase. PHPCS clean across 43 source files.
 
 **Compatibility**
-* WordPress 5.0–7.0. PHP 7.2+ (lowered back from the 7.4 floor declared at 1.0.6). Stripe SDK bundled.
+* WordPress 5.0-7.0. PHP 7.2+ (lowered back from the 7.4 floor declared at 1.0.6). Stripe SDK bundled.
 
 = 1.0.6 =
 
@@ -42,7 +42,7 @@ Every PRO tier includes every PRO feature, white-label included. License count i
 * Form response wording is mode-aware and constant for valid / invalid / unknown emails (no enumeration oracle).
 * Stripe Secret Key input renders a fixed-length mask (no length leak via view source).
 * Customer Portal slug length-capped at 64 chars to prevent rewrite-engine bloat.
-* Namespaced `Exception` catch fixed — Stripe failures now render a graceful message instead of a WSOD.
+* Namespaced `Exception` catch fixed - Stripe failures now render a graceful message instead of a WSOD.
 * Plugin uninstall (via Freemius's `after_uninstall` hook) cleans up every option and transient.
 * GDPR personal-data exporter + eraser registered with WordPress Privacy Tools.
 
@@ -54,7 +54,7 @@ Every PRO tier includes every PRO feature, white-label included. License count i
 **Reliability & ops**
 * Daily WP-Cron sweep removes expired magic-link tokens + rate-limit counters (WP's built-in transient GC is lazy on low-traffic sites).
 * WP-CLI commands: `wp lscp purge-tokens`, `wp lscp limiter-reset <email>`, `wp lscp send <email>`, `wp lscp config`.
-* Full payments-grade test suite — 250 PHPUnit tests, 18,690 assertions, property-based fuzz on the token store, token-entropy distribution, concurrent-redemption race test, CRLF / email-header hardening, slug path-traversal hardening.
+* Full payments-grade test suite - 250 PHPUnit tests, 18,690 assertions, property-based fuzz on the token store, token-entropy distribution, concurrent-redemption race test, CRLF / email-header hardening, slug path-traversal hardening.
 
 **Compatibility & internal**
 * Minimum PHP bumped from 7.0 to 7.4 (older versions are end-of-life). Note: 1.1.0/1.1.1 lowered the declared floor back to 7.2 after lint verification on PHP 7.2.

@@ -1,6 +1,6 @@
 <?php
 /**
- * Builds GitBook documentation URLs for the settings page.
+ * Builds documentation URLs for the settings page.
  *
  * @package LSCP
  */
@@ -15,11 +15,11 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'LSCP_TEST_MODE' ) ) {
 
 final class DocsHelper {
 
-	public const BASE = 'https://gauchoplugins.gitbook.io/login-for-stripe-customer-portal-wordpress-plugin';
+	public const BASE = 'https://docs.customerportalplugin.com';
 
 	public static function url( string $path = '' ): string {
-		$path = ltrim( $path, '/' );
-		return '' === $path ? self::BASE : self::BASE . '/' . $path;
+		$path = trim( $path, '/' );
+		return '' === $path ? self::BASE . '/' : self::BASE . '/' . $path . '/';
 	}
 
 	public static function link( string $path, string $text ): string {
